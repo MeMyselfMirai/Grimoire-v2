@@ -1,25 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Token from './drag/Token';
 
 function App() {
+
+  const multipleTokens = [1,2,3,4,5,6,7,8,9].map(_ => <Token top = {Math.random() * 400} left = {Math.random() * 800}/>);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {multipleTokens}
+    </>
   );
 }
 
