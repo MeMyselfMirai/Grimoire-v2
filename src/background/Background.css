@@ -1,0 +1,49 @@
+.backgroundImage {
+    background: transparent; 
+    overflow: hidden; 
+    width: 100vw; 
+    height: 100vh;
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    pointer-events: none;
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.backgroundImage::before {
+    content: ""; 
+    z-index: -1; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    position: absolute;
+}
+
+body {overflow: hidden;}
+
+
+
+@media screen and (orientation:portrait) {
+    .backgroundImage::before {
+        transform: rotate(90deg); 
+        width: 100vh; 
+        height: 100vw; 
+        left: calc(50% - calc(100vh / 2)); 
+        top: calc(50% - calc(100vw / 2));
+    }
+    /* .background_select_scroll_item {width: 148px; height: 300px; margin: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer;}
+    .background_select_scroll_item_image {transform: rotate(90deg); width: 300px; height: 148px;} */
+}
+@media screen and (orientation:landscape) {
+    .backgroundImage::before {
+        transform: rotate(0deg); 
+        width: 100vw; 
+        height: 100vh; 
+        left: calc(50% - calc(100vw / 2)); 
+        top: calc(50% - calc(100vh / 2));
+    }
+    /* .background_select_scroll_item {width: 300px; height: 148px; margin: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer;}
+    .background_select_scroll_item_image {width: 300px; height: 148px;} */
+}

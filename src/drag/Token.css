@@ -1,7 +1,12 @@
-div {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    border-radius: 100%;
-    background-size: cover;
+.roleToken {
+    height: 150px; 
+    width: 150px; 
+    position: absolute; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    left: 0px; 
+    border-radius: 100%; 
+    /*background-image: url("/assets/alive_token.png"); */
+    pointer-events: all; 
+    cursor: move;
 }

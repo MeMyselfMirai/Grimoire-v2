@@ -14,9 +14,9 @@ export enum Team {
     /** Travellers -- Temporary players of either alignment */
     Traveller = "traveller",
 
-    /** Fabled -- Administrative effects assigned a role name. */
+    /** Fabled -- Administrative effects to solve a problem */
     Fabled = "fabled",
 
-    /** Quaint -- An undisclosed experimental role. Take caution, and avoid using! */
-    Quaint = "quaint"
+    /** Loric -- Administrative effects to modify or undermine the game */
+    Loric = "loric",
 };

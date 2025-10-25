@@ -1,45 +1,7 @@
-import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import { RefObject, useRef } from "react";
 import './Token.css';
 import Draggable from "react-draggable";
 import { Position } from "../types/Position";
-
-var top: number, setTop: Dispatch<SetStateAction<number>>;
-var left: number, setLeft: Dispatch<SetStateAction<number>>;
-
-function useSetupDrag(ref: RefObject<any>) {
-    useEffect(() => {
-        /** The X offset between the cursor and a dragged element */
-        var xOffset: number = 0;
-        /** The Y offset between the cursor and a dragged element */
-        var yOffset: number = 0;
-        let dragged: HTMLElement | null;
-        const dragStart = (e: any) => {
-            console.log(ref);
-            if (!ref.current || !ref.current.contains(e.target)) return;
-            xOffset = e.pageX - left;
-            yOffset = e.pageY - top;
-            dragged = e.target;
-        }
-
-        const drag = (e: any) => {
-            if (!dragged) return;
-            e.preventDefault();
-            setLeft(e.pageX - xOffset);
-            setTop(e.pageY - yOffset);
-        }
-
-        const dragEnd = (e: any) => {
-            if (!dragged) return;
-            dragged = null;
-        }
-
-        window.addEventListener("mousedown", dragStart, false);
-        window.addEventListener("mouseup", dragEnd, false);
-        window.addEventListener("mousemove", drag, false);
-    }, [ref]);
-}
-
-
 
 function Token({top, left}: Position) {
 
@@ -51,7 +13,7 @@ function Token({top, left}: Position) {
 
   return (
     <Draggable nodeRef={ref}>
-        <div ref={ref} className="Token" style={{
+        <div ref={ref} className="roleToken" style={{
             backgroundImage:`url(/assets/token.png)`,
             top: top,
             left: left
