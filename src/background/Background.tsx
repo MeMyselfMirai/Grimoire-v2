@@ -2,7 +2,7 @@ import "./Background.css"
 
 function Background({image}: any) {
     return (
-        <div className="backgroundImage" style={{backgroundImage: image}}></div>
+        <div className="Background__image" style={{backgroundImage: image}}></div>
     )
 }
 

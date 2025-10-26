@@ -1,4 +1,4 @@
-.backgroundImage {
+.Background__image {
     background: transparent; 
     overflow: hidden; 
     width: 100vw; 
@@ -12,7 +12,7 @@
     background-position: center;
 }
 
-.backgroundImage::before {
+.Background__image::before {
     content: ""; 
     z-index: -1; 
     background-position: center; 
@@ -26,7 +26,7 @@ body {overflow: hidden;}
 
 
 @media screen and (orientation:portrait) {
-    .backgroundImage::before {
+    .Background__image::before {
         transform: rotate(90deg); 
         width: 100vh; 
         height: 100vw; 
@@ -37,7 +37,7 @@ body {overflow: hidden;}
     .background_select_scroll_item_image {transform: rotate(90deg); width: 300px; height: 148px;} */
 }
 @media screen and (orientation:landscape) {
-    .backgroundImage::before {
+    .Background__image::before {
         transform: rotate(0deg); 
         width: 100vw; 
         height: 100vh; 

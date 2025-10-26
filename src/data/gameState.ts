@@ -1,4 +1,4 @@
-import { Position } from "./types/Position";
+import { Position } from "../types/Position";
 
 const multipleTokens: Position[] = JSON.parse(localStorage.getItem("positions") ?? "[]") as Position[];
 if (multipleTokens.length === 0) {

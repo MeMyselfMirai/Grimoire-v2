@@ -26,7 +26,7 @@ function DragZone({enabled, initialPositions}: DragType) {
     for (let i = 0; i < positions.length; i++) {
         const pos: Position = initialPositions[i];
         tokens.push(
-            <Token key={i} top={pos.top} left={pos.left} onDrag={(e, ui) => handleDrag(e, ui, i)} enabled={enabled} />
+            <Token key={i} id="alsaahir" top={pos.top} left={pos.left} onDrag={(e, ui) => handleDrag(e, ui, i)} enabled={enabled} />
         )
     }
 
