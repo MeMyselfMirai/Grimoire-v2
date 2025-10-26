@@ -1,24 +1,18 @@
-import { RefObject, useRef, useState } from "react";
+import { useState } from "react";
 import './Token.css';
+import './DragZone.css';
 import { Position } from "../types/Position";
-import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
+import { DraggableData, DraggableEvent } from "react-draggable";
+import Token from "./Token";
 
-type DragType = { enabled: boolean }
-
-const multipleTokens: Position[] = JSON.parse(localStorage.getItem("positions") ?? "[]") as Position[];
-if (multipleTokens.length == 0) {
-    for (let i = 0; i < 9; i++) {
-        multipleTokens.push({ top: Math.random() * 400, left: Math.random() * 800})
-    }
+type DragType = {
+    enabled: boolean
+    initialPositions: Position[]
 }
 
+function DragZone({enabled, initialPositions}: DragType) {
 
-function DragZone({enabled}: DragType) {
-    // Kludge to fix a reference error in Draggable 4.5.
-    // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
-    const ref: RefObject<any> = useRef(null);
-
-    const [positions, setPositions] = useState(multipleTokens)
+    const [positions, setPositions] = useState(initialPositions)
 
     function handleDrag(e: DraggableEvent, ui: DraggableData, index: number) {
         let {top, left} = positions[index];
@@ -30,32 +24,15 @@ function DragZone({enabled}: DragType) {
 
     const tokens = [];
     for (let i = 0; i < positions.length; i++) {
-        const pos: Position = positions[i];
+        const pos: Position = initialPositions[i];
         tokens.push(
-            <Draggable 
-                key={i} 
-                nodeRef={ref} 
-                disabled={!enabled} 
-                onDrag={(e,ui) => handleDrag(e, ui, i)} 
-                positionOffset={{x: multipleTokens[i].left, y: multipleTokens[i].top}}
-            >
-                <div
-                    ref={ref}
-                    className="roleToken"
-                    style={{
-                        backgroundImage: `url(/assets/token.png)`,
-                    }}
-                >
-                    HELLO WORLD!
-                </div>
-            </Draggable>
+            <Token key={i} top={pos.top} left={pos.left} onDrag={(e, ui) => handleDrag(e, ui, i)} enabled={enabled} />
         )
     }
 
     return (
         <div id="DragZone__div">
             {tokens}
-            
         </div>
     );
 }

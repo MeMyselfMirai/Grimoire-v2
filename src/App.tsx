@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 import Background from './background/Background';
-import Token from './drag/Token';
 import Toggle from './fixed/Toggle';
 import DragZone from './drag/DragZone';
+import { multipleTokens } from './gameState';
 
 
 
@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <Background image = {backgroundImage} />
-      <DragZone enabled={enabled} />
+      <DragZone enabled={enabled} initialPositions={multipleTokens} />
       <Toggle callback={toggleBackground}/>
     </>
   );
