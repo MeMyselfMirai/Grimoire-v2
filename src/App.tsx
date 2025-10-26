@@ -3,15 +3,17 @@ import './App.css';
 import Background from './background/Background';
 import Token from './drag/Token';
 import Toggle from './fixed/Toggle';
+import DragZone from './drag/DragZone';
 
 
-const multipleTokens = [1,2,3,4,5,6,7,8,9].map(i => <Token key={i} top = {Math.random() * (window.innerHeight-150)} left = {Math.random() * (window.innerWidth-150)}/>);
 
 function App() {
 
   const [backgroundImage, setBackgroundImage] = useState("url(/assets/backgrounds/blue_circle_large.webp)");
+  const [enabled, setEnabled] = useState(true);
 
   function toggleBackground(enabled: boolean) {
+    setEnabled(enabled);
     if (enabled) {
       setBackgroundImage("url(/assets/backgrounds/green_circle_large.webp)");
     } else {
@@ -22,9 +24,7 @@ function App() {
   return (
     <>
       <Background image = {backgroundImage} />
-      <div id="dragZone">
-        {multipleTokens}
-      </div>
+      <DragZone enabled={enabled} />
       <Toggle callback={toggleBackground}/>
     </>
   );

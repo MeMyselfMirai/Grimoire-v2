@@ -1,5 +1,6 @@
 import { RefObject, useRef, useState } from "react"
 import "./Toggle.css"
+import { useImage } from "../util";
 
 
 
@@ -20,8 +21,14 @@ function Toggle({callback}: any) {
     }
 
     return (
-        
-        <div ref={ref} id="toggle" onClick={onToggle} className="bottomToggle" style={{backgroundImage: "url(/assets/move.png)"}}></div>
+        <div ref={ref} 
+             id="toggle" 
+             onClick={onToggle} 
+             className="bottomToggle" 
+             style={useImage("/assets/move.png")}>
+
+            
+        </div>
     )
 }
 
