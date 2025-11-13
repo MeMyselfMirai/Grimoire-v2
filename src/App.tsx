@@ -4,7 +4,7 @@ import Background from './background/Background';
 import Toggle from './fixed/Toggle';
 import DragZone from './drag/DragZone';
 import { multipleTokens } from './data/gameState';
-import { areRolesLoading, initRoles } from './data/role';
+import { areRolesLoading, initRoles } from './data/roleData';
 
 
 
@@ -24,16 +24,15 @@ function App() {
     }
 
     if (loading) {
-        initRoles().then(_ => setLoading(false))
+        // Kludge because I can't figure out why the ROLES object isn't updating instantly when set.
+        initRoles().then(_ => setTimeout(() => setLoading(areRolesLoading), 250))
+        return (<>
+            <Background image={backgroundImage} />
+            <p style={{color: 'white', position:"absolute", fontSize:"40px"}}> LOADING...</p>
+        </>)
     }
 
-    return loading ?
-        (<>
-            <Background image={backgroundImage} />
-            <p style={{color: 'white', position:"absolute"}}> LOADING...</p>
-        </>)
-        :
-        (<>
+    return (<>
             <Background image={backgroundImage} />
             <DragZone enabled={enabled} initialPositions={multipleTokens} />
             <Toggle callback={toggleBackground} />

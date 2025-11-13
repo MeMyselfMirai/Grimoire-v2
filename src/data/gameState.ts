@@ -1,11 +1,14 @@
 import { Position } from "../types/Position";
 
-const multipleTokens: Position[] = JSON.parse(localStorage.getItem("positions") ?? "[]") as Position[];
-if (multipleTokens.length === 0) {
+export type TokData = Position & {id: string}
+
+const initialTokens: TokData[] = JSON.parse(localStorage.getItem("positions") ?? "[]") as TokData[];
+if (initialTokens.length === 0 || initialTokens[0].id == undefined) {
+    initialTokens.length = 0;
     for (let i = 0; i < 9; i++) {
-        multipleTokens.push({ top: Math.random() * 400, left: Math.random() * 800})
+        initialTokens.push({ top: Math.random() * 400, left: Math.random() * 80, id: "alsaahir"})
     }
-    localStorage.setItem("positions", JSON.stringify(multipleTokens));
+    localStorage.setItem("positions", JSON.stringify(initialTokens));
 }
 
-export { multipleTokens };
+export { initialTokens as multipleTokens };
