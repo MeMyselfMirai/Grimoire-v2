@@ -1,30 +1,30 @@
-import { useState } from "react";
+import { useContext } from "react";
 import './Token.css';
 import './DragZone.css';
 import { DraggableData, DraggableEvent } from "react-draggable";
 import Token from "./Token";
-import { TokData } from "../data/gameState";
+import { ContextType, GameContext } from "../data/gameState";
 import { ROLES } from "../data/roleData";
+import { GameState } from "../types/GameState";
 
 type DragType = {
     enabled: boolean
-    initialPositions: TokData[]
 }
 
-function DragZone({enabled, initialPositions}: DragType) {
+function DragZone({enabled}: DragType) {
 
-    const [positions, setPositions] = useState(initialPositions);
+    const {gameState, setGameState}: ContextType = useContext(GameContext) as ContextType;
 
-    function handleDrag(e: DraggableEvent, ui: DraggableData, index: number) {
-        setPositions(positions => {
-            const updatedPositions = [...positions];
-            updatedPositions[index] = {
-                ...updatedPositions[index],
-                top: updatedPositions[index].top + ui.deltaY,
-                left: updatedPositions[index].left + ui.deltaX,
-            };
-            localStorage.setItem("positions", JSON.stringify(updatedPositions));
-            return updatedPositions;
+    function handleDrag(_: DraggableEvent, ui: DraggableData, index: number) {
+        setGameState(oldState => {
+            const newState: GameState = {...oldState};
+            newState.playerTokens = [...oldState.playerTokens];
+            newState.playerTokens[index] = {...newState.playerTokens[index]}
+            newState.playerTokens[index].position = {
+                top: newState.playerTokens[index].position.top + ui.deltaY,
+                left: newState.playerTokens[index].position.left + ui.deltaX,
+            }
+            return newState;
         });
     }
 
@@ -33,23 +33,23 @@ function DragZone({enabled, initialPositions}: DragType) {
         const choice = Math.floor(Math.random() * choices);
         const newId = Object.keys(ROLES)[choice];
 
-        setPositions(positions => {
-            const updatedPositions = [...positions];
-            updatedPositions[index] = {
-                ...updatedPositions[index],
+        setGameState(oldState => {
+            const newState: GameState = {...oldState};
+            newState.playerTokens = [...oldState.playerTokens];
+            newState.playerTokens[index] = {
+                ...newState.playerTokens[index],
                 id: newId
-            };
-            localStorage.setItem("positions", JSON.stringify(updatedPositions));
-            return updatedPositions;
+            }
+            return newState;
         });
     }
 
-    const tokens = positions.map((pos, index) => (
+    const tokens = gameState.playerTokens.map((token, index) => (
         <Token 
             key={index} 
-            id={pos.id} 
-            top={pos.top} 
-            left={pos.left} 
+            id={token.id} 
+            top={token.position.top} 
+            left={token.position.left} 
             onDrag={(e, ui) => handleDrag(e, ui, index)} 
             onClick={() => handleClick(index)}
             enabled={enabled} 
