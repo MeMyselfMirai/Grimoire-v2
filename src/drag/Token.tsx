@@ -29,16 +29,42 @@ function Token({ id, top, left, onDrag, onClick, enabled}: TokenType) {
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
     const ref: RefObject<any> = useRef(null);
+    const touchMoved = useRef(false);
+
+
+    function handleTouchStart() {
+        touchMoved.current = false;
+    }
+
+    function handleTouchMove(e:any, ui:any) {
+        touchMoved.current = true;
+        onDrag(e,ui);
+    }
+
+    function handleTouchEnd(e: any) {
+        // if the finger hasn't moved, treat as a tap and call onClick
+        if (!touchMoved.current) {
+            // prevent synthetic mouse events if needed
+            e.preventDefault();
+            onClick(e as React.MouseEvent<HTMLElement,MouseEvent>);
+        }
+    }
 
     return (
-        <Draggable nodeRef={ref} disabled={!enabled} onDrag={onDrag} position={{x: left, y: top}}>
+        <Draggable 
+            nodeRef={ref} 
+            disabled={!enabled} 
+            position={{x: left, y: top}} 
+            onStart={handleTouchStart}
+            onDrag={handleTouchMove} 
+            onStop={handleTouchEnd}
+        >
             <div
                 ref={ref}
                 className="Token__container"
                 style={{
                     backgroundImage: `url(/assets/token.png)`
                 }}
-                onClick={onClick}
             >
                 <img className="Token__image General__backgroundImage" src={data.image} alt={data.name}/>
                 <TokenName name={data.name} />

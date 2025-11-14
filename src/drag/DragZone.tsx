@@ -35,6 +35,7 @@ function DragZone({enabled}: DragType) {
 
     function handleClick(e: any, uid: number) {
         e.stopPropagation();
+        console.log(uid)
         setAppState(oldState => {
             return {
                 ...oldState,

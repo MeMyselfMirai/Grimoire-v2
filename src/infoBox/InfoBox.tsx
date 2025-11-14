@@ -21,7 +21,6 @@ function InfoBox() {
     } = useContext(GameContext) as AppContextType & GameContextType;
 
     const token = getToken(appState.activeTokenUid, gameState);
-    console.log(token);
 
     if (token === undefined) {
         return ( <></> );
