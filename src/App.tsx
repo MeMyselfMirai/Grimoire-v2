@@ -5,6 +5,7 @@ import Toggle from './fixed/Toggle';
 import DragZone from './drag/DragZone';
 import { GameContext, load, save } from './data/gameState';
 import { areRolesLoading, initRoles } from './data/roleData';
+import SideMenu from './sideMenu/SideMenu';
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <GameContext value={{gameState, setGameState}}>
             <Background />
             <DragZone enabled={enabled} />
+            <SideMenu />
             <Toggle callback={toggleBackground} />
         </GameContext>
     );

@@ -1,0 +1,101 @@
+.SideMenu__openButton {
+    position: absolute; 
+    top: 5px; 
+    left: 5px; 
+    width: 70px; 
+    height: 70px; 
+    opacity: 0.4; 
+    transition: opacity 
+    linear 0.1s; 
+    background-color: lightslategrey; 
+    cursor: pointer; 
+    border-radius: 10px; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: contain;
+}
+.SideMenu__openButton:hover {
+    opacity: 0.6;
+}
+
+.SideMenu__closeButton {
+    position: absolute; 
+    top: 5px; 
+    right: 5px; 
+    width: 55px; 
+    height: 55px; 
+    opacity: 0.4; 
+    transition: opacity linear 0.1s; 
+    cursor: pointer; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: contain;
+}
+.SideMenu__closeButton:hover  {
+    opacity: 0.6;
+}
+
+.SideMenu__container {
+    position: absolute; 
+    top: 0px; 
+    left: 0px; 
+    height: 100%; 
+    width: 300px; 
+    transition: transform ease-in-out 0.5s;
+}
+
+.SideMenu__body {
+    position: fixed; 
+    width: 280px; 
+    height: calc(100% - 110px); 
+    padding: 10px; 
+    top: 90px; 
+    overflow-y: scroll; 
+    display: block; 
+    font-size: 25px; 
+    scrollbar-width: none;
+}
+.SideMenu__body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.SideMenu__header {
+    width: 263px; 
+    text-align: center; 
+    font-size: 40pt; 
+    text-shadow: 0 0 3px rgb(255, 255, 255)
+}
+
+
+.SideMenu__ratio {
+    width: 100%; 
+    text-align: center; 
+    color: white; 
+    font-size: 15pt;
+}
+
+
+.MenuItem__container {
+    position: relative; 
+    cursor: pointer; 
+    font-size: 20px; 
+    width: 100%; 
+    padding-top: 10px;
+}
+
+
+.MenuItem__label {
+    position: absolute; 
+    font-size: 20px; 
+    color: white; 
+    cursor: pointer;
+}
+
+
+.MenuItem__count {
+    position: absolute; 
+    right: 10px; 
+    height: 20px; 
+    color: white;
+}

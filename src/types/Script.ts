@@ -1,14 +1,14 @@
-import { RoleData } from "./Role"
+import { Role } from "./Role"
 
 
-type Meta = {
+export type Meta = {
     id: "_meta",
     author: string,
     name: string
 }
 
-type LiteralRole = {
+export type LiteralRole = {
     id: string
 }
 
-export type Script = [Meta, ...Array<LiteralRole | RoleData>]
+export type Script = [Meta, ...Array<LiteralRole | Role>]
