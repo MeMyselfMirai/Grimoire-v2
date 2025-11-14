@@ -6,6 +6,9 @@ import { ROLES } from '../data/roleData';
 import { Role } from '../types/Role';
 import { LiteralRole } from '../types/Script';
 import MenuItem from './MenuItem';
+import { Team } from '../types/Team';
+import { Visibility } from '../types/Visibility';
+import { Viability } from '../types/Viability';
 
 type ItemStore = {
     [key: string]: JSX.Element[]
@@ -48,7 +51,7 @@ function isRole(role: LiteralRole | Role): role is Role {
     return ROLES[role.id] === undefined;
 }
 
-function populateJSX(script: (LiteralRole | Role)[]): ItemStore {
+function populateJSX(script: (LiteralRole | Role)[], createCallback: (id: string) => void): ItemStore {
     const items: ItemStore = {}
     Object.keys(TEAM_TYPES).forEach(type => items[type] = []);
 
@@ -59,7 +62,7 @@ function populateJSX(script: (LiteralRole | Role)[]): ItemStore {
         const role = r as Role;
         if (!(role.team in items)) return;
         items[role.team].push((
-            <MenuItem roleId={role.id} key={role.id}></MenuItem>
+            <MenuItem roleId={role.id} key={role.id} callback={createCallback}></MenuItem>
         ));
     })
 
@@ -81,7 +84,28 @@ function SideMenu() {
         setOffset(-300);
     }
 
-    const sectionData = populateJSX(script);
+function createToken(id: string) {
+    setGameState(prevState => {
+        const newToken = {
+            id: id,
+            uid: Date.now(),
+            team: Team.Townsfolk,
+            visibility: Visibility.Assigned,
+            viability: Viability.Alive,
+            position: {
+                top: window.innerHeight / 2,
+                left: window.innerWidth / 2,
+            },
+        };
+
+        return {
+            ...prevState,
+            playerTokens: [...prevState.playerTokens, newToken],
+        };
+    });
+}
+
+    const sectionData = populateJSX(script, createToken);
 
     const sections = Object.values(TEAM_TYPES).map<JSX.Element>(team => (
         <div key={team.id}>
