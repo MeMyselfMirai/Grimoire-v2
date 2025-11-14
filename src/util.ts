@@ -9,6 +9,5 @@ export function useImage(imagePath: string): CSSProperties {
 
 export async function getJSON(path: string) {
     const result = await fetch("/data/" + path);
-    console.log(result);
     return await result.json();
 }

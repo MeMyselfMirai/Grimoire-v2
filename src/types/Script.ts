@@ -7,8 +7,8 @@ export type Meta = {
     name: string
 }
 
-export type LiteralRole = {
+export type RoleIdentifier = {
     id: string
 }
 
-export type Script = [Meta, ...Array<LiteralRole | Role>]
+export type Script = [Meta, ...Array<RoleIdentifier | Role>]

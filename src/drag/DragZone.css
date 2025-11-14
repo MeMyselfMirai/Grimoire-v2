@@ -1,4 +1,13 @@
-.DragZone__div {
+#DragZone__pointerCapture {
+    position: fixed; 
+    top: 0px; 
+    left: 0px; 
+    height: 100%; 
+    width: 100%; 
+    touch-action: none;
+}
+
+#DragZone__container {
     position: fixed; 
     top: 0px; 
     left: 0px; 

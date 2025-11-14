@@ -6,12 +6,13 @@ import DragZone from './drag/DragZone';
 import { GameContext, load, save } from './data/gameState';
 import { areRolesLoading, initRoles } from './data/roleData';
 import SideMenu from './sideMenu/SideMenu';
-
-
+import InfoBox from './infoBox/InfoBox';
+import { DEFAULT_APP_STATE } from './data/appState';
 
 function App() {
 
     const [gameState, setGameState] = useState(load())
+    const [appState, setAppState] = useState(DEFAULT_APP_STATE);
     const [loading, setLoading] = useState(areRolesLoading);
     const [enabled, setEnabled] = useState(true);
 
@@ -40,11 +41,12 @@ function App() {
     console.log("Saved this world")
 
     return (
-        <GameContext value={{gameState, setGameState}}>
+        <GameContext value={{gameState, setGameState, appState, setAppState}}>
             <Background />
             <DragZone enabled={enabled} />
-            <SideMenu />
             <Toggle callback={toggleBackground} />
+            <InfoBox />
+            <SideMenu />
         </GameContext>
     );
 }

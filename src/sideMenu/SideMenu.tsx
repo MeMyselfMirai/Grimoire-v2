@@ -1,10 +1,10 @@
 
 import { JSX, useContext, useState } from 'react';
 import './SideMenu.css';
-import { ContextType, GameContext } from '../data/gameState';
+import { GameContextType, GameContext } from '../data/gameState';
 import { ROLES } from '../data/roleData';
 import { Role } from '../types/Role';
-import { LiteralRole } from '../types/Script';
+import { RoleIdentifier } from '../types/Script';
 import MenuItem from './MenuItem';
 import { Team } from '../types/Team';
 import { Visibility } from '../types/Visibility';
@@ -14,6 +14,9 @@ type ItemStore = {
     [key: string]: JSX.Element[]
 }
 
+/**
+ * The teams that appear in the side menu when selecting a character.
+ */
 const TEAM_TYPES = {
     "townsfolk": {
         "id": "townsfolk",
@@ -47,11 +50,22 @@ const TEAM_TYPES = {
     },
 }
 
-function isRole(role: LiteralRole | Role): role is Role {
+/**
+ * Determine if a script item is a complete role item.
+ * @param role A role object from the script
+ * @returns true iff the item has all of its role data
+ */
+function isRole(role: RoleIdentifier | Role): role is Role {
     return ROLES[role.id] === undefined;
 }
 
-function populateJSX(script: (LiteralRole | Role)[], createCallback: (id: string) => void): ItemStore {
+/**
+ * Construct the side menu's individual items using the given script.
+ * @param script The script in use. 
+ * @param createCallback What the individual menu items should do to create a new token
+ * @returns 
+ */
+function populateJSX(script: (RoleIdentifier | Role)[], createCallback: (id: string) => void): ItemStore {
     const items: ItemStore = {}
     Object.keys(TEAM_TYPES).forEach(type => items[type] = []);
 
@@ -72,9 +86,9 @@ function populateJSX(script: (LiteralRole | Role)[], createCallback: (id: string
 function SideMenu() {
     const [offset, setOffset] = useState(-300);
     // eslint-disable-next-line
-    const {gameState, setGameState} = useContext(GameContext) as ContextType;
+    const {gameState, setGameState} = useContext(GameContext) as GameContextType;
 
-    const script = gameState.script.slice(1) as (LiteralRole | Role)[];
+    const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
 
     function openMenu() {
         setOffset(0);
@@ -84,26 +98,26 @@ function SideMenu() {
         setOffset(-300);
     }
 
-function createToken(id: string) {
-    setGameState(prevState => {
-        const newToken = {
-            id: id,
-            uid: Date.now(),
-            team: Team.Townsfolk,
-            visibility: Visibility.Assigned,
-            viability: Viability.Alive,
-            position: {
-                top: window.innerHeight / 2,
-                left: window.innerWidth / 2,
-            },
-        };
+    function createToken(id: string) {
+        setGameState(prevState => {
+            const newToken = {
+                id: id,
+                uid: Date.now(),
+                team: Team.Townsfolk,
+                visibility: Visibility.Assigned,
+                viability: Viability.Alive,
+                position: {
+                    top: window.innerHeight / 2 - 75,
+                    left: window.innerWidth / 2 - 75,
+                },
+            };
 
-        return {
-            ...prevState,
-            playerTokens: [...prevState.playerTokens, newToken],
-        };
-    });
-}
+            return {
+                ...prevState,
+                playerTokens: [...prevState.playerTokens, newToken],
+            };
+        });
+    }
 
     const sectionData = populateJSX(script, createToken);
 

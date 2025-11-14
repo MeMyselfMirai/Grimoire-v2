@@ -2,6 +2,11 @@ import "./Token.css"
 
 type TokenNameType = {name: string}
 
+/**
+ * A SVG graphic showing the name of a role on the token.
+ * @param name The name to display.
+ * @returns 
+ */
 function TokenName({name}: TokenNameType) {
     return (
         <svg viewBox="0 0 150 150" className="TokenName__graphic">

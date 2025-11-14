@@ -1,19 +1,10 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { GameState } from "../types/GameState";
-import { Position } from "../types/Position";
 
-export type TokData = Position & {id: string}
-
-const initialTokens: TokData[] = JSON.parse(localStorage.getItem("positions") ?? "[]") as TokData[];
-if (initialTokens.length === 0 || initialTokens[0].id === undefined) {
-    initialTokens.length = 0;
-    for (let i = 0; i < 9; i++) {
-        initialTokens.push({ top: Math.random() * 400, left: Math.random() * 80, id: "alsaahir"})
-    }
-    localStorage.setItem("positions", JSON.stringify(initialTokens));
-}
-
-
+/**
+ * Load the Game State from storage.
+ * @returns The game state saved in storage, or a generic simple one otherwise.
+ */
 export function load(): GameState {
     if (localStorage.getItem("state") == null) {
         return {
@@ -37,14 +28,23 @@ export function load(): GameState {
     return JSON.parse(localStorage.getItem("state")!) as GameState;
 }
 
+/**
+ * Save the game state to storage. 
+ * @param state The state of the game at this time. 
+ */
 export function save(state: GameState) {
     localStorage.setItem("state", JSON.stringify(state));
 }
 
-
+/**
+ * A global context object whose purpose is to deal with and hand around the global state.
+ */
 export const GameContext = createContext<any>(null);
 
-export type ContextType = {gameState: GameState, setGameState: Dispatch<SetStateAction<GameState>>};
-
-
-export { initialTokens as multipleTokens };
+/**
+ * The item types in the GameContext object. We can't specify them here, so we do so elsewhere.
+ */
+export type GameContextType = {
+    gameState: GameState, 
+    setGameState: Dispatch<SetStateAction<GameState>>
+};
