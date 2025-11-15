@@ -1,4 +1,9 @@
 @font-face {
+    font-family: PiratesBay;
+    src: url(/public/assets/fonts/piratesbay.ttf);
+}
+
+@font-face {
     font-family: Dumbledor;
     src: url(/public/assets/fonts/Dumbledor1.ttf);
 }

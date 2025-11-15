@@ -1,40 +1,40 @@
 .InfoBox__container {
-    position: absolute; 
-    left: 0px; 
-    bottom: 0px; 
-    width: 100%; 
-    height: 250px; 
-    white-space: nowrap; 
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 250px;
+    white-space: nowrap;
     overflow: visible;
 }
 
 .InfoBox__tab {
     height: 250px;
-    position: relative; 
-    top: 0px; 
-    left: 0px; 
-    display: inline-block; 
-    color: white; 
-    text-align: center; 
+    position: relative;
+    top: 0px;
+    left: 0px;
+    display: inline-block;
+    color: white;
+    text-align: center;
     overflow: hidden;
 }
 
 .InfoBox__tabHeader {
-    height: 250px; 
+    height: 250px;
     cursor: pointer;
 }
 
 .InfoBox__tabHeaderGeneric {
-    width: 100px; 
-    background-position: 50%; 
-    position: absolute; 
-    left: 0px; 
+    width: 100px;
+    background-position: 50%;
+    position: absolute;
+    left: 0px;
     top: 0px;
 }
 
 
 .InfoBox__tabImage {
-    width: 100%; 
+    width: 100%;
     margin-top: 75px;
     align-items: center;
 }
@@ -43,6 +43,7 @@
     width: 250px;
     transition: width ease-in-out 0.2s;
 }
+
 .InfoBox__focus.InfoDetails__container {
     width: calc(100% - 315px) !important;
 }
@@ -58,38 +59,96 @@
     background-size: cover;
     border-radius: 100%;
     transition: width ease-in-out 0.5s,
-    height ease-in-out 0.5s,
-    left ease-in-out 0.5s;
+        height ease-in-out 0.5s,
+        left ease-in-out 0.5s;
 }
+
 .InfoBox__focus .InfoDetails__token {
     left: 0px;
     width: 250px;
     height: 250px;
 }
 
+.InfoDetails__content {
+    position: absolute;
+    top: 0px;
+    left: 260px;
+    height: 100%;
+    width: calc(100% - 265px);
+}
+
+.InfoDetails__roleName {
+    height: 100px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    color: rgb(211, 211, 211);
+    font-size: 50pt;
+    font-family: PiratesBay;
+}
+
+.InfoDetails__playerName {
+    position: absolute;
+    top: 70px;
+    left: 30px;
+    color: rgb(192, 72, 72);
+    font-size: 17pt;
+    font-family: PiratesBay;
+}
+
+.InfoDetails__ability {
+    position: absolute;
+    width: calc(100vw - 600px);
+    top: 95px;
+    left: 15px;
+    color: darkgrey;
+    font-size: 24pt;
+    font-family: PiratesBay;
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+}
+
+.InfoDetails__flavor {
+    position: absolute;
+    width: calc(100vw - 600px);
+    top: 180px;
+    left: 15px;
+    font-size: 12pt;
+    font-style: italic;
+    font-family: PiratesBay;
+    overflow-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+}
+
+
 /** The reminders tab */
 .InfoReminders__container {
-    width: 100px; 
+    width: 100px;
     transition: width ease-in-out 0.2s;
 }
+
 .InfoBox__focus.InfoReminders__container {
     width: calc(100% - 465px);
 }
 
 /** The shrouds tab */
 .InfoShrouds__container {
-    width: 100px; 
+    width: 100px;
     transition: width ease-in-out 0.2s;
 }
+
 .InfoBox__focus.InfoShrouds__container {
     width: calc(100% - 465px);
 }
 
 /** The powers tab */
 .InfoPowers__container {
-    width: 100px; 
+    width: 100px;
     transition: width ease-in-out 0.2s;
 }
+
 .InfoBox__focus.InfoPowers__container {
     width: calc(100% - 465px);
 }

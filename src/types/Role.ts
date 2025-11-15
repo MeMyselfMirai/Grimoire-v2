@@ -7,6 +7,7 @@ export type Role = {
     id: string,
     name: string,
     ability: string,
+    flavor?: string,
     team: string,
     image: string,
     reminders?: string[],
