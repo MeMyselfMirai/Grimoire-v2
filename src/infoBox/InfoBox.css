@@ -152,3 +152,46 @@
 .InfoBox__focus.InfoPowers__container {
     width: calc(100% - 465px);
 }
+
+.InfoPowers__content {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+    height: 190px;
+    width: calc(100vw - 625px);
+    text-align: center;
+    overflow-wrap: break-word;
+    white-space: normal;
+    margin: 30px;
+}
+
+.InfoPowers__nameLabel {
+    color: rgb(175, 175, 175);
+    font-size: 20pt;
+    font-family: PiratesBay;
+}
+
+.InfoPowers__nameInput {
+    height: 40px;
+    width: 100%;
+    color: black;
+    font-size: 20pt;
+    background-color: #afafaf;
+}
+
+.InfoPowers__optionsContainer {
+    width: 100%;
+    height: 50%;
+}
+
+.InfoPowers__option {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}

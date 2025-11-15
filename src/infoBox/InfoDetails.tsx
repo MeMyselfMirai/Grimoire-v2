@@ -2,7 +2,7 @@ import { ROLES } from "../data/roleData";
 import Token from "../drag/Token";
 import { Role } from "../types/Role";
 import { TokenData } from "../types/TokenData";
-import { InfoTabType } from "./InfoBox";
+import { InfoTabType } from "./util";
 
 type InfoDetailsType = InfoTabType & {
     token: TokenData

@@ -1,6 +1,4 @@
 import { useContext, useState } from "react";
-import { GameState } from "../types/GameState";
-import { TokenData } from "../types/TokenData";
 import { GameContext, GameContextType } from "../data/gameState";
 import { AppContextType } from "../data/appState";
 import "./InfoBox.css"
@@ -8,6 +6,7 @@ import InfoDetails from "./InfoDetails";
 import InfoReminders from "./InfoReminders";
 import InfoShrouds from "./InfoShrouds";
 import InfoPowers from "./InfoPowers";
+import { getToken } from "./util";
 
 enum Focus {
     DETAILS,
@@ -16,33 +15,17 @@ enum Focus {
     POWERS
 }
 
-export type InfoTabType = {
-    focused: boolean,
-    focusCallback: () => void
-}
-
-function getToken(uid: number, gameState: GameState): TokenData | undefined {
-    for (const token of gameState.playerTokens) {
-        if (token.uid === uid) return token;
-    }
-    return undefined;
-}
-
 function InfoBox() {
 
-    const {
-        gameState,
-        appState
-    } = useContext(GameContext) as AppContextType & GameContextType;
-
+    const {gameState, appState} = useContext(GameContext) as AppContextType & GameContextType;
     const [focus, setFocus] = useState(Focus.DETAILS);
 
     const token = getToken(appState.activeTokenUid, gameState);
-
     if (token === undefined) {
         return ( <></> );
     }
 
+    
     return (
         <div className="InfoBox__container" style={{backgroundImage: "url('assets/vines.png')"}}>
             <InfoDetails 

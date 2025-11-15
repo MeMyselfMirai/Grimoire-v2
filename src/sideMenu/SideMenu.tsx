@@ -6,7 +6,6 @@ import { ROLES } from '../data/roleData';
 import { Role } from '../types/Role';
 import { RoleIdentifier } from '../types/Script';
 import MenuItem from './MenuItem';
-import { Team } from '../types/Team';
 import { Visibility } from '../types/Visibility';
 import { Viability } from '../types/Viability';
 
@@ -103,7 +102,7 @@ function SideMenu() {
             const newToken = {
                 id: id,
                 uid: Date.now(),
-                team: Team.Townsfolk,
+                name: "",
                 visibility: Visibility.Assigned,
                 viability: Viability.Alive,
                 position: {
