@@ -7,3 +7,89 @@
     white-space: nowrap; 
     overflow: visible;
 }
+
+.InfoBox__tab {
+    height: 250px;
+    position: relative; 
+    top: 0px; 
+    left: 0px; 
+    display: inline-block; 
+    color: white; 
+    text-align: center; 
+    overflow: hidden;
+}
+
+.InfoBox__tabHeader {
+    height: 250px; 
+    cursor: pointer;
+}
+
+.InfoBox__tabHeaderGeneric {
+    width: 100px; 
+    background-position: 50%; 
+    position: absolute; 
+    left: 0px; 
+    top: 0px;
+}
+
+
+.InfoBox__tabImage {
+    width: 100%; 
+    margin-top: 75px;
+    align-items: center;
+}
+
+.InfoDetails__container {
+    width: 250px;
+    transition: width ease-in-out 0.2s;
+}
+.InfoBox__focus.InfoDetails__container {
+    width: calc(100% - 315px) !important;
+}
+
+/** The details tab */
+.InfoDetails__token {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 25px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100%;
+    transition: width ease-in-out 0.5s,
+    height ease-in-out 0.5s,
+    left ease-in-out 0.5s;
+}
+.InfoBox__focus .InfoDetails__token {
+    left: 0px;
+    width: 250px;
+    height: 250px;
+}
+
+/** The reminders tab */
+.InfoReminders__container {
+    width: 100px; 
+    transition: width ease-in-out 0.2s;
+}
+.InfoBox__focus.InfoReminders__container {
+    width: calc(100% - 465px);
+}
+
+/** The shrouds tab */
+.InfoShrouds__container {
+    width: 100px; 
+    transition: width ease-in-out 0.2s;
+}
+.InfoBox__focus.InfoShrouds__container {
+    width: calc(100% - 465px);
+}
+
+/** The powers tab */
+.InfoPowers__container {
+    width: 100px; 
+    transition: width ease-in-out 0.2s;
+}
+.InfoBox__focus.InfoPowers__container {
+    width: calc(100% - 465px);
+}

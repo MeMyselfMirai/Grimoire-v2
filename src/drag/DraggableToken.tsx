@@ -63,7 +63,7 @@ function DraggableToken({ id, position, onDrag, onClick, onDrop, enabled}: Token
             onStop={handleTouchEnd}
         >
             <div ref={ref} style={{zIndex: touchMoved.current ? 1 : 0}}>
-                <Token id={id}></Token>
+                <Token id={id} className="Token__container"></Token>
             </div>
         </Draggable>
     );

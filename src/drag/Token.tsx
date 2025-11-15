@@ -3,7 +3,9 @@ import TokenName from "./TokenName";
 import { ROLES } from "../data/roleData";
 
 type TokenType = {
-    id: string
+    id: string,
+    className?: string,
+    onClick?: () => void
 }
 
 /**
@@ -16,16 +18,17 @@ type TokenType = {
  * @param enabled Whether this token should be allowed to be dragged around.
  * @returns 
  */
-function Token({ id }: TokenType) {
+function Token({ id, className, onClick }: TokenType) {
 
     const data = ROLES[id];
 
     return (
         <div
-            className="Token__container"
+            className={className}
             style={{
                 backgroundImage: `url(/assets/token.png)`
             }}
+            onClick={() => onClick?.()}
         >
             <img className="Token__image General__backgroundImage" src={data.image} alt={data.name}/>
             <TokenName name={data.name} />

@@ -1,11 +1,25 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { GameState } from "../types/GameState";
 import { TokenData } from "../types/TokenData";
 import { GameContext, GameContextType } from "../data/gameState";
 import { AppContextType } from "../data/appState";
 import "./InfoBox.css"
-import Token from "../drag/Token";
+import InfoDetails from "./InfoDetails";
+import InfoReminders from "./InfoReminders";
+import InfoShrouds from "./InfoShrouds";
+import InfoPowers from "./InfoPowers";
 
+enum Focus {
+    DETAILS,
+    SHROUDS,
+    REMINDERS,
+    POWERS
+}
+
+export type InfoTabType = {
+    focused: boolean,
+    focusCallback: () => void
+}
 
 function getToken(uid: number, gameState: GameState): TokenData | undefined {
     for (const token of gameState.playerTokens) {
@@ -21,6 +35,8 @@ function InfoBox() {
         appState
     } = useContext(GameContext) as AppContextType & GameContextType;
 
+    const [focus, setFocus] = useState(Focus.DETAILS);
+
     const token = getToken(appState.activeTokenUid, gameState);
 
     if (token === undefined) {
@@ -29,7 +45,23 @@ function InfoBox() {
 
     return (
         <div className="InfoBox__container" style={{backgroundImage: "url('assets/vines.png')"}}>
-            <Token id={token.id}></Token>
+            <InfoDetails 
+                token={token} 
+                focused={focus === Focus.DETAILS}
+                focusCallback={() => setFocus(Focus.DETAILS)}
+            ></InfoDetails>
+            <InfoShrouds
+                focused={focus === Focus.SHROUDS}
+                focusCallback={() => setFocus(Focus.SHROUDS)}
+            ></InfoShrouds>
+            <InfoReminders
+                focused={focus === Focus.REMINDERS}
+                focusCallback={() => setFocus(Focus.REMINDERS)}
+            ></InfoReminders>
+            <InfoPowers
+                focused={focus === Focus.POWERS}
+                focusCallback={() => setFocus(Focus.POWERS)}
+            ></InfoPowers>
         </div>
     )
 }
