@@ -31,3 +31,8 @@
     font-family: Dumbledor;
     font-size: 24px;
 }
+
+/* Bit of a kludge to ensure that the dragged token is always on top.*/
+.react-draggable {
+    position:absolute;
+}

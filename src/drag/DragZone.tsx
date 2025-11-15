@@ -2,7 +2,7 @@ import { useContext } from "react";
 import './Token.css';
 import './DragZone.css';
 import { DraggableData, DraggableEvent } from "react-draggable";
-import Token from "./Token";
+import DraggableToken from "./DraggableToken";
 import { GameContextType, GameContext } from "../data/gameState";
 import { GameState } from "../types/GameState";
 import { AppContextType } from "../data/appState";
@@ -22,14 +22,20 @@ function DragZone({enabled}: DragType) {
 
     function handleDrag(_: DraggableEvent, ui: DraggableData, index: number) {
         setGameState(oldState => {
-            const newState: GameState = {...oldState};
-            newState.playerTokens = [...oldState.playerTokens];
-            newState.playerTokens[index] = {...newState.playerTokens[index]}
-            newState.playerTokens[index].position = {
-                top: newState.playerTokens[index].position.top + ui.deltaY,
-                left: newState.playerTokens[index].position.left + ui.deltaX,
+            return {
+                ...oldState,
+                playerTokens: [
+                    ...oldState.playerTokens.slice(0,index),
+                    {
+                        ...oldState.playerTokens[index],
+                        position: {
+                            top: oldState.playerTokens[index].position.top + ui.deltaY,
+                            left: oldState.playerTokens[index].position.left + ui.deltaX,
+                        }
+                    },
+                    ...oldState.playerTokens.slice(index+1)
+                ]
             }
-            return newState;
         });
     }
 
@@ -44,6 +50,19 @@ function DragZone({enabled}: DragType) {
         });
     }
 
+    function handleDrop(index: number) {
+        setGameState(oldState => {
+            const newState: GameState = {...oldState};
+            const oldToken = oldState.playerTokens[index];
+            newState.playerTokens = [
+                ...oldState.playerTokens.slice(0,index),
+                ...oldState.playerTokens.slice(index+1),
+                oldToken
+            ];
+            return newState;
+        });
+    }
+
     function handleNeutralClick() {
         setAppState(oldState => {
             return {
@@ -54,12 +73,12 @@ function DragZone({enabled}: DragType) {
     }
 
     const tokens = gameState.playerTokens.map((token, index) => (
-        <Token 
-            key={index} 
+        <DraggableToken 
+            key={token.uid} 
             id={token.id} 
-            top={token.position.top} 
-            left={token.position.left} 
-            onDrag={(e, ui) => handleDrag(e, ui, index)} 
+            position={token.position}
+            onDrag={(e, ui) => handleDrag(e, ui, index)}
+            onDrop={() => handleDrop(index)}
             onClick={(e) => handleClick(e, token.uid)}
             enabled={enabled} 
         />
