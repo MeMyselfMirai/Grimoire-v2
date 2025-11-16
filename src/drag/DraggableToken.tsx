@@ -29,29 +29,39 @@ function DraggableToken({ id, name, position, onDrag, onClick, onDrop, enabled}:
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
     const ref: RefObject<any> = useRef(null);
-    const touchMoved = useRef(false);
+    const touchMoved = useRef({left: 0, top: 0, total: false});
 
-
-    function handleTouchStart() {
-        touchMoved.current = false;
+    function hasSufficientlyMoved() {
+        touchMoved.current = {
+            left: touchMoved.current.left,
+            top: touchMoved.current.top,
+            total: touchMoved.current.total || touchMoved.current.left ** 2 + touchMoved.current.top ** 2 > 100
+        };
+        return touchMoved.current.total;
     }
 
-    function handleTouchMove(e:any, ui:any) {
-        touchMoved.current = true;
-        console.log("aaaaaaaaaa")
+    function handleTouchStart() {
+        touchMoved.current = {left: 0, top: 0, total: false};
+    }
+
+    function handleTouchMove(e:DraggableEvent, ui:DraggableData) {
+        touchMoved.current = {
+            left: touchMoved.current.left + ui.deltaX,
+            top: touchMoved.current.top + ui.deltaY,
+            total: touchMoved.current.total
+        }
+        hasSufficientlyMoved();
         onDrag(e,ui);
     }
 
     function handleTouchEnd(e: any) {
-        console.log("END")
-        console.log(touchMoved)
-        if (touchMoved.current) {
+        if (touchMoved.current.total) {
             onDrop();
         } else {
             e.preventDefault();
             onClick(e as React.MouseEvent<HTMLElement,MouseEvent>);
         }
-        touchMoved.current = false;
+        touchMoved.current = {left: 0, top: 0, total: false};
     }
 
     return (
@@ -63,7 +73,7 @@ function DraggableToken({ id, name, position, onDrag, onClick, onDrop, enabled}:
             onDrag={handleTouchMove} 
             onStop={handleTouchEnd}
         >
-            <div ref={ref} style={{zIndex: touchMoved.current ? 1 : 0}}>
+            <div ref={ref} style={{zIndex: hasSufficientlyMoved() ? 1 : 0}}>
                 <Token id={id} name={name} className="Token__container"></Token>
             </div>
         </Draggable>

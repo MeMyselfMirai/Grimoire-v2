@@ -61,10 +61,11 @@
 
 
 .SideMenu__header {
-    width: 263px; 
+    width: 100%; 
     text-align: center; 
-    font-size: 40pt; 
-    text-shadow: 0 0 3px rgb(255, 255, 255)
+    font-size: 48pt; 
+    text-shadow: 0 0 3px rgb(255, 255, 255);
+    font-family: PiratesBay;
 }
 
 
@@ -87,9 +88,10 @@
 
 .MenuItem__label {
     position: absolute; 
-    font-size: 20px; 
+    font-size: 24px; 
     color: white; 
     cursor: pointer;
+    font-family: PiratesBay;
 }
 
 
@@ -98,4 +100,5 @@
     right: 10px; 
     height: 20px; 
     color: white;
+    font-family: PiratesBay;
 }

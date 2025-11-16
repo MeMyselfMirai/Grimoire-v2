@@ -45,8 +45,8 @@ function App() {
             <Background />
             <DragZone enabled={enabled} />
             <Toggle callback={toggleBackground} />
-            <InfoBox />
             <SideMenu />
+            <InfoBox />
         </GameContext>
     );
 }
