@@ -1,65 +1,15 @@
 import { JSX, useContext } from "react";
 import { GameContext, GameContextType } from "../data/gameState";
-import { ROLES } from "../data/roleData";
+import { ROLES, TEAM_TYPES } from "../data/roleData";
 import { GameState } from "../types/GameState";
 import { Role } from "../types/Role";
-import { RoleIdentifier } from "../types/Script";
+import { isRole, RoleIdentifier } from "../types/Script";
 import { Viability } from "../types/Viability";
 import { Visibility } from "../types/Visibility";
 import MenuRole from "./MenuRole";
 
 type Storage<T> = {
     [key: string]: T
-}
-
-/**
- * The teams that appear in the side menu when selecting a character.
- */
-export const TEAM_TYPES = {
-    "townsfolk": {
-        "id": "townsfolk",
-        "header": "Townsfolk",
-        "color": "#0033cc",
-    },
-    "outsider": {
-        "id": "outsider",
-        "header": "Outsiders",
-        "color": "#1a53ff",
-    },
-    "minion": {
-        "id": "minion",
-        "header": "Minions",
-        "color": "#b30000",
-    },
-    "demon": {
-        "id": "demon",
-        "header": "Demons",
-        "color": "#e60000",
-    },
-    "traveller": {
-        "id": "traveller",
-        "header": "Travellers",
-        "color": "#6600ff",
-    },
-    "fabled": {
-        "id": "fabled",
-        "header": "Fabled",
-        "color": "#b3b300",
-    },
-    "loric": {
-        "id": "loric",
-        "header": "Loric",
-        "color": "#00b300",
-    },
-}
-
-/**
- * Determine if a script item is a complete role item.
- * @param role A role object from the script
- * @returns true iff the item has all of its role data
- */
-function isRole(role: RoleIdentifier | Role): role is Role {
-    return ROLES[role.id] === undefined;
 }
 
 /**
@@ -112,7 +62,7 @@ function aggregateJSX(gameState: GameState, elements: Storage<JSX.Element[]>): J
     return Object.values(TEAM_TYPES).map<JSX.Element>(team => (
         <div key={team.id}>
             <div className="SideMenu__header" style={{ color: team.color }}>{team.header}</div>
-            <div className='MenuRoles__ratio' id={`MenuRoles__ratio_${team.id}`}>{teamCounts[team.id] ?? 0}/0</div>
+            <div className='MenuRoles__ratio'>{teamCounts[team.id] ?? 0}/0</div>
             <hr style={{ marginBlockEnd: "0em" }}></hr>
             {elements[team.id] ?? []}
         </div>

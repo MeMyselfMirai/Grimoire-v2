@@ -22,13 +22,39 @@ export default function ShroudIcons() {
         });
     }
 
+    function selectCallback(id: string, index: number) {
+        setAppState(oldState => {
+            const oldIcons = oldState.activeShroud!.shownIcons;
+            return {
+                ...oldState,
+                activeShroud: {
+                    ...oldState.activeShroud!,
+                    shownIcons: [
+                        ...oldIcons.slice(0,index),
+                        id,
+                        ...oldIcons.slice(index+1)
+                    ]
+                }
+            }
+        });
+    }
+
+    function changeIcon(index: number) {
+        setAppState(oldState => {
+            return {
+                ...oldState,
+                characterSelectCallback: (id) => selectCallback(id, index)
+            }
+        });
+    }
+
     const icons = appState.activeShroud!.shownIcons;
 
-    const iconJsx = icons.map(id => {
+    const iconJsx = icons.map((id, index) => {
         let token = <></>
-        if (id !== undefined) token = <SampleToken id={id} />;
+        if (id !== undefined) token = <SampleToken id={id} className="Shroud__icon General__backgroundImage" />;
         return (
-            <div className="Shroud__icon" style={{backgroundImage:" url(assets/person_add.png)"}}>
+            <div key={index} className="Shroud__iconContainer" style={{backgroundImage:" url(assets/person_add.png)"}} onClick={() => changeIcon(index)}>
                 {token}
             </div>
         )

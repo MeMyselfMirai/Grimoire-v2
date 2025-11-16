@@ -1,0 +1,96 @@
+import { JSX, useContext } from "react";
+import "./CharacterSelect.css"
+import { AppContextType } from "../data/appState";
+import { GameContext, GameContextType } from "../data/gameState";
+import { TEAM_TYPES, ROLES } from "../data/roleData";
+import { GameState } from "../types/GameState";
+import { Role } from "../types/Role";
+import { isRole, RoleIdentifier } from "../types/Script";
+import SampleToken from "../token/SampleToken";
+
+type Storage<T> = {
+    [key: string]: T
+}
+
+/**
+ * Construct the token select menu's individual items using the given script.
+ * @param script The script in use. 
+ * @param callback What the individual menu items should do to create a new token
+ * @returns 
+ */
+export function populateJSX(gameState: GameState, callback: (id: string) => void): Storage<JSX.Element[]> {
+    const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
+
+    const items: Storage<JSX.Element[]> = {}
+    Object.keys(TEAM_TYPES).forEach(type => items[type] = []);
+
+    script.forEach(r => {
+        if (!isRole(r)) {
+            r = ROLES[r.id];
+        }
+        const role = r as Role;
+        if (!(role.team in items)) return;
+        items[role.team].push((
+            <SampleToken
+                id={role.id}
+                className={"CharacterSelect__token General__backgroundImage"}
+                onClick={() => callback(role.id)}
+            />
+        ));
+    })
+
+    return items;
+}
+
+function aggregateJSX(gameState: GameState, elements: Storage<JSX.Element[]>): JSX.Element[] {
+    const tokens = gameState.playerTokens;
+
+    const teamCounts: Storage<number> = {};
+    tokens.forEach(token => {
+        const team = ROLES[token.id].team;
+        if (!(team in teamCounts)) teamCounts[team] = 0
+        teamCounts[team] += 1;
+    });
+
+    return Object.values(TEAM_TYPES).filter(team => elements[team.id]?.length > 0).map<JSX.Element>(team => (
+        <div key={team.id}>
+            <div className="CharacterSelect__teamHeader" style={{ color: team.color }}>{team.header}</div><br />
+            <div id="mutate_menu_townsfolk">
+                {elements[team.id] ?? []}
+            </div><br />
+        </div>
+    ));
+}
+
+export default function CharacterSelect() {
+    const { gameState, appState, setAppState } = useContext(GameContext) as AppContextType & GameContextType;
+
+    if (appState.characterSelectCallback === undefined) {
+        return <></>
+    }
+    const onSelect = appState.characterSelectCallback!;
+
+    function closeMenu(selection?: string) {
+        if (selection !== undefined) onSelect(selection);
+        setAppState(oldState => {
+            return {
+                ...oldState,
+                characterSelectCallback: undefined
+            }
+        });
+    }
+
+    const roleJSX = populateJSX(gameState, closeMenu);
+    const sectionJSX = aggregateJSX(gameState, roleJSX);
+
+
+    return (
+        <div className="CharacterSelect__container" onClick={() => closeMenu()}>
+            <div className="CharacterSelect__background">
+                <div className="CharacterSelect__content">
+                    {sectionJSX}
+                </div>
+            </div>
+        </div>
+    )
+}

@@ -9,6 +9,7 @@ import SideMenu from './sideMenu/SideMenu';
 import InfoBox from './infoBox/InfoBox';
 import { DEFAULT_APP_STATE } from './data/appState';
 import Shroud from './shroud/Shroud';
+import CharacterSelect from './characterSelect/CharacterSelect';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
             <SideMenu />
             <InfoBox />
             <Shroud />
+            <CharacterSelect />
         </GameContext>
     );
 }

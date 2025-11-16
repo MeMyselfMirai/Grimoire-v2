@@ -8,6 +8,6 @@ type ShroudTitleType = {
 export default function ShroudTitle({ title }: ShroudTitleType) {
 
     return (
-        <TextareaAutosize className="Shroud__title" placeholder='You Learn...'>{title}</TextareaAutosize>
+        <TextareaAutosize className="Shroud__title" placeholder='You Learn...' value={title}></TextareaAutosize>
     );
 }

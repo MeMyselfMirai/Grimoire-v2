@@ -7,7 +7,8 @@ export type ActiveShroud = Shroud & {
 
 export type AppState = {
     activeTokenUid: number,
-    activeShroud?: ActiveShroud
+    activeShroud?: ActiveShroud,
+    characterSelectCallback?: (id: string) => void
 }
 
 export const DEFAULT_APP_STATE: AppState = Object.freeze({
