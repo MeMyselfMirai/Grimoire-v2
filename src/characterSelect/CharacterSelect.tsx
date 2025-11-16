@@ -33,6 +33,7 @@ export function populateJSX(gameState: GameState, callback: (id: string) => void
         items[role.team].push((
             <SampleToken
                 id={role.id}
+                key={role.id}
                 className={"CharacterSelect__token General__backgroundImage"}
                 onClick={() => callback(role.id)}
             />
