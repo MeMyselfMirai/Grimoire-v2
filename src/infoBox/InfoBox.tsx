@@ -4,8 +4,8 @@ import { AppContextType } from "../data/appState";
 import "./InfoBox.css"
 import InfoDetails from "./InfoDetails";
 import InfoReminders from "./InfoReminders";
-import InfoShrouds from "./InfoShrouds";
-import InfoPowers from "./InfoPowers";
+import InfoShrouds from "./shrouds/InfoShrouds";
+import InfoPowers from "./Powers/InfoPowers";
 import { getToken } from "./util";
 
 enum Focus {
