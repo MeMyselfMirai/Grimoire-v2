@@ -1,104 +1,145 @@
 .SideMenu__openButton {
-    position: absolute; 
-    top: 5px; 
-    left: 5px; 
-    width: 70px; 
-    height: 70px; 
-    opacity: 0.4; 
-    transition: opacity 
-    linear 0.1s; 
-    background-color: lightslategrey; 
-    cursor: pointer; 
-    border-radius: 10px; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 70px;
+    height: 70px;
+    opacity: 0.4;
+    transition: opacity linear 0.1s;
+    background-color: lightslategrey;
+    cursor: pointer;
+    border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: contain;
 }
+
 .SideMenu__openButton:hover {
     opacity: 0.6;
 }
 
 .SideMenu__closeButton {
-    position: absolute; 
-    top: 5px; 
-    right: 5px; 
-    width: 55px; 
-    height: 55px; 
-    opacity: 0.4; 
-    transition: opacity linear 0.1s; 
-    cursor: pointer; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 55px;
+    height: 55px;
+    opacity: 0.4;
+    transition: opacity linear 0.1s;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: contain;
 }
-.SideMenu__closeButton:hover  {
+
+.SideMenu__closeButton:hover {
     opacity: 0.6;
 }
 
+.SideMenu__logo {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 280px;
+    height: 70px;
+    opacity: 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 10px;
+}
+
 .SideMenu__container {
-    position: absolute; 
-    top: 0px; 
-    left: 0px; 
-    height: 100%; 
-    width: 300px; 
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 300px;
     transition: transform ease-in-out 0.5s;
 }
 
 .SideMenu__body {
-    position: fixed; 
-    width: 280px; 
-    height: calc(100% - 110px); 
-    padding: 10px; 
-    top: 90px; 
-    overflow-y: scroll; 
-    display: block; 
-    font-size: 25px; 
+    position: fixed;
+    width: 280px;
+    height: calc(100% - 110px);
+    padding: 10px;
+    top: 90px;
+    overflow-y: scroll;
+    display: block;
+    font-size: 25px;
     scrollbar-width: none;
 }
+
 .SideMenu__body::-webkit-scrollbar {
     display: none;
 }
 
 
 .SideMenu__header {
-    width: 100%; 
-    text-align: center; 
-    font-size: 48pt; 
+    width: 100%;
+    text-align: center;
+    font-size: 48pt;
     text-shadow: 0 0 3px rgb(255, 255, 255);
     font-family: PiratesBay;
 }
 
 
-.SideMenu__ratio {
-    width: 100%; 
-    text-align: center; 
-    color: white; 
+.SideButtons__container {
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+    height: 80px;
+    display: flex;
+}
+
+.SideButtons__button {
+    border-radius: 25px;
+    background-size: contain;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.SideButtons__clearAll {
+    background-size: 45%;
+    background-color: #ff0000c5;
+    flex-grow: 1;
+}
+
+.SideButtons__shuffle {
+    background-color: #585858e7;
+    flex-grow: 1;
+}
+
+.MenuRoles__ratio {
+    width: 100%;
+    text-align: center;
+    color: white;
     font-size: 15pt;
 }
 
 
-.MenuItem__container {
-    position: relative; 
-    cursor: pointer; 
-    font-size: 20px; 
-    width: 100%; 
+.MenuRole__container {
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
     padding-top: 10px;
 }
 
 
-.MenuItem__label {
-    position: absolute; 
-    font-size: 24px; 
-    color: white; 
+.MenuRole__label {
+    position: absolute;
+    font-size: 24px;
+    color: white;
     cursor: pointer;
     font-family: PiratesBay;
 }
 
 
-.MenuItem__count {
-    position: absolute; 
-    right: 10px; 
-    height: 20px; 
+.MenuRole__count {
+    position: absolute;
+    right: 10px;
+    height: 20px;
     color: white;
     font-family: PiratesBay;
 }
