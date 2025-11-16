@@ -32,6 +32,19 @@
     font-size: 24px;
 }
 
+.Token__name {
+    position: absolute;
+    width: 100%; 
+    top:150px; 
+    left: 0px;
+    height: 35px; 
+    text-align: center; 
+    font-size: 20pt; 
+    font-family: PiratesBay; 
+    pointer-events: none; 
+    color: white;
+}
+
 /* Bit of a kludge to ensure that the dragged token is always on top.*/
 .react-draggable {
     position:absolute;

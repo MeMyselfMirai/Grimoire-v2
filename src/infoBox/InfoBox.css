@@ -69,6 +69,22 @@
     height: 250px;
 }
 
+.InfoDetails__tokenName {
+    position: absolute;
+    bottom: 20px;
+    display: block; 
+    color:rgb(192, 72, 72); 
+    font-size: 20pt; 
+    font-family: PiratesBay;
+    width: 250px;
+    text-align: center;
+    transition: bottom ease-in-out 0.5s;
+}
+
+.InfoBox__focus .InfoDetails__tokenName {
+    bottom: -30px;
+}
+
 .InfoDetails__content {
     position: absolute;
     top: 0px;

@@ -5,6 +5,7 @@ import { Position } from "../types/Position";
 import Token from "./Token";
 
 type TokenType = {
+    name: string,
     position: Position,
     onDrag: (e: DraggableEvent, ui: DraggableData) => void,
     onClick: MouseEventHandler<HTMLElement>,
@@ -23,7 +24,7 @@ type TokenType = {
  * @param enabled Whether this token should be allowed to be dragged around.
  * @returns 
  */
-function DraggableToken({ id, position, onDrag, onClick, onDrop, enabled}: TokenType) {
+function DraggableToken({ id, name, position, onDrag, onClick, onDrop, enabled}: TokenType) {
 
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
@@ -63,7 +64,7 @@ function DraggableToken({ id, position, onDrag, onClick, onDrop, enabled}: Token
             onStop={handleTouchEnd}
         >
             <div ref={ref} style={{zIndex: touchMoved.current ? 1 : 0}}>
-                <Token id={id} className="Token__container"></Token>
+                <Token id={id} name={name} className="Token__container"></Token>
             </div>
         </Draggable>
     );

@@ -42,9 +42,10 @@ function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
     return (
         <div className={"InfoDetails__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
             <Token id={token.id} className="InfoDetails__token" onClick={focusCallback}></Token>
+            <span className="InfoDetails__tokenName">{token.name ?? ""}</span>
             <div className="InfoDetails__content">
                 <div className="InfoDetails__roleName">{role.name}</div>
-                <div className="InfoDetails__playerName">Alice</div>
+                <div className="InfoDetails__playerName">{token.name}</div>
                 <div className="InfoDetails__ability">{role.ability}</div>
                 {generateFlavor(role)}
             </div>

@@ -76,6 +76,7 @@ function DragZone({enabled}: DragType) {
         <DraggableToken 
             key={token.uid} 
             id={token.id} 
+            name={token.name}
             position={token.position}
             onDrag={(e, ui) => handleDrag(e, ui, index)}
             onDrop={() => handleDrop(index)}
