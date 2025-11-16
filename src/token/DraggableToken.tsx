@@ -39,6 +39,11 @@ function DraggableToken({ token, focused, onDrag, onClick, onDrop, enabled}: Tok
         return touchMoved.current.total;
     }
 
+    function handleMouseDown(e: any) {
+        if (enabled) return true;
+        onClick(e);
+    }
+
     function handleTouchStart() {
         touchMoved.current = {left: 0, top: 0, total: false};
     }
@@ -58,7 +63,7 @@ function DraggableToken({ token, focused, onDrag, onClick, onDrop, enabled}: Tok
             onDrop();
         } else {
             e.preventDefault();
-            onClick(e as React.MouseEvent<HTMLElement,MouseEvent>);
+            onClick(e);
         }
         touchMoved.current = {left: 0, top: 0, total: false};
     }
@@ -68,6 +73,7 @@ function DraggableToken({ token, focused, onDrag, onClick, onDrop, enabled}: Tok
             nodeRef={ref} 
             disabled={!enabled} 
             position={{x: token.position.left, y: token.position.top}} 
+            onMouseDown={handleMouseDown}
             onStart={handleTouchStart}
             onDrag={handleTouchMove} 
             onStop={handleTouchEnd}
