@@ -32,4 +32,5 @@ export type Shroud = {
     icons?: number
     iconsFixed?: boolean
     autofill?: boolean
+    epilog?: string
 }

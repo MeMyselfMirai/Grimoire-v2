@@ -8,6 +8,7 @@ import { areRolesLoading, initRoles } from './data/roleData';
 import SideMenu from './sideMenu/SideMenu';
 import InfoBox from './infoBox/InfoBox';
 import { DEFAULT_APP_STATE } from './data/appState';
+import Shroud from './shroud/Shroud';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
             <Toggle callback={toggleBackground} />
             <SideMenu />
             <InfoBox />
+            <Shroud />
         </GameContext>
     );
 }

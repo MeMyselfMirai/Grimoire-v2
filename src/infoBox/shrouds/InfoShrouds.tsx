@@ -3,7 +3,6 @@ import { ROLES } from "../../data/roleData";
 import { GameState } from "../../types/GameState";
 import { Shroud } from "../../types/Role";
 import { InfoTabType } from "../util";
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
 import ShroudCard from "./ShroudCard";
 
@@ -86,10 +85,9 @@ const DEFAULT_SHROUDS: ShroudMap = Object.freeze({
 
 function completeShroudList(gameState: GameState) {
     const output = {...DEFAULT_SHROUDS};
-    gameState.script.splice(1)
+    gameState.script.slice(1)
         .filter(role => ROLES[role.id].shrouds !== undefined)
         .forEach(role => {
-            console.log(role);
             const shrouds = ROLES[role.id].shrouds!;
             for (const i in shrouds) {
                 const shroudId = `${role.id}_${i}`;
@@ -100,7 +98,7 @@ function completeShroudList(gameState: GameState) {
 }
 
 function InfoShrouds({focused, focusCallback}: InfoTabType) {
-    const {gameState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {gameState} = useContext(GameContext) as GameContextType;
     const shrouds = completeShroudList(gameState)
     
     const shroudJsx = [];

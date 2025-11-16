@@ -1,9 +1,13 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { Shroud } from "../types/Role";
 
+export type ActiveShroud = Shroud & {
+    shownIcons: (string | undefined)[]
+}
+
 export type AppState = {
     activeTokenUid: number,
-    activeShroud?: Shroud
+    activeShroud?: ActiveShroud
 }
 
 export const DEFAULT_APP_STATE: AppState = Object.freeze({

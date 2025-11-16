@@ -1,0 +1,96 @@
+.Shroud__container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.Shroud__closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 85px;
+    height: 85px;
+    opacity: 0.4;
+    transition: opacity linear 0.1s;
+    cursor: pointer;
+}
+
+.Shroud__closeButton:hover {
+    opacity: 0.6;
+}
+
+.Shroud__content {
+    height: fit-content;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    pointer-events: none;
+}
+
+.Shroud__title {
+    width: 65%;
+    overflow-x: hidden;
+
+    background-color: #00000000;
+    border: none;
+    color: white;
+    font-family: PiratesBay;
+    font-size: 60pt;
+    pointer-events: all;
+    resize: none;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+.Shroud__title::selection {
+    background: #888;
+}
+
+.Shroud__title:focus {
+    outline: 1px #666 groove;
+}
+
+.Shroud__iconsContainer {
+    text-align: center;
+    width: 100%;
+    pointer-events: all;
+}
+
+.Shroud__icon {
+    position: relative;
+    margin: 10px; 
+    width: 350px; 
+    height: 300px; 
+    background-color: #44444494; 
+    border-radius: 25px; 
+    display: inline-block; 
+    cursor: pointer; 
+    background-position: center; 
+    background-size: auto 80%; 
+    background-repeat: no-repeat;
+}
+
+.Shroud__extraIconsButton {
+    position: relative;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: #44444494;
+    border-radius: 25px;
+    display: inline-block;
+    cursor: pointer;
+    pointer-events: all;
+    background-position: center;
+    background-size: auto 80%;
+    background-repeat: no-repeat;
+}
+
+.Shroud__epilog {
+    color: #AAA;
+    font-family: Dumbledor;
+    font-size: 20pt;
+}
