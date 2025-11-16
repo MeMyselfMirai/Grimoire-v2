@@ -20,6 +20,22 @@
     pointer-events: none;
 }
 
+.Token__focus {
+    width: 90%; 
+    height: 90%;
+    left: 5%;
+    top: 5%;
+}
+
+.Token__visibilityIndicator {
+    position: absolute; 
+    width: 35%; 
+    height: 35%; 
+    right: 17.5%; 
+    bottom: 17.5%; 
+    pointer-events: none; 
+}
+
 .General__backgroundImage {
     background-position: center; 
     background-repeat: no-repeat; 
@@ -30,6 +46,23 @@
     fill: black;
     font-family: Dumbledor;
     font-size: 24px;
+}
+
+.Token__deathFlag {
+    width: 33.3%; 
+    pointer-events: none; 
+    position: absolute; 
+    left: 33.3%; 
+    top: 5%; 
+}
+
+.Token__deathNoVote {
+    filter: invert(1);
+    width: 25%; 
+    pointer-events: none; 
+    position: absolute; 
+    left: 37.5%; 
+    top: 17.5%; 
 }
 
 .Token__name {
@@ -43,9 +76,4 @@
     font-family: PiratesBay; 
     pointer-events: none; 
     color: white;
-}
-
-/* Bit of a kludge to ensure that the dragged token is always on top.*/
-.react-draggable {
-    position:absolute;
 }

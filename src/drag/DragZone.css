@@ -1,4 +1,4 @@
-#DragZone__pointerCapture {
+.DragZone__pointerCapture {
     position: fixed; 
     top: 0px; 
     left: 0px; 
@@ -7,11 +7,17 @@
     touch-action: none;
 }
 
-#DragZone__container {
+.DragZone__container {
     position: fixed; 
     top: 0px; 
     left: 0px; 
     height: 100%; 
     width: 100%; 
     pointer-events: none;
+}
+
+
+/* Bit of a kludge to ensure that the dragged token is always on top.*/
+.react-draggable {
+    position:absolute;
 }

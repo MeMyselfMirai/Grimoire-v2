@@ -1,10 +1,15 @@
 import './Token.css';
-import TokenName from "./TokenName";
+import TokenName from "./components/TokenName";
 import { ROLES } from "../data/roleData";
+import { TokenData } from '../types/TokenData';
+import DeathFlag from './components/DeathFlag';
+import { Visibility } from '../types/Visibility';
+import Shading from './components/Shading';
+import VisibilityIndicator from './components/VisibilityIndicator';
 
 type TokenType = {
-    id: string,
-    name?: string
+    token: TokenData
+    focused?: boolean
     className?: string,
     onClick?: () => void
 }
@@ -19,21 +24,24 @@ type TokenType = {
  * @param enabled Whether this token should be allowed to be dragged around.
  * @returns 
  */
-function Token({ id, name, className, onClick }: TokenType) {
+function Token({ token, focused = false, className, onClick }: TokenType) {
 
-    const data = ROLES[id];
+    const data = ROLES[token.id];
 
     return (
         <div
             className={className}
             style={{
-                backgroundImage: `url(/assets/token.png)`
+                backgroundImage: `url(/assets/token.png)`,
             }}
             onClick={() => onClick?.()}
         >
             <img className="Token__image General__backgroundImage" src={data.image} alt={data.name}/>
+            <Shading token={token} focused={focused} className={className}></Shading>
             <TokenName name={data.name} />
-            <span className='Token__name'>{name ?? ""}</span>
+            <DeathFlag token={token} />
+            <VisibilityIndicator token={token}></VisibilityIndicator>
+            <span className='Token__name'>{token.visibility === Visibility.Assigned ? token.name ?? "" : ""}</span>
         </div>
     );
 }

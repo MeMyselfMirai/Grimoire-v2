@@ -69,12 +69,43 @@
     height: 250px;
 }
 
+.InfoDetails__tokenMask {
+    position: absolute;
+    top: 0px;
+    left: 25px;
+    height: 200px;
+    width: 200px;
+    pointer-events: none;
+    background-color: black;
+    opacity: 0.5;
+    border-radius: 100%;
+}
+
+.InfoBox__focus .InfoDetails__tokenMask {
+    left: 0px;
+    width: 250px;
+    height: 250px;
+}
+
+.InfoDetails__visibilityIndicator {
+    position: absolute;
+    top: 0px;
+    left: 25px;
+    height: 200px;
+    width: 200px;
+    pointer-events: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 60%;
+    border-radius: 100%;
+}
+
 .InfoDetails__tokenName {
     position: absolute;
     bottom: 20px;
-    display: block; 
-    color:rgb(192, 72, 72); 
-    font-size: 20pt; 
+    display: block;
+    color: rgb(192, 72, 72);
+    font-size: 20pt;
     font-family: PiratesBay;
     width: 250px;
     text-align: center;

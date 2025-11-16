@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import './Token.css';
 import './DragZone.css';
 import { DraggableData, DraggableEvent } from "react-draggable";
-import DraggableToken from "./DraggableToken";
+import DraggableToken from "../token/DraggableToken";
 import { GameContextType, GameContext } from "../data/gameState";
 import { GameState } from "../types/GameState";
 import { AppContextType } from "../data/appState";
@@ -18,7 +17,7 @@ type DragType = {
  */
 function DragZone({enabled}: DragType) {
 
-    const {gameState, setGameState, setAppState} = useContext(GameContext) as GameContextType & AppContextType;
+    const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType & AppContextType;
 
     function handleDrag(_: DraggableEvent, ui: DraggableData, index: number) {
         setGameState(oldState => {
@@ -74,10 +73,9 @@ function DragZone({enabled}: DragType) {
 
     const tokens = gameState.playerTokens.map((token, index) => (
         <DraggableToken 
-            key={token.uid} 
-            id={token.id} 
-            name={token.name}
-            position={token.position}
+            key={token.uid}
+            focused={appState.activeTokenUid === token.uid}
+            token={token}
             onDrag={(e, ui) => handleDrag(e, ui, index)}
             onDrop={() => handleDrop(index)}
             onClick={(e) => handleClick(e, token.uid)}
@@ -87,8 +85,8 @@ function DragZone({enabled}: DragType) {
 
     return (
         <>
-            <div id="DragZone__pointerCapture" onClick={handleNeutralClick} ></div>
-            <div id="DragZone__container">
+            <div className="DragZone__pointerCapture" onClick={handleNeutralClick} ></div>
+            <div className="DragZone__container">
                 {tokens}
             </div>
         </>

@@ -1,5 +1,3 @@
-import "./Token.css"
-
 type TokenNameType = {name: string}
 
 /**

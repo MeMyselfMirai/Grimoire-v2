@@ -1,7 +1,8 @@
 import { ROLES } from "../data/roleData";
-import Token from "../drag/Token";
+import SampleToken from "../token/SampleToken";
 import { Role } from "../types/Role";
 import { TokenData } from "../types/TokenData";
+import { Visibility } from "../types/Visibility";
 import { InfoTabType } from "./util";
 
 type InfoDetailsType = InfoTabType & {
@@ -39,13 +40,31 @@ function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
 
     const role = ROLES[token.id];
 
+    let name = token.name ?? "";
+    let mask = <></>
+
+    if (token.visibility === Visibility.Bluff) {
+        name = "(Demon Bluff)"
+        mask = <>
+            <div className="InfoDetails__tokenMask"></div>
+            <div className="InfoDetails__visibilityIndicator" style={{backgroundImage: "url(assets/visibility_off_yellow.png)"}}></div>
+        </>;
+    } else if (token.visibility === Visibility.Hidden) {
+        name = " (Hidden Token)"
+        mask = <>
+            <div className="InfoDetails__tokenMask"></div>
+            <div className="InfoDetails__visibilityIndicator" style={{backgroundImage: "url(assets/visibility_off_red.png)"}}></div>
+        </>;
+    }
+
     return (
         <div className={"InfoDetails__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
-            <Token id={token.id} className="InfoDetails__token" onClick={focusCallback}></Token>
-            <span className="InfoDetails__tokenName">{token.name ?? ""}</span>
+            <SampleToken id={token.id} className="InfoDetails__token" onClick={focusCallback}></SampleToken>
+            {mask}
+            <span className="InfoDetails__tokenName">{name}</span>
             <div className="InfoDetails__content">
                 <div className="InfoDetails__roleName">{role.name}</div>
-                <div className="InfoDetails__playerName">{token.name}</div>
+                <div className="InfoDetails__playerName">{name}</div>
                 <div className="InfoDetails__ability">{role.ability}</div>
                 {generateFlavor(role)}
             </div>
