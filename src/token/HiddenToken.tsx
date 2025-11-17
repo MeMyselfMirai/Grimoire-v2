@@ -32,6 +32,7 @@ export default function HiddenToken({ token, className }: HiddenTokenType) {
         <div className={className} style={{backgroundImage: image}}>
             {deadvoteJsx}
             {travellerIndicatorJsx}
+            <span className='Token__name'>{token.visibility === Visibility.Assigned ? token.name ?? "" : ""}</span>
         </div>
     )
 }
