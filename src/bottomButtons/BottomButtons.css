@@ -1,4 +1,4 @@
-.bottomToggle {
+.BottomButtons__button {
     position: absolute; 
     bottom: 10px; 
     width: 100px; 
@@ -7,10 +7,13 @@
     background-position: center; 
     background-repeat: no-repeat; 
     background-size: contain;
+    cursor: pointer
 }
 
-#toggle {
+.BottomButtons__visibilityToggle {
+    right: 10px;
+}
+
+.BottomButtons__dragToggle {
     right: 120px;
-    background-color: green;
-    cursor: pointer
 }

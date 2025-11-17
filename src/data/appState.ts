@@ -7,13 +7,16 @@ export type ActiveShroud = Shroud & {
 
 export type AppState = {
     activeTokenUid: number,
+    draggingEnabled: boolean,
+    tokenDataVisible: boolean,
     activeShroud?: ActiveShroud,
     characterSelectCallback?: (id: string) => void
 }
 
 export const DEFAULT_APP_STATE: AppState = Object.freeze({
     activeTokenUid: -1,
-    activeShroud: undefined
+    draggingEnabled: true,
+    tokenDataVisible: true
 })
 
 export const AppContext = createContext(null);

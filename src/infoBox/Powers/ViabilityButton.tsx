@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { Viability } from "../../types/Viability";
-import { getToken } from "../util";
+import { nextViability, Viability } from "../../types/Viability";
+import { getToken } from "../../util";
 
 
 export default function ViabilityButton() {
@@ -24,19 +24,6 @@ export default function ViabilityButton() {
     }
 
     function cycleViability() {
-        let newViability: Viability;
-        switch (token.viability) {
-            case Viability.Alive:
-                newViability = Viability.Dead;
-                break;
-            case Viability.Dead:
-                newViability = Viability.NoVote;
-                break;
-            case Viability.NoVote:
-                newViability = Viability.Alive;
-                break;
-        }
-        
         setGameState(oldState => {
             return {
                 ...oldState,
@@ -44,7 +31,7 @@ export default function ViabilityButton() {
                     ...oldState.playerTokens.slice(0, index),
                     {
                         ...oldState.playerTokens[index],
-                        viability: newViability
+                        viability: nextViability(token.viability)
                     },
                     ...oldState.playerTokens.slice(index+1)
                 ]

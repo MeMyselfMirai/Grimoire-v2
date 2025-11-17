@@ -3,14 +3,24 @@ import './Token.css';
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
 import Token from "./Token";
 import { TokenData } from "../types/TokenData";
+import { ROLES } from "../data/roleData";
+import { Team } from "../types/Team";
+import HiddenToken from "./HiddenToken";
 
 type TokenType = {
     token: TokenData;
     focused: boolean;
+    enabled: boolean;
+    isDataVisible: boolean;
     onDrag: (e: DraggableEvent, ui: DraggableData) => void;
     onClick: MouseEventHandler<HTMLElement>;
     onDrop: () => void;
-    enabled: boolean;
+}
+
+function shouldAppearNormallyAnyway(token: TokenData): boolean {
+    const role = ROLES[token.id];
+    if (role === undefined) return false;
+    return role.team in [Team.Loric, Team.Fabled];
 }
 
 /**
@@ -23,7 +33,7 @@ type TokenType = {
  * @param enabled Whether this token should be allowed to be dragged around.
  * @returns 
  */
-function DraggableToken({ token, focused, onDrag, onClick, onDrop, enabled}: TokenType) {
+function DraggableToken({ token, focused, enabled, isDataVisible, onDrag, onClick, onDrop}: TokenType) {
 
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
@@ -68,6 +78,11 @@ function DraggableToken({ token, focused, onDrag, onClick, onDrop, enabled}: Tok
         touchMoved.current = {left: 0, top: 0, total: false};
     }
 
+    let innerToken = <Token token={token} focused={focused} className="Token__container" />
+    if (!isDataVisible && !shouldAppearNormallyAnyway(token)) {
+        innerToken = <HiddenToken token={token} className="Token__container" />
+    }
+
     return (
         <Draggable 
             nodeRef={ref} 
@@ -75,11 +90,11 @@ function DraggableToken({ token, focused, onDrag, onClick, onDrop, enabled}: Tok
             position={{x: token.position.left, y: token.position.top}} 
             onMouseDown={handleMouseDown}
             onStart={handleTouchStart}
-            onDrag={handleTouchMove} 
+            onDrag={handleTouchMove}
             onStop={handleTouchEnd}
         >
             <div ref={ref} style={{zIndex: hasSufficientlyMoved() ? 1 : 0}}>
-                <Token token={token} focused={focused} className="Token__container"></Token>
+                {innerToken}
             </div>
         </Draggable>
     );

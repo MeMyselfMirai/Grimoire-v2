@@ -1,4 +1,4 @@
-import { InfoTabType } from "../util";
+import { InfoTabType } from "../InfoBox";
 import SetName from "./SetName";
 import DeleteButton from "./DeleteButton";
 import ViabilityButton from "./ViabilityButton";

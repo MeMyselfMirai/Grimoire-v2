@@ -3,7 +3,7 @@ import SampleToken from "../token/SampleToken";
 import { Role } from "../types/Role";
 import { TokenData } from "../types/TokenData";
 import { Visibility } from "../types/Visibility";
-import { InfoTabType } from "./util";
+import { InfoTabType } from "./InfoBox";
 
 type InfoDetailsType = InfoTabType & {
     token: TokenData

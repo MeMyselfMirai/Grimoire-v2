@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { getToken } from "../util";
+import { getToken } from "../../util";
 
 
 export default function EditButton() {

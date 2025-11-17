@@ -1,4 +1,4 @@
-import { InfoTabType } from "./util";
+import { InfoTabType } from "./InfoBox";
 
 function InfoReminders({focused, focusCallback}: InfoTabType) {
     return (

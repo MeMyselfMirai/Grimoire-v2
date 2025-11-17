@@ -1,3 +1,9 @@
+.General__backgroundImage {
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: contain;
+}
+
 .Token__container {
     height: 150px; 
     width: 150px; 
@@ -36,12 +42,6 @@
     pointer-events: none; 
 }
 
-.General__backgroundImage {
-    background-position: center; 
-    background-repeat: no-repeat; 
-    background-size: contain;
-}
-
 .TokenName__textPath {
     fill: black;
     font-family: Dumbledor;
@@ -76,4 +76,22 @@
     font-family: PiratesBay; 
     pointer-events: none; 
     color: white;
+}
+
+
+.HiddenToken__deadvote {
+    width: 100px; 
+    pointer-events: none; 
+    position: absolute; 
+    left: 25px; 
+    top: 25px; 
+}
+
+.HiddenToken__roleIndicator {
+    width: 80%; 
+    height: 80%; 
+    position: absolute; 
+    top: 10%; 
+    left: 10%; 
+    pointer-events: none;
 }

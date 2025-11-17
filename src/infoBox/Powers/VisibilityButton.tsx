@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { Visibility } from "../../types/Visibility";
-import { getToken } from "../util";
+import { nextVisibility, Visibility } from "../../types/Visibility";
+import { getToken } from "../../util";
 
 
 export default function VisibilityButton() {
@@ -23,20 +23,7 @@ export default function VisibilityButton() {
             break;
     }
 
-    function cycleVisibility() {
-        let newVisibility: Visibility;
-        switch (token.visibility) {
-            case Visibility.Assigned:
-                newVisibility = Visibility.Bluff;
-                break;
-            case Visibility.Bluff:
-                newVisibility = Visibility.Hidden;
-                break;
-            case Visibility.Hidden:
-                newVisibility = Visibility.Assigned;
-                break;
-        }
-        
+    function cycleVisibility() {        
         setGameState(oldState => {
             return {
                 ...oldState,
@@ -44,7 +31,7 @@ export default function VisibilityButton() {
                     ...oldState.playerTokens.slice(0, index),
                     {
                         ...oldState.playerTokens[index],
-                        visibility: newVisibility
+                        visibility: nextVisibility(token.visibility)
                     },
                     ...oldState.playerTokens.slice(index+1)
                 ]

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ROLES } from "../../data/roleData";
 import { GameState } from "../../types/GameState";
 import { Shroud } from "../../types/Role";
-import { InfoTabType } from "../util";
+import { InfoTabType } from "../InfoBox";
 import { GameContext, GameContextType } from "../../data/gameState";
 import ShroudCard from "./ShroudCard";
 

@@ -6,13 +6,18 @@ import InfoDetails from "./InfoDetails";
 import InfoReminders from "./InfoReminders";
 import InfoShrouds from "./shrouds/InfoShrouds";
 import InfoPowers from "./Powers/InfoPowers";
-import { getToken } from "./util";
+import { getToken } from "../util";
 
 enum Focus {
     DETAILS,
     SHROUDS,
     REMINDERS,
     POWERS
+}
+
+export type InfoTabType = {
+    focused: boolean,
+    focusCallback: () => void
 }
 
 function InfoBox() {

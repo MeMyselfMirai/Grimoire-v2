@@ -9,3 +9,14 @@ export enum Viability {
     /** Player is dead, and has used their remaining vote */
     NoVote = "dead_voted"
 };
+
+export function nextViability(current: Viability) {
+    switch (current) {
+        case Viability.Alive:
+            return Viability.Dead;
+        case Viability.Dead:
+            return Viability.NoVote;
+        case Viability.NoVote: 
+            return Viability.Alive;
+    }
+}

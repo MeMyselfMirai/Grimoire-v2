@@ -5,17 +5,15 @@ import DraggableToken from "../token/DraggableToken";
 import { GameContextType, GameContext } from "../data/gameState";
 import { GameState } from "../types/GameState";
 import { AppContextType } from "../data/appState";
-
-type DragType = {
-    enabled: boolean
-}
+import { getToken } from "../util";
+import { nextViability } from "../types/Viability";
 
 /**
  * Provides a div containing the entire "DragZone", a region where all draggable tokens exist. 
  * @param enabled Whether the dragzone allows tokens within it to be dragged.
  * @returns 
  */
-function DragZone({enabled}: DragType) {
+function DragZone() {
 
     const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType & AppContextType;
 
@@ -41,12 +39,34 @@ function DragZone({enabled}: DragType) {
     function handleClick(e: any, uid: number) {
         e.stopPropagation();
         console.log(uid)
-        setAppState(oldState => {
-            return {
-                ...oldState,
-                activeTokenUid: uid,
+        if (appState.tokenDataVisible) {
+            setAppState(oldState => {
+                return {
+                    ...oldState,
+                    activeTokenUid: uid,
+                }
+            });
+        } else {
+            const token = getToken(uid, gameState);
+            const index = gameState.playerTokens.indexOf(token!);
+            if (token === undefined) {
+                console.error(`Clicked a token (uid=${uid}) that is apparently undefined. How?`)
+                return;
             }
-        });
+            setGameState(oldState => {
+                return {
+                    ...oldState,
+                    playerTokens: [
+                        ...oldState.playerTokens.slice(0, index),
+                        {
+                            ...token!,
+                            viability: nextViability(token.viability)
+                        },
+                        ...oldState.playerTokens.slice(index+1)
+                    ]
+                }
+            })
+        }
     }
 
     function handleDrop(index: number) {
@@ -75,11 +95,12 @@ function DragZone({enabled}: DragType) {
         <DraggableToken 
             key={token.uid}
             focused={appState.activeTokenUid === token.uid}
+            enabled={appState.draggingEnabled} 
+            isDataVisible={appState.tokenDataVisible}
             token={token}
             onDrag={(e, ui) => handleDrag(e, ui, index)}
             onDrop={() => handleDrop(index)}
             onClick={(e) => handleClick(e, token.uid)}
-            enabled={enabled} 
         />
     ));
 
