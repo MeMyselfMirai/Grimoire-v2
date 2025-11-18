@@ -1,0 +1,104 @@
+.TopButtons__container {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 300px;
+    height: 45px;
+    display: inline-block;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.TopButtons__button {
+    width: 100px;
+    display: block;
+    height: 41px;
+    text-align: center;
+    font-family: PiratesBay;
+    font-size: 28pt;
+    border: black 2px solid;
+    color: #afafaf;
+    cursor: pointer;
+}
+
+.NightOrder__container {
+    position: absolute;
+    width: 520px;
+    right: 0px;
+    top: 45px;
+    word-wrap: normal;
+    text-align: right;
+    height: calc(100% - 160px);
+    pointer-events: none;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.NightOrder__container::-webkit-scrollbar {
+    display: none;
+}
+
+.NightOrder__content {
+    width: 90px;
+    position: absolute;
+    right: 0px;
+    pointer-events: all;
+    display: flex;
+    flex-flow: column;
+    pointer-events: all;
+}
+
+.NightOrderItem__container {
+    width: 90px;
+    height: 90px;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    position: static;
+    transform: translateX(0px);
+    transition: all ease-in-out 0.3s;
+    text-align: left;
+    min-height: 90px;
+    overflow: hidden;
+}
+
+.NightOrderItem__open {
+    width: 500px;
+    transform: translateX(-410px);
+}
+
+.NightOrderItem__text {
+    width: 399px;
+    height: calc(max-content + 10px);
+    display: inline-block;
+    transform: translateX(81px);
+    padding: 10px;
+    font-size: 15pt;
+    font-family: PiratesBay;
+    color: white;
+    pointer-events: none;
+}
+
+.NightOrderItem__image {
+    width: 90px;
+    height: 90px;
+    display: inline;
+    pointer-events: none;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.NightOrderItem__visibility {
+    position: absolute;
+    left: 45px;
+    top: 45px;
+    height: 30px;
+    width: 30px;
+    background-color: #00000080;
+    border-radius: 100%;
+    box-shadow: 0px 0px 5px 5px #00000080;
+}

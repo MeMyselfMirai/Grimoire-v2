@@ -8,6 +8,10 @@
     src: url(/public/assets/fonts/Dumbledor1.ttf);
 }
 
+* {
+  user-select: none;
+}
+
 .App {
   text-align: center;
 }

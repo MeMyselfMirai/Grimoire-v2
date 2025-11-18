@@ -1,5 +1,6 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { Shroud } from "../types/Role";
+import { NightOrderTab } from "../nightOrder/TopButtons";
 
 export type ActiveShroud = Shroud & {
     shownIcons: (string | undefined)[]
@@ -9,6 +10,10 @@ export type AppState = {
     activeTokenUid: number,
     draggingEnabled: boolean,
     tokenDataVisible: boolean,
+    nightOrderData: {
+        currentTab: NightOrderTab,
+        openItems: boolean[]
+    }
     activeShroud?: ActiveShroud,
     characterSelectCallback?: (id: string) => void
 }
@@ -16,7 +21,11 @@ export type AppState = {
 export const DEFAULT_APP_STATE: AppState = Object.freeze({
     activeTokenUid: -1,
     draggingEnabled: true,
-    tokenDataVisible: true
+    tokenDataVisible: true,
+    nightOrderData: {
+        currentTab: NightOrderTab.None,
+        openItems: []
+    }
 })
 
 export const AppContext = createContext(null);

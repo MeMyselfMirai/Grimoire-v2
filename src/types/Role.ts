@@ -1,3 +1,4 @@
+import { Team } from "./Team"
 
 export type RoleData = {
     [key: string]: Role
@@ -8,7 +9,7 @@ export type Role = {
     name: string,
     ability: string,
     flavor?: string,
-    team: string,
+    team: Team,
     image: string,
     reminders?: string[],
     firstNight?: number,

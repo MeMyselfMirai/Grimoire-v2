@@ -1,6 +1,6 @@
 import { JSX, useContext } from "react";
 import { GameContext, GameContextType } from "../data/gameState";
-import { ROLES, TEAM_TYPES } from "../data/roleData";
+import { ROLES, TEAM_DATA } from "../data/roleData";
 import { GameState } from "../types/GameState";
 import { Role } from "../types/Role";
 import { isRole, RoleIdentifier } from "../types/Script";
@@ -23,7 +23,7 @@ export function populateJSX(gameState: GameState, createCallback: (id: string) =
     const tokens = gameState.playerTokens;
 
     const items: Storage<JSX.Element[]> = {}
-    Object.keys(TEAM_TYPES).forEach(type => items[type] = []);
+    Object.keys(TEAM_DATA).forEach(type => items[type] = []);
 
     const characterDict: Storage<number> = {}
 
@@ -59,7 +59,7 @@ function aggregateJSX(gameState: GameState, elements: Storage<JSX.Element[]>): J
         teamCounts[team] += 1;
     });
 
-    return Object.values(TEAM_TYPES).map<JSX.Element>(team => (
+    return Object.values(TEAM_DATA).map<JSX.Element>(team => (
         <div key={team.id}>
             <div className="SideMenu__header" style={{ color: team.color }}>{team.header}</div>
             <div className='MenuRoles__ratio'>{teamCounts[team.id] ?? 0}/0</div>

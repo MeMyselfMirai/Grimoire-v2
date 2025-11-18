@@ -1,4 +1,5 @@
 import { RoleData } from "../types/Role";
+import { Team } from "../types/Team";
 import { getJSON } from "../util";
 
 /**
@@ -16,41 +17,49 @@ export var ROLES: RoleData = {}
  */
 export var BASE_ROLES: RoleData = {}
 
+type TeamData = {
+    [key in Team]: {
+        id: string;
+        header: string;
+        color: string;
+    };
+};
+
 /**
  * The teams that appear in the side menu when selecting a character.
  */
-export const TEAM_TYPES = {
-    "townsfolk": {
+export const TEAM_DATA: TeamData = {
+    [Team.Townsfolk]: {
         "id": "townsfolk",
         "header": "Townsfolk",
         "color": "#0033cc",
     },
-    "outsider": {
+    [Team.Outsider]: {
         "id": "outsider",
         "header": "Outsiders",
         "color": "#1a53ff",
     },
-    "minion": {
+    [Team.Minion]: {
         "id": "minion",
         "header": "Minions",
         "color": "#b30000",
     },
-    "demon": {
+    [Team.Demon]: {
         "id": "demon",
         "header": "Demons",
         "color": "#e60000",
     },
-    "traveller": {
+    [Team.Traveller]: {
         "id": "traveller",
         "header": "Travellers",
         "color": "#6600ff",
     },
-    "fabled": {
+    [Team.Fabled]: {
         "id": "fabled",
         "header": "Fabled",
         "color": "#b3b300",
     },
-    "loric": {
+    [Team.Loric]: {
         "id": "loric",
         "header": "Loric",
         "color": "#00b300",

@@ -15,7 +15,6 @@ function ToggleDrag() {
             }
         })
     }
-    console.log(appState)
 
     return (
         <div onClick={onToggle} 

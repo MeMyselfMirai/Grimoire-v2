@@ -10,6 +10,7 @@ import { DEFAULT_APP_STATE } from './data/appState';
 import Shroud from './shroud/Shroud';
 import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
+import NightOrder from './nightOrder/NightOrder';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Background />
             <DragZone />
             <BottomButtons />
+            <NightOrder />
             <SideMenu />
             <InfoBox />
             <Shroud />
