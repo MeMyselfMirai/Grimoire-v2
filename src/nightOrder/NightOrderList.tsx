@@ -40,11 +40,12 @@ export default function NightOrderList() {
         .sort((a,b) => ROLES[a.id][timeKey]! - ROLES[b.id][timeKey]!)
         .map((data) => (
             <NightOrderItem 
-                key={data.id} 
+                key={data.id + "_" + timeKey} 
                 roleId={data.id} 
                 alive={data.alive} 
                 assigned={data.assigned}
-                firstNight={firstNight} />
+                firstNight={firstNight}
+            />
         ))
 
     return (

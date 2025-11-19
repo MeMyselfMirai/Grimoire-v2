@@ -102,3 +102,17 @@
     border-radius: 100%;
     box-shadow: 0px 0px 5px 5px #00000080;
 }
+
+.JinxItem__firstImage {
+    width: 70%;
+    position: absolute;
+    top: 0px;
+    left: 0px
+}
+
+.JinxItem__secondImage {
+    width: 70%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px
+}

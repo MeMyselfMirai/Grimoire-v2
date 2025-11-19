@@ -4,9 +4,9 @@ import { GameContext, GameContextType } from "../data/gameState";
 
 export enum NightOrderTab {
     None = "None",
-    FirstNight = "FirstNight",
-    OtherNight = "OtherNight",
-    Jinxes = "Jinxes"
+    Jinxes = "Jinxes",
+    FirstNight = "First",
+    OtherNight = "Other",
 }
 
 export default function TopButtons() {
@@ -29,12 +29,26 @@ export default function TopButtons() {
         })
     }
 
+    const buttons = Object.values(NightOrderTab)
+        .filter(t => t != NightOrderTab.None)
+        .reverse()
+        .map(tab => {
+            const tabStyle: any = {...style};
+            if (appState.nightOrderData.currentTab === tab) tabStyle.color = "white";
+            return (
+                <div 
+                    className="TopButtons__button" 
+                    style={tabStyle} 
+                    onClick={() => setOpenTabTo(tab)}
+                >
+                    {tab}
+                </div>
+            )
+        })
+
     return (
         <div className="TopButtons__container">
-            <div className="TopButtons__button" style={style} onClick={() => setOpenTabTo(NightOrderTab.OtherNight)}>other</div>
-            <div className="TopButtons__button" style={style} onClick={() => setOpenTabTo(NightOrderTab.FirstNight)}>first</div>
-            <div className="TopButtons__button" style={style} onClick={() => setOpenTabTo(NightOrderTab.Jinxes)}>jinxes</div>
-
+            {buttons}
         </div>
     )
 }
