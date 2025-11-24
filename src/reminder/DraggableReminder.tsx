@@ -1,39 +1,19 @@
 import { MouseEventHandler, RefObject, useRef } from "react";
-import './Token.css';
-import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
-import Token from "./Token";
-import { TokenData } from "../types/TokenData";
-import { ROLES } from "../data/roleData";
-import { Team } from "../types/Team";
-import HiddenToken from "./HiddenToken";
+import { Reminder as ReminderData } from "../types/Reminder";
+import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
+import Reminder from "./Reminder";
 
-type TokenType = {
-    token: TokenData;
-    focused: boolean;
-    dragEnabled: boolean;
-    isDataVisible: boolean;
+type ReminderType = {
+    reminder: ReminderData,
+    dragEnabled: boolean,
+    promptDeletion: boolean
     onDrag: (e: DraggableEvent, ui: DraggableData) => void;
     onClick: MouseEventHandler<HTMLElement>;
     onDrop: () => void;
-}
 
-function shouldAppearNormallyAnyway(token: TokenData): boolean {
-    const role = ROLES[token.id];
-    if (role === undefined) return false;
-    return role.team in [Team.Loric, Team.Fabled];
-}
+} 
 
-/**
- * A draggable token representing a player in the game. 
- * @param id the Role id to go on this token.
- * @param top how far this token is from the top of the screen, in pixels.
- * @param left how far this token is from the left of the screen, in pixels.
- * @param onDrag a callback to handle this token being dragged around.
- * @param clickCallback a callback to handle this token being clicked. 
- * @param enabled Whether this token should be allowed to be dragged around.
- * @returns 
- */
-function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, onClick, onDrop}: TokenType) {
+export default function DraggableReminder({ reminder, dragEnabled, promptDeletion, onDrag, onClick, onDrop}: ReminderType) {
 
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
@@ -78,26 +58,21 @@ function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, on
         touchMoved.current = {left: 0, top: 0, total: false};
     }
 
-    let innerToken = <Token token={token} focused={focused} className="Token__container" />
-    if (!isDataVisible && !shouldAppearNormallyAnyway(token)) {
-        innerToken = <HiddenToken token={token} className="Token__container" />
-    }
+    const innerReminder = <Reminder reminder={reminder} promptDeletion={promptDeletion} />;
 
     return (
-        <Draggable 
-            nodeRef={ref} 
-            disabled={!dragEnabled} 
-            position={{x: token.position.left, y: token.position.top}} 
+        <Draggable
+            nodeRef={ref}
+            disabled={!dragEnabled}
+            position={{x: reminder.left, y: reminder.top}}
             onMouseDown={handleMouseDown}
             onStart={handleTouchStart}
             onDrag={handleTouchMove}
             onStop={handleTouchEnd}
         >
             <div ref={ref} style={{zIndex: hasSufficientlyMoved() ? 1 : 0}}>
-                {innerToken}
+                {innerReminder}
             </div>
         </Draggable>
-    );
+    )
 }
-
-export default DraggableToken;

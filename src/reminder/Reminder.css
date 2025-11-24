@@ -1,0 +1,59 @@
+.Reminder__container {
+    position: absolute;
+    height: 75px;
+    width: 75px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    pointer-events: all;
+    cursor: move;
+    font-weight: bold;
+
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 100%;
+    pointer-events: all;
+}
+
+.Reminder__image {
+    position: absolute;
+    top: 0;
+    /* Center horizontally with this one weird trick! */
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.Reminder__text {
+    font-family: Dumbledor;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 70%;
+    color: black;
+    pointer-events: none;
+    width: 80%;
+    /* Bounding box check */
+    /* background-color: rgba(255, 0, 0, 0.2);
+    border: 1px solid red; */
+}
+
+.Reminder__prompt {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    margin: 10%;
+    pointer-events: none;
+    border-radius: 100%;
+    user-select: none;
+    opacity: 75%;
+}

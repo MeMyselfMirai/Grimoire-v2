@@ -9,10 +9,11 @@ export type ActiveShroud = Shroud & {
 export type AppState = {
     activeTokenUid: number,
     draggingEnabled: boolean,
+    promptedReminders: number[],
     tokenDataVisible: boolean,
     nightOrderData: {
-        currentTab: NightOrderTab,
-        openItems: boolean[]
+        // TODO: Denest this by one; I initially figured other properties would be relevant.
+        currentTab: NightOrderTab
     }
     activeShroud?: ActiveShroud,
     characterSelectCallback?: (id: string) => void
@@ -21,6 +22,7 @@ export type AppState = {
 export const DEFAULT_APP_STATE: AppState = Object.freeze({
     activeTokenUid: -1,
     draggingEnabled: true,
+    promptedReminders: [],
     tokenDataVisible: true,
     nightOrderData: {
         currentTab: NightOrderTab.None,

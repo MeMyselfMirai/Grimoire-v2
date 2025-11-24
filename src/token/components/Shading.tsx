@@ -10,7 +10,7 @@ type ShadingType = {
 export default function Shading({token, focused, className}: ShadingType) {
     if (!focused) return <></>;
 
-    const outerClasses = className === undefined ? "Token__focus" : className + " Token__focus";
+    const outerClasses = className === undefined ? "TokenShading__focus" : className + " TokenShading__focus";
 
     let color = "white";
     if (token.visibility === Visibility.Hidden) color = "red";
