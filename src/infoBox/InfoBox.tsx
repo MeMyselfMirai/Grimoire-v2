@@ -3,7 +3,7 @@ import { GameContext, GameContextType } from "../data/gameState";
 import { AppContextType } from "../data/appState";
 import "./InfoBox.css"
 import InfoDetails from "./InfoDetails";
-import InfoReminders from "./InfoReminders";
+import InfoReminders from "./Reminders/InfoReminders";
 import InfoShrouds from "./shrouds/InfoShrouds";
 import InfoPowers from "./Powers/InfoPowers";
 import { getToken } from "../util";

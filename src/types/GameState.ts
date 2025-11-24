@@ -1,4 +1,4 @@
-import { Reminder } from "./Reminder"
+import { ReminderData } from "./Reminder"
 import { Script } from "./Script"
 import { TokenData } from "./TokenData"
 
@@ -9,7 +9,7 @@ export type GameState = {
     orientation: "portrait" | "landscape",
     playerCount: number,
     playerTokens: TokenData[],
-    reminders: Reminder[],
+    reminders: ReminderData[],
     script: Script
     scriptColor: string,
     scriptId: number

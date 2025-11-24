@@ -8,10 +8,14 @@ import EditButton from "./EditButton";
 function InfoPowers({focused, focusCallback}: InfoTabType) {
 
     return (
-        <div className={"InfoPowers__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
+        <div 
+            className={"InfoPowers__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")} 
+            // This is necessary to hide the content of the reminders tab.
+            style={{backgroundImage: "url('assets/vines.png')"}}
+        >
             <div 
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
-                style={{backgroundImage: "url('assets/yellow_swirls.webp')"}}
+                style={{backgroundImage: "url('assets/yellow_swirls.webp')", backgroundPosition:"calc(50% + 140px)"}}
                 onClick={focusCallback}
             >
                 <img className="InfoBox__tabImage" src="assets/power.png" alt=""></img>

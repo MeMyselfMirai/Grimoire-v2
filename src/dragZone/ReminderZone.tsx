@@ -31,10 +31,9 @@ export default function ReminderZone() {
         if (!appState.tokenDataVisible) return;
 
         const reminder = gameState.reminders[index];
-        console.log(reminder.reminderUid)
         e.stopPropagation();
 
-        if (appState.promptedReminders.indexOf(reminder.reminderUid) === -1) {
+        if (!appState.promptedReminders.includes(reminder.reminderUid)) {
             setAppState(oldState => {
                 return {
                     ...oldState,
@@ -77,14 +76,13 @@ export default function ReminderZone() {
         });
     }
 
-    console.log(appState.promptedReminders)
-
     const reminders = gameState.reminders.map((reminder, index) => (
         <DraggableReminder 
             key={reminder.reminderUid}
+            className="Reminder__container"
             dragEnabled={appState.draggingEnabled}
             reminder={reminder} 
-            promptDeletion={appState.promptedReminders.indexOf(reminder.reminderUid) !== -1}
+            promptDeletion={appState.promptedReminders.includes(reminder.reminderUid)}
             onDrag={(e,ui) => handleDrag(e, ui, index)}
             onDrop={() => handleDrop(index)}
             onClick={(e) => handleClick(e, index)}

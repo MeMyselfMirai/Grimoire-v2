@@ -1,7 +1,7 @@
 import { Position } from "./Position"
 
 
-export type Reminder = {
+export type ReminderData = {
     // The role that is on this reminder
     id: string,
     text: string,

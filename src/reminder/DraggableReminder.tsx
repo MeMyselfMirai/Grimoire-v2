@@ -1,6 +1,6 @@
 import { MouseEventHandler, RefObject, useRef } from "react";
-import { Reminder as ReminderData } from "../types/Reminder";
-import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
+import { ReminderData } from "../types/Reminder";
+import Draggable, { DraggableEvent, DraggableData, DraggableEventHandler } from "react-draggable";
 import Reminder from "./Reminder";
 
 type ReminderType = {
@@ -9,11 +9,11 @@ type ReminderType = {
     promptDeletion: boolean
     onDrag: (e: DraggableEvent, ui: DraggableData) => void;
     onClick: MouseEventHandler<HTMLElement>;
-    onDrop: () => void;
-
+    onDrop: DraggableEventHandler;
+    className?: string,
 } 
 
-export default function DraggableReminder({ reminder, dragEnabled, promptDeletion, onDrag, onClick, onDrop}: ReminderType) {
+export default function DraggableReminder({ reminder, className, dragEnabled, promptDeletion, onDrag, onClick, onDrop}: ReminderType) {
 
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
@@ -48,17 +48,17 @@ export default function DraggableReminder({ reminder, dragEnabled, promptDeletio
         onDrag(e,ui);
     }
 
-    function handleTouchEnd(e: any) {
+    function handleTouchEnd(e: DraggableEvent, data: DraggableData) {
         if (touchMoved.current.total) {
-            onDrop();
+            onDrop(e, data);
         } else {
             e.preventDefault();
-            onClick(e);
+            onClick(e as any);
         }
         touchMoved.current = {left: 0, top: 0, total: false};
     }
 
-    const innerReminder = <Reminder reminder={reminder} promptDeletion={promptDeletion} />;
+    const innerReminder = <Reminder reminder={reminder} className={className} promptDeletion={promptDeletion} />;
 
     return (
         <Draggable

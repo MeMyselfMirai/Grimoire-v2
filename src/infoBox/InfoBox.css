@@ -5,7 +5,6 @@
     width: 100%;
     height: 250px;
     white-space: nowrap;
-    overflow: visible;
 }
 
 .InfoBox__tab {
@@ -26,7 +25,7 @@
 
 .InfoBox__tabHeaderGeneric {
     width: 100px;
-    background-position: 50%;
+    background-position: calc(50%);
     position: absolute;
     left: 0px;
     top: 0px;
@@ -45,7 +44,7 @@
 }
 
 .InfoBox__focus.InfoDetails__container {
-    width: calc(100% - 315px) !important;
+    width: calc(100% - 300px) !important;
 }
 
 /** The details tab */
@@ -182,10 +181,61 @@
 .InfoReminders__container {
     width: 100px;
     transition: width ease-in-out 0.2s;
+    overflow: visible;
 }
 
 .InfoBox__focus.InfoReminders__container {
-    width: calc(100% - 465px);
+    width: calc(100% - 450px);
+}
+
+.InfoReminders__content {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+    height: 220;
+    width: calc(100vw - 595px);
+    text-align: left;
+    overflow-wrap: break-word;
+    white-space: normal;
+    margin: 15px;
+}
+
+.InfoReminders__staticReminder {
+    display:inline-block; 
+    width: 100px; 
+    height: 100px; 
+    background-position: left; 
+    background-repeat: no-repeat; 
+    background-size: contain; 
+    margin: 5px; 
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+}
+
+.InfoReminders__staticReminder .Reminder__text {
+    /* A kludge because I can't figure out percentage-based measurement */
+    font-size: 16px;
+}
+
+.InfoReminders__dynamicReminder {
+    top: 0;
+    object-fit: contain;
+
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+            
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    text-align: center; /* Center text */
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
+.InfoReminders__dynamicReminder .Reminder__text {
+    /* A kludge because I can't figure out percentage-based measurement */
+    font-size: 16px;
 }
 
 /** The shrouds tab */
@@ -195,7 +245,7 @@
 }
 
 .InfoBox__focus.InfoShrouds__container {
-    width: calc(100% - 465px);
+    width: calc(100% - 450px);
 }
 
 .InfoShrouds__content {
@@ -243,7 +293,7 @@
 }
 
 .InfoBox__focus.InfoPowers__container {
-    width: calc(100% - 465px);
+    width: calc(100% - 450px);
 }
 
 .InfoPowers__content {

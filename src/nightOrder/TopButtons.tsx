@@ -12,7 +12,6 @@ export enum NightOrderTab {
 export default function TopButtons() {
     const { appState, setAppState } = useContext(GameContext) as AppContextType & GameContextType;
     const style = {backgroundImage: 'url("assets/vines.png")'};
-    console.log(appState.nightOrderData)
 
     function setOpenTabTo(tabName: NightOrderTab) {
         if (appState.nightOrderData.currentTab === tabName) {
@@ -30,7 +29,7 @@ export default function TopButtons() {
     }
 
     const buttons = Object.values(NightOrderTab)
-        .filter(t => t != NightOrderTab.None)
+        .filter(t => t !== NightOrderTab.None)
         .reverse()
         .map(tab => {
             const tabStyle: any = {...style};
