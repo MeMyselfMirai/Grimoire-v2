@@ -10,6 +10,8 @@ export default function ReminderZone() {
 
     const { gameState, setGameState, appState, setAppState } = useContext(GameContext) as GameContextType & AppContextType;
 
+    if (!appState.tokenDataVisible) return <></>
+
     function handleDrag(_: DraggableEvent, ui: DraggableData, index: number) {
         setGameState(oldState => {
             return {

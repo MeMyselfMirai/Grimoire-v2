@@ -16,7 +16,8 @@ export default function DeleteButton() {
                 playerTokens: [
                     ...oldGameState.playerTokens.slice(0,index),
                     ...oldGameState.playerTokens.slice(index+1)
-                ]
+                ],
+                reminders: oldGameState.reminders.filter(r => r.ownerUid !== appState.activeTokenUid)
             };
         })
         setAppState(oldState => {

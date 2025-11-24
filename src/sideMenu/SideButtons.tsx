@@ -33,7 +33,8 @@ function SideButtons() {
         setGameState(oldState => {
             return {
                 ...oldState,
-                playerTokens: []
+                playerTokens: [],
+                reminders: [],
             }
         });
     }

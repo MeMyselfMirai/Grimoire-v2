@@ -36,6 +36,7 @@ export default function TopButtons() {
             if (appState.nightOrderData.currentTab === tab) tabStyle.color = "white";
             return (
                 <div 
+                    key={tab}
                     className="TopButtons__button" 
                     style={tabStyle} 
                     onClick={() => setOpenTabTo(tab)}
