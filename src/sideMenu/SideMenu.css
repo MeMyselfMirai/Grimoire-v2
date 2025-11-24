@@ -110,6 +110,11 @@
     flex-grow: 1;
 }
 
+.SideButtons__spread {
+    background-color: teal;
+    flex-grow: 1;
+}
+
 .MenuRoles__ratio {
     width: 100%;
     text-align: center;
