@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './SideMenu.css';
 import MenuRoles from './MenuRoles';
 import SideButtons from './SideButtons';
+import SideDropdown from './dropdown/SideDropdown';
 
 function SideMenu() {
     const [offset, setOffset] = useState(-300);
@@ -23,8 +24,9 @@ function SideMenu() {
                 <div className='SideMenu__closeButton' style={{ backgroundImage: `url("assets/close.png")` }} onClick={closeMenu}></div>
 
                 <div className='SideMenu__body'>
-                    <SideButtons></SideButtons>
-                    <MenuRoles></MenuRoles>
+                    <SideDropdown />
+                    <SideButtons />
+                    <MenuRoles />
                 </div>
             </div>
         </>

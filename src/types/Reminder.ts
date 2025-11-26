@@ -1,4 +1,4 @@
-import { Position } from "./Position"
+import { isPosition, Position } from "./Position"
 
 
 export type ReminderData = {
@@ -8,3 +8,13 @@ export type ReminderData = {
     ownerUid: number,
     reminderUid: number
 } & Position
+
+export function isReminderData(obj: any): obj is ReminderData {
+    if (typeof obj !== "object" || obj === null) return false;
+    if (typeof obj.id !== "string") return false;
+    if (typeof obj.text !== "string") return false;
+    if (typeof obj.ownerUid !== "number") return false;
+    if (typeof obj.reminderUid !== "number") return false;
+
+    return isPosition(obj);
+}

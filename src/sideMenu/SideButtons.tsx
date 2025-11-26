@@ -86,6 +86,7 @@ function SideButtons() {
     }
 
     function clearAll() {
+        // TODO: CONFIRMATIONS
         setGameState(oldState => {
             return {
                 ...oldState,

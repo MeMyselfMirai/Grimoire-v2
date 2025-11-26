@@ -1,4 +1,4 @@
-import { Position } from "./Position";
+import { isPosition, Position } from "./Position";
 import { Viability } from "./Viability";
 import { Visibility } from "./Visibility";
 
@@ -21,3 +21,15 @@ export type TokenData = {
     /** The position of this token on screen. */
     position: Position;
 };
+
+export function isTokenData(obj: any): obj is TokenData {
+    if (typeof obj !== "object" || obj === null) return false;
+
+    if (typeof obj.id !== "string") return false;
+    if (typeof obj.uid !== "number") return false;
+    if (![Visibility.Assigned, Visibility.Bluff, Visibility.Hidden].includes(obj.visibility)) return false;
+    if (![Viability.Alive, Viability.Dead, Viability.NoVote].includes(obj.viability)) return false;
+    if (!isPosition(obj.position)) return false;
+
+    return true;
+}

@@ -16,12 +16,14 @@ export type AppState = {
         currentTab: NightOrderTab
     }
     activeShroud?: ActiveShroud,
+    isBackgroundSelectorOpen: boolean
     characterSelectCallback?: (id: string) => void
 }
 
 export const DEFAULT_APP_STATE: AppState = Object.freeze({
     activeTokenUid: -1,
     draggingEnabled: true,
+    isBackgroundSelectorOpen: false,
     promptedReminders: [],
     tokenDataVisible: true,
     nightOrderData: {

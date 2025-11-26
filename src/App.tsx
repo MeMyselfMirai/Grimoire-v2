@@ -11,6 +11,7 @@ import Shroud from './shroud/Shroud';
 import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
+import BackgroundSelector from './backgroundSelector/BackgroundSelector';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <NightOrder />
             <SideMenu />
             <InfoBox />
+            <BackgroundSelector />
             <Shroud />
             <CharacterSelect />
         </GameContext>
