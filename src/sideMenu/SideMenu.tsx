@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import './SideMenu.css';
-import MenuRoles from './MenuRoles';
+import MenuRoles from './roles/MenuRoles';
 import SideButtons from './SideButtons';
 import SideDropdown from './dropdown/SideDropdown';
 

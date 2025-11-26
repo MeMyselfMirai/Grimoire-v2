@@ -1,4 +1,4 @@
-import { ROLES } from "../data/roleData"
+import { ROLES } from "../../data/roleData"
 
 
 type MenuRoleType = {

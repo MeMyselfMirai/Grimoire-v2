@@ -1,16 +1,15 @@
 import { JSX, useContext } from "react";
-import { GameContext, GameContextType } from "../data/gameState";
-import { ROLES, TEAM_DATA } from "../data/roleData";
-import { GameState } from "../types/GameState";
-import { Role } from "../types/Role";
-import { isRole, RoleIdentifier } from "../types/Script";
-import { Viability } from "../types/Viability";
-import { Visibility } from "../types/Visibility";
+import { GameContext, GameContextType } from "../../data/gameState";
+import { ROLES, TEAM_DATA } from "../../data/roleData";
+import { GameState } from "../../types/GameState";
+import { Role } from "../../types/Role";
+import { isRole, RoleIdentifier } from "../../types/Script";
+import { Viability } from "../../types/Viability";
+import { Visibility } from "../../types/Visibility";
 import MenuRole from "./MenuRole";
-
-type Storage<T> = {
-    [key: string]: T
-}
+import { MapLike } from "typescript";
+import TeamSection from "./TeamSection";
+import { Team } from "../../types/Team";
 
 /**
  * Construct the side menu's individual items using the given script.
@@ -18,14 +17,14 @@ type Storage<T> = {
  * @param createCallback What the individual menu items should do to create a new token
  * @returns 
  */
-export function populateJSX(gameState: GameState, createCallback: (id: string) => void): Storage<JSX.Element[]> {
+export function populateJSX(gameState: GameState, createCallback: (id: string) => void): MapLike<JSX.Element[]> {
     const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
     const tokens = gameState.playerTokens;
 
-    const items: Storage<JSX.Element[]> = {}
+    const items: MapLike<JSX.Element[]> = {}
     Object.keys(TEAM_DATA).forEach(type => items[type] = []);
 
-    const characterDict: Storage<number> = {}
+    const characterDict: MapLike<number> = {}
 
     tokens.forEach(token => {
         if (!(token.id in characterDict)) {
@@ -49,23 +48,20 @@ export function populateJSX(gameState: GameState, createCallback: (id: string) =
     return items;
 }
 
-function aggregateJSX(gameState: GameState, elements: Storage<JSX.Element[]>): JSX.Element[] {
+function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): JSX.Element[] {
     const tokens = gameState.playerTokens;
 
-    const teamCounts: Storage<number> = {};
+    const teamCounts: MapLike<number> = {};
     tokens.forEach(token => {
         const team = ROLES[token.id].team;
         if (!(team in teamCounts)) teamCounts[team] = 0
         teamCounts[team] += 1;
     });
 
-    return Object.values(TEAM_DATA).map<JSX.Element>(team => (
-        <div key={team.id}>
-            <div className="SideMenu__header" style={{ color: team.color }}>{team.header}</div>
-            <div className='MenuRoles__ratio'>{teamCounts[team.id] ?? 0}/0</div>
-            <hr style={{ marginBlockEnd: "0em" }}></hr>
-            {elements[team.id] ?? []}
-        </div>
+    return Object.values(Team).map<JSX.Element>((team: Team) => (
+        <TeamSection teamId={team}>
+            {elements[team] ?? []}
+        </TeamSection>
     ));
 }
 
