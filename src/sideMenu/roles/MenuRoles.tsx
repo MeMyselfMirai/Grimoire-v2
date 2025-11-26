@@ -39,7 +39,7 @@ export function populateJSX(gameState: GameState, searchFilter: string, createCa
         }
         const role = r as Role;
         if (!(role.team in items)) return;
-        if (!role.name.toLowerCase().includes(searchFilter.toLowerCase())) return;
+        if (!role.name.replace(/\W/g, "").toLowerCase().includes(searchFilter.replace(/\W/g, "").toLowerCase())) return;
         const amount = characterDict[role.id] ?? 0;
         items[role.team].push((
             <MenuRole roleId={role.id} amount={amount} key={role.id} callback={createCallback}></MenuRole>
@@ -59,11 +59,12 @@ function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): J
         teamCounts[team] += 1;
     });
 
-    return Object.values(Team).map<JSX.Element>((team: Team) => (
-        <TeamSection teamId={team}>
-            {elements[team] ?? []}
-        </TeamSection>
-    ));
+    return Object.values(Team)
+        .map<JSX.Element>((team: Team) => (
+            <TeamSection teamId={team}>
+                {elements[team] ?? []}
+            </TeamSection>
+        ));
 }
 
 function MenuRoles() {
