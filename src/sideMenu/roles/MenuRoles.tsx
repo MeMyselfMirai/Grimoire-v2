@@ -1,4 +1,4 @@
-import { JSX, useContext } from "react";
+import { JSX, useContext, useRef, useState } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { ROLES, TEAM_DATA } from "../../data/roleData";
 import { GameState } from "../../types/GameState";
@@ -17,7 +17,7 @@ import { Team } from "../../types/Team";
  * @param createCallback What the individual menu items should do to create a new token
  * @returns 
  */
-export function populateJSX(gameState: GameState, createCallback: (id: string) => void): MapLike<JSX.Element[]> {
+export function populateJSX(gameState: GameState, searchFilter: string, createCallback: (id: string) => void): MapLike<JSX.Element[]> {
     const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
     const tokens = gameState.playerTokens;
 
@@ -39,6 +39,7 @@ export function populateJSX(gameState: GameState, createCallback: (id: string) =
         }
         const role = r as Role;
         if (!(role.team in items)) return;
+        if (!role.name.toLowerCase().includes(searchFilter.toLowerCase())) return;
         const amount = characterDict[role.id] ?? 0;
         items[role.team].push((
             <MenuRole roleId={role.id} amount={amount} key={role.id} callback={createCallback}></MenuRole>
@@ -69,6 +70,14 @@ function MenuRoles() {
 
     const {gameState, setGameState} = useContext(GameContext) as GameContextType;
 
+    const [searchTerm, setSearchTerm] = useState("");
+    const searchRef = useRef<any>(null);
+
+    function updateSearch() {
+        if (searchRef.current === null) return;
+        setSearchTerm(searchRef.current.value)
+    }
+
     function createToken(id: string) {
         setGameState(prevState => {
             const newToken = {
@@ -90,11 +99,19 @@ function MenuRoles() {
         });
     }
 
-    const roleJSX = populateJSX(gameState, createToken);
+    const roleJSX = populateJSX(gameState, searchTerm, createToken);
     const sectionJSX = aggregateJSX(gameState, roleJSX);
     
     return (
         <>
+            <input 
+                ref={searchRef}
+                className="MenuRoles__search"
+                type="text" 
+                autoComplete="off" 
+                placeholder="Search For a Role" 
+                onChange={updateSearch} 
+            />
             {sectionJSX}
         </>
     );
