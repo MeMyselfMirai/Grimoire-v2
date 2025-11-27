@@ -10,6 +10,7 @@ import MenuRole from "./MenuRole";
 import { MapLike } from "typescript";
 import TeamSection from "./TeamSection";
 import { Team } from "../../types/Team";
+import { sortAlphabetical, sortSao } from "../../data/roleSorting";
 
 /**
  * Construct the side menu's individual items using the given script.
@@ -17,7 +18,12 @@ import { Team } from "../../types/Team";
  * @param createCallback What the individual menu items should do to create a new token
  * @returns 
  */
-export function populateJSX(gameState: GameState, searchFilter: string, createCallback: (id: string) => void): MapLike<JSX.Element[]> {
+export function populateJSX(
+        gameState: GameState, 
+        searchFilter: string,
+        sortMethod: (r1: Role, r2: Role) => number,
+        createCallback: (id: string) => void
+    ): MapLike<JSX.Element[]> {
     const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
     const tokens = gameState.playerTokens;
 
@@ -33,18 +39,19 @@ export function populateJSX(gameState: GameState, searchFilter: string, createCa
         characterDict[token.id] += 1
     })
 
-    script.forEach(r => {
-        if (!isRole(r)) {
-            r = ROLES[r.id];
-        }
-        const role = r as Role;
-        if (!(role.team in items)) return;
-        if (!role.name.replace(/\W/g, "").toLowerCase().includes(searchFilter.replace(/\W/g, "").toLowerCase())) return;
-        const amount = characterDict[role.id] ?? 0;
-        items[role.team].push((
-            <MenuRole roleId={role.id} amount={amount} key={role.id} callback={createCallback}></MenuRole>
-        ));
-    })
+    script.map(r => {
+            if (!isRole(r)) return ROLES[r.id];
+            return r as Role;
+        })
+        .sort(sortMethod)
+        .forEach(role => {
+            if (!(role.team in items)) return;
+            if (!role.name.replace(/\W/g, "").toLowerCase().includes(searchFilter.replace(/\W/g, "").toLowerCase())) return;
+            const amount = characterDict[role.id] ?? 0;
+            items[role.team].push((
+                <MenuRole roleId={role.id} amount={amount} key={role.id} callback={createCallback}></MenuRole>
+            ));
+        })
 
     return items;
 }
@@ -61,7 +68,7 @@ function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): J
 
     return Object.values(Team)
         .map<JSX.Element>((team: Team) => (
-            <TeamSection teamId={team}>
+            <TeamSection key={team} teamId={team}>
                 {elements[team] ?? []}
             </TeamSection>
         ));
@@ -71,8 +78,11 @@ function MenuRoles() {
 
     const {gameState, setGameState} = useContext(GameContext) as GameContextType;
 
+    const [usingSao, setUsingSao] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
     const searchRef = useRef<any>(null);
+
+    const sortMethod = usingSao ? sortSao : sortAlphabetical;
 
     function updateSearch() {
         if (searchRef.current === null) return;
@@ -100,7 +110,7 @@ function MenuRoles() {
         });
     }
 
-    const roleJSX = populateJSX(gameState, searchTerm, createToken);
+    const roleJSX = populateJSX(gameState, searchTerm, sortMethod, createToken);
     const sectionJSX = aggregateJSX(gameState, roleJSX);
     
     return (
@@ -113,6 +123,11 @@ function MenuRoles() {
                 placeholder="Search For a Role" 
                 onChange={updateSearch} 
             />
+            <div 
+                className="MenuRoles__sort" 
+                style={{backgroundImage: 'url("assets/backgrounds/purple_swirls.webp")'}}
+                onClick={() => setUsingSao(!usingSao)}
+            >{"Sort order: " + (usingSao ? "SAO" : "A-Z")}</div>
             {sectionJSX}
         </>
     );

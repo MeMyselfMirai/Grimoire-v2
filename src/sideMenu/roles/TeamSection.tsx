@@ -1,4 +1,4 @@
-import { JSX, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { TEAM_DATA } from "../../data/roleData"
 import { Team } from "../../types/Team"
 
@@ -13,7 +13,7 @@ type TeamSectionType = {
 export default function TeamSection({teamId, actualCount, expectedCount, children}: TeamSectionType) {
 
     const [open, setOpen] = useState(true);
-    
+
     if (children.length === 0) return <></>
     
     const team = TEAM_DATA[teamId];

@@ -115,6 +115,17 @@
     flex-grow: 1;
 }
 
+.MenuRoles__sort {
+    width: 80%;
+    height: 40px;
+    margin: 0 0 0 30px;
+    border-radius: 20px;
+    background-position: 50% 50%;
+    color: grey;
+    font-family: PiratesBay;
+    text-align: center;
+}
+
 .MenuRoles__search {
     width: 95%;
     font-size: 1em;

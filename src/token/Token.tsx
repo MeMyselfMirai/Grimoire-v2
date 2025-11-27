@@ -27,7 +27,7 @@ type TokenType = {
 function Token({ token, focused = false, className, onClick }: TokenType) {
 
     const data = ROLES[token.id];
-
+    console.log(token.id, data)
     return (
         <div
             className={className}
