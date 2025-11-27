@@ -1,4 +1,4 @@
-import { JSX, useContext, useRef, useState } from "react";
+import { JSX, useContext, useMemo, useRef, useState } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { ROLES, TEAM_DATA } from "../../data/roleData";
 import { GameState } from "../../types/GameState";
@@ -110,7 +110,10 @@ function MenuRoles() {
         });
     }
 
-    const roleJSX = populateJSX(gameState, searchTerm, sortMethod, createToken);
+    const roleJSX = useMemo(
+            () => populateJSX(gameState, searchTerm, sortMethod, createToken),
+            [gameState, searchTerm, sortMethod]
+    )
     const sectionJSX = aggregateJSX(gameState, roleJSX);
     
     return (

@@ -12,16 +12,17 @@ import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
 import BackgroundSelector from './backgroundSelector/BackgroundSelector';
+import { DEFAULT_SCRIPTS, initScripts } from './data/scriptData';
 
 function App() {
 
     const [gameState, setGameState] = useState(load())
     const [appState, setAppState] = useState(DEFAULT_APP_STATE);
     const [loading, setLoading] = useState(areRolesLoading);
-
+    
     if (loading) {
         // Kludge because I can't figure out why the ROLES object isn't updating instantly when set.
-        initRoles().then(_ => setTimeout(() => setLoading(areRolesLoading), 250))
+        Promise.allSettled([initRoles(), initScripts()]).then(_ => setTimeout(() => setLoading(areRolesLoading), 500));
         return (<>
             <p style={{color: 'black', position:"absolute", fontSize:"40px"}}> LOADING...</p>
         </>)

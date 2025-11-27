@@ -62,6 +62,10 @@ const SAO_PREFIXES = [
  * on the script.
  */
 function saoIndex(text: string) {
+    // Hermit -- hardcoded exception
+    if (text.startsWith("You have all Outsider abilities.")) {
+        return -Infinity;
+    }
     // Atheist -- hardcoded exception
     if (text.startsWith("The Storyteller can break the game rules")) {
         return Infinity;

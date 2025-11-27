@@ -3,6 +3,7 @@ import "./SideDropdown.css"
 import DownloadButton from "./DownloadButton";
 import UploadButton from "./UploadButton";
 import BackgroundButton from "./BackgroundButton";
+import ScriptChoices from "./ScriptChoices";
 
 export default function SideDropdown() {
 
@@ -33,6 +34,7 @@ export default function SideDropdown() {
                     <BackgroundButton />
                     <DownloadButton />
                 </div>
+                <ScriptChoices />
             </div>
         </div>
     )

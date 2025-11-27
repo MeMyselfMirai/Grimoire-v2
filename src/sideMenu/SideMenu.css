@@ -127,14 +127,15 @@
 }
 
 .MenuRoles__search {
-    width: 95%;
+    width: 80%;
     font-size: 1em;
     font-family: PiratesBay;
     text-align: center;
     background-color: #00000000;
     color: white;
-    border: none;
-    margin: 20px 0 10px 10px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    margin: 20px 0 10px 30px;
 }
 
 .MenuRoles__search:focus {

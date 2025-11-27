@@ -73,3 +73,32 @@
     background-size: 70%;
     cursor: pointer;
 }
+
+.SideDropdown__scriptHeader {
+    color: white;
+    text-shadow: 0 0 10px black;
+    font-size: 30pt;
+    font-family: PiratesBay;
+}
+
+.SideDropdown__scriptSelect {
+    margin-top: 5px;
+    font-size: 0.7em;
+    font-family: PiratesBay;
+    text-align: center;
+    height: 1.5em;
+    width: 90%;
+    box-shadow: 0 0 10px darkblue;
+    border: none;
+    border-radius: 0.5em;
+    color: white;
+}
+
+.SideDropdown__scriptName {
+    font-size: 20pt;
+    color: white;
+    height: 30px;
+    font-weight: bold;
+    font-family: PiratesBay;
+    text-shadow: 0 0 10px black;
+}
