@@ -89,6 +89,7 @@
     height: 1.5em;
     width: 90%;
     box-shadow: 0 0 10px darkblue;
+    background-position: 50% calc(50% + 0.75em);
     border: none;
     border-radius: 0.5em;
     color: white;

@@ -12,15 +12,28 @@ const SCRIPT_COLORS = [
     "#0000F0",
 ]
 
+const SCRIPT_BACKGROUNDS = [
+    "url(assets/backgrounds/red_circle_small.webp)",
+    "url(assets/backgrounds/yellow_circle_small.webp)",
+    "url(assets/backgrounds/purple_circle_small.webp)",
+    "url(assets/backgrounds/green_circle_small.webp)",
+    // Bit of cheating -- black background
+    "url(assets/backgrounds/user_center.webp)",
+    "url(assets/backgrounds/blue_circle_small.webp)",
+]
+
 export default function ScriptChoices() {
     const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
     const selectRef = useRef<any>(null);
 
-    const color = useMemo(() => {
-        let index = DEFAULT_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
-        if (index < 0) index = 5;
-        return SCRIPT_COLORS[index];
+    const index = useMemo(() => {
+        const index = DEFAULT_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
+        if (index < 0) return 5;
+        return index;
     }, [SCRIPT_COLORS, gameState.script]);
+
+    const color = SCRIPT_COLORS[index];
+    const backgroundImage = SCRIPT_BACKGROUNDS[index];
 
     const defaultNames = DEFAULT_SCRIPTS.map(script => script[0].name);
     const nameJsx = defaultNames.map(name => <option>{name}</option>);
@@ -44,8 +57,9 @@ export default function ScriptChoices() {
                 ref={selectRef} 
                 defaultValue={gameState.script[0].name}
                 className="SideDropdown__scriptSelect" 
-                style={{backgroundImage: `url("/assets/backgrounds/blue_swirls.webp")`}} 
-                onChange={changeScript}>
+                style={{backgroundImage}} 
+                onChange={changeScript}
+            >
                 {nameJsx}
             </select>
             <hr />
