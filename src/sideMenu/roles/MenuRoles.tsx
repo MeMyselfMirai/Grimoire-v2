@@ -1,4 +1,4 @@
-import { JSX, useContext, useMemo, useRef, useState } from "react";
+import { JSX, useCallback, useContext, useMemo, useRef, useState } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { ROLES, TEAM_DATA } from "../../data/roleData";
 import { GameState } from "../../types/GameState";
@@ -89,7 +89,7 @@ function MenuRoles() {
         setSearchTerm(searchRef.current.value)
     }
 
-    function createToken(id: string) {
+    const createToken = useCallback((id: string) => {
         setGameState(prevState => {
             const newToken = {
                 id: id,
@@ -108,11 +108,11 @@ function MenuRoles() {
                 playerTokens: [...prevState.playerTokens, newToken],
             };
         });
-    }
+    }, [setGameState]);
 
     const roleJSX = useMemo(
             () => populateJSX(gameState, searchTerm, sortMethod, createToken),
-            [gameState, searchTerm, sortMethod]
+            [gameState, searchTerm, sortMethod, createToken]
     )
     const sectionJSX = aggregateJSX(gameState, roleJSX);
     

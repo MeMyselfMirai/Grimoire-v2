@@ -26,9 +26,9 @@ export default function DownloadButton() {
             <a 
                 ref={linkRef} 
                 download="gameState.json"
-                href=""
+                href="%PUBLIC_URL%"
                 hidden 
-            />
+            >Hidden Download executor</a>
         </>
     )
 }

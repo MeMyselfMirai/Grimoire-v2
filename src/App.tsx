@@ -12,7 +12,7 @@ import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
 import BackgroundSelector from './backgroundSelector/BackgroundSelector';
-import { DEFAULT_SCRIPTS, initScripts } from './data/scriptData';
+import { initScripts } from './data/scriptData';
 
 function App() {
 

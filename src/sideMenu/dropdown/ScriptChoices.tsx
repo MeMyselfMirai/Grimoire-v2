@@ -23,20 +23,20 @@ const SCRIPT_BACKGROUNDS = [
 ]
 
 export default function ScriptChoices() {
-    const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {gameState, setGameState} = useContext(GameContext) as AppContextType & GameContextType;
     const selectRef = useRef<any>(null);
 
     const index = useMemo(() => {
         const index = DEFAULT_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
         if (index < 0) return 5;
         return index;
-    }, [SCRIPT_COLORS, gameState.script]);
+    }, [gameState.script]);
 
     const color = SCRIPT_COLORS[index];
     const backgroundImage = SCRIPT_BACKGROUNDS[index];
 
     const defaultNames = DEFAULT_SCRIPTS.map(script => script[0].name);
-    const nameJsx = defaultNames.map(name => <option>{name}</option>);
+    const optionJsx = defaultNames.map(name => <option>{name}</option>);
 
     function changeScript() {
         if (selectRef.current === null) return;
@@ -60,7 +60,7 @@ export default function ScriptChoices() {
                 style={{backgroundImage}} 
                 onChange={changeScript}
             >
-                {nameJsx}
+                {optionJsx}
             </select>
             <hr />
             <span style={{color}} className="SideDropdown__scriptName" >{gameState.script[0].name}</span>
