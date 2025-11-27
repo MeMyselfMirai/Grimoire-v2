@@ -32,7 +32,6 @@ export default function TokenZone() {
     function handleClick(e: any, index: number) {
         const token = gameState.playerTokens[index];
         e.stopPropagation();
-        console.log("Token clicked:", token.uid)
         if (appState.tokenDataVisible) {
             setAppState(oldState => {
                 return {

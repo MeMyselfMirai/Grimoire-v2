@@ -55,7 +55,6 @@ export default function BackgroundSelector() {
     }
 
     function setBackgroundTo(link: string) {
-        console.log(link)
         setGameState(state => {
             return {
                 ...state,

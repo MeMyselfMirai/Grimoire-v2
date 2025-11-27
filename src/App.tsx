@@ -3,7 +3,7 @@ import './App.css';
 import Background from './background/Background';
 import DragZone from './dragZone/DragZone';
 import { GameContext, load, save } from './data/gameState';
-import { areRolesLoading, initRoles } from './data/roleData';
+import { areRolesLoading, importCustomRoles, initRoles } from './data/roleData';
 import SideMenu from './sideMenu/SideMenu';
 import InfoBox from './infoBox/InfoBox';
 import { DEFAULT_APP_STATE } from './data/appState';
@@ -22,7 +22,9 @@ function App() {
     
     if (loading) {
         // Kludge because I can't figure out why the ROLES object isn't updating instantly when set.
-        Promise.allSettled([initRoles(), initScripts()]).then(_ => setTimeout(() => setLoading(areRolesLoading), 500));
+        Promise.allSettled([initRoles(), initScripts()]).then(_ => {
+            setTimeout(() => { importCustomRoles(gameState.script); setLoading(areRolesLoading)}, 500);
+        });
         return (<>
             <p style={{color: 'black', position:"absolute", fontSize:"40px"}}> LOADING...</p>
         </>)

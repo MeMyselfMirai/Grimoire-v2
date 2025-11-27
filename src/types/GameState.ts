@@ -1,5 +1,5 @@
 import { isReminderData, ReminderData } from "./Reminder"
-import { isScript, Script } from "./Script"
+import { isGenericScript, Script } from "./Script"
 import { isTokenData, TokenData } from "./TokenData"
 
 
@@ -16,7 +16,6 @@ export type GameState = {
 }
 
 export function isValidGamestate(obj: any): obj is GameState {
-    console.log(obj)
     if (typeof obj !== "object" || obj === null) return false;
     
     if (typeof obj.background !== "string") return false;
@@ -30,11 +29,10 @@ export function isValidGamestate(obj: any): obj is GameState {
     if (!Array.isArray(obj.reminders)) return false;
     if (!obj.reminders.every((reminder: any) => isReminderData(reminder))) return false;
     
-    if (!isScript(obj.script)) return false;
+    if (!isGenericScript(obj.script)) return false;
     
     if (typeof obj.scriptColor !== "string") return false;
     if (typeof obj.scriptId !== "number") return false;
-    console.log("So far so good")
 
     return true;
 }

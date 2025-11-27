@@ -95,6 +95,21 @@
     color: white;
 }
 
+.SideDropdown__uploadLabel {
+    color: white;
+    font-family: PiratesBay;
+    background-position: 50% 50%;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px darkgreen;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.SideDropdown__uploadLabel:hover {
+    color: lightgreen;
+}
+
 .SideDropdown__scriptName {
     font-size: 20pt;
     color: white;

@@ -1,4 +1,5 @@
-import {  RoleData } from "../types/Role";
+import {  isCompleteRole, Role, RoleData } from "../types/Role";
+import { Script } from "../types/Script";
 import { Team } from "../types/Team";
 import { getJSON } from "../util";
 
@@ -21,7 +22,11 @@ export var BASE_ROLES: RoleData = {}
  * Initialize the roles by fetching from external storage.
  */
 export async function initRoles() {
-    getJSON("tokens.json").then(role => BASE_ROLES = Object.freeze(ROLES = role))
+    getJSON("tokens.json").then(roles => {
+        ROLES = roles;
+        BASE_ROLES = JSON.parse(JSON.stringify(roles));
+        Object.freeze(BASE_ROLES);
+    })
 }
 
 /**
@@ -30,6 +35,15 @@ export async function initRoles() {
  */
 export function areRolesLoading() {
     return Object.keys(ROLES).length === 0;
+}
+
+export function importCustomRoles(script: Script) {
+    script.slice(1).forEach(role => {
+        if (ROLES[role.id] === undefined) {
+            if (!isCompleteRole(role)) throw new Error(`Script contains a role "${role.id}" for which there is no data!`);
+            ROLES[role.id] = role;
+        }
+    })
 }
 
 

@@ -46,7 +46,6 @@ function InfoReminders({focused, focusCallback}: InfoTabType) {
 
     let staticJsx = [];
     let draggableJsx = ghosts.map(({left, top, text}, index) => {
-        console.log("Reminder Text:", text)
         return <ReminderSpawner 
             key={index} 
             text={text} 

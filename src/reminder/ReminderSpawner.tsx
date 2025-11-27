@@ -29,7 +29,6 @@ export default function ReminderSpawner({roleId, text, top, left, ownerUid, clas
     }
 
     function onDrop(e: DraggableEvent, data: DraggableData) {
-        console.log(data);
         // Don't drop if we aren't outside the box
         if (data.y > -100) return;
         const droppedPos = data.node.getBoundingClientRect() as Position

@@ -45,8 +45,6 @@ function spreadTokens(tokens: TokenData[]): TokenData[] {
         };
     });
 
-    console.log(list)
-    console.log(list.sort(({angle: a1}, {angle: a2}) => a2 - a1))
 
     const secondHalf = list.sort(({angle: a1}, {angle: a2}) => a2 - a1).map(({index}, i) => {
         const angle = angleSeperation * (-(total - 1) / 2 + i);
