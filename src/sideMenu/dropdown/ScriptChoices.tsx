@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ALL_SCRIPTS, commitNewScript } from "../../data/scriptData";
+import { ALL_SCRIPTS, commitNewScript, modernizeLegacyScript } from "../../data/scriptData";
 import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
 import { importCustomRoles } from "../../data/roleData";
 
@@ -65,9 +65,11 @@ export default function ScriptChoices() {
             window.alert("Ya dun goofed!\nError parsing JSON. Is that actually a JSON file?");
             return;
         }
+
+        script = modernizeLegacyScript(script);
         
         if (!isCompleteScript(script)) {
-            console.log(script)
+            console.error("Invalid Script:", script);
             window.alert("Ya dun goofed!\n" + reasonForScriptFailure(script));
             return;
         }
@@ -83,9 +85,6 @@ export default function ScriptChoices() {
         });
         
     }
-    console.log("Name:", gameState.script[0].name);
-    console.log(ALL_SCRIPTS.map(x => x[0].name))
-    console.log(ALL_SCRIPTS)
     return (
         <>
             <span className="SideDropdown__scriptHeader">Current Script</span>

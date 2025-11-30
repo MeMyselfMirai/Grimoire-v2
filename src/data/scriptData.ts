@@ -1,4 +1,5 @@
-import { Script } from "../types/Script";
+import { Role } from "../types/Role";
+import { LegacyScript, Script } from "../types/Script";
 import { getJSON } from "../util";
 import { importCustomRoles } from "./roleData";
 
@@ -44,6 +45,18 @@ export function scriptId(script: Script): number {
         if (JSON.stringify(ALL_SCRIPTS[i]) === scriptJSON) return i;
     }
     return -1;
+}
+
+export function modernizeLegacyScript(script: LegacyScript): Script {
+    const modern: Script = [script[0]];
+    for (let i = 1; i < script.length; i++) {
+        if (typeof script[i] === "string") {
+            modern.push({id: script[i] as string});
+        } else {
+            modern.push(script[i] as Role);
+        }
+    }
+    return modern;
 }
 
 export function commitNewScript(script: Script) {
