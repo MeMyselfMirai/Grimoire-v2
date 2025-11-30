@@ -64,3 +64,22 @@ export function isCompleteScript(obj: any): obj is Script {
 
     return true;
 }
+
+export function reasonForScriptFailure(obj: any): string {
+    if (!Array.isArray(obj)) {
+        return "Your input should be an array. Did you accidentally import a GameState file?"
+    }
+    if (!isMeta(obj[0])) {
+        return "Scripts should begin with a meta tag."
+    }
+    for (let i = 1; i < obj.length; i++) {
+        const role = obj[i];
+        if (typeof role === "string") return "Scripts that are just a list of strings are unsupported. That script must be really old."
+        if (typeof role !== "object") return `The role at position ${i} is not a proper object.`
+        if (typeof role.id !== "string") return `The role at position ${i} has a missing or malformed id.`
+        if (ROLES[role.id] !== undefined) continue
+        if (!isCompleteRole(role)) return `The role with id "${role.id}" is not known by this Grimoire, and has a missing or incomplete implementation. Is it homebrew? Did TPI just release it?`;
+    }
+
+    return "...I dunno what went wrong. Contact Mirai and send them the JSON you just tried to import."
+}

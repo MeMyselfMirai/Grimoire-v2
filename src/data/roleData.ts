@@ -1,4 +1,4 @@
-import {  isCompleteRole, Role, RoleData } from "../types/Role";
+import {  isCompleteRole, RoleData } from "../types/Role";
 import { Script } from "../types/Script";
 import { Team } from "../types/Team";
 import { getJSON } from "../util";

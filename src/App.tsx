@@ -12,7 +12,7 @@ import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
 import BackgroundSelector from './backgroundSelector/BackgroundSelector';
-import { initScripts } from './data/scriptData';
+import { commitNewScript, initScripts, loadLocalScripts } from './data/scriptData';
 
 function App() {
 
@@ -23,7 +23,12 @@ function App() {
     if (loading) {
         // Kludge because I can't figure out why the ROLES object isn't updating instantly when set.
         Promise.allSettled([initRoles(), initScripts()]).then(_ => {
-            setTimeout(() => { importCustomRoles(gameState.script); setLoading(areRolesLoading)}, 500);
+            setTimeout(() => { 
+                loadLocalScripts();
+                importCustomRoles(gameState.script); 
+                commitNewScript(gameState.script);
+                setLoading(areRolesLoading);
+            }, 500);
         });
         return (<>
             <p style={{color: 'black', position:"absolute", fontSize:"40px"}}> LOADING...</p>

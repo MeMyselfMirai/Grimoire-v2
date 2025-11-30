@@ -1,8 +1,8 @@
-import { useContext, useMemo, useRef } from "react";
+import { useContext, useRef } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { DEFAULT_SCRIPTS } from "../../data/scriptData";
-import { isCompleteScript } from "../../types/Script";
+import { ALL_SCRIPTS, commitNewScript } from "../../data/scriptData";
+import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
 import { importCustomRoles } from "../../data/roleData";
 
 const SCRIPT_COLORS = [
@@ -28,59 +28,64 @@ export default function ScriptChoices() {
     const selectRef = useRef<any>(null);
     const uploadRef = useRef<any>(null);
 
-    const index = useMemo(() => {
-        const index = DEFAULT_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
-        return index;
-    }, [gameState.script]);
-
-    console.log(index)
-
+    const index = ALL_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
+    
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
     const backgroundImage = SCRIPT_BACKGROUNDS[index] ?? SCRIPT_BACKGROUNDS[5];
-
-    const defaultNames = DEFAULT_SCRIPTS.map(script => script[0].name);
+    
+    const defaultNames = ALL_SCRIPTS.map(script => script[0].name);
     const optionJsx = defaultNames.map(name => <option key={name} >{name}</option>);
-    optionJsx.push(<option key={"custom"} hidden>Custom Script</option>);
-
+    
     function changeScript() {
         if (selectRef.current === null) return;
-
+        
         setGameState(state => {
             return {
                 ...state,
-                script: DEFAULT_SCRIPTS[selectRef.current.selectedIndex]
+                script: ALL_SCRIPTS[selectRef.current.selectedIndex]
             };
         })
     }
-
+    
     function openUploadDialog() {
         if (uploadRef.current === null) return;
-
+        
         uploadRef.current.click();
     }
-
+    
     async function uploadScript() {
         if (uploadRef.current === null) return;
-
+        
         const raw = await uploadRef.current.files[0].text();
-        const script = JSON.parse(raw);
-
-        if (!isCompleteScript(script)) {
-            window.alert("Ya dun goofed!\n" + 
-                "Your script is invalid. Note that scripts that are just name arrays are deprecated.");
+        
+        let script: any;
+        try {
+            script = JSON.parse(raw);
+        } catch (e) {
+            window.alert("Ya dun goofed!\nError parsing JSON. Is that actually a JSON file?");
             return;
         }
-
+        
+        if (!isCompleteScript(script)) {
+            console.log(script)
+            window.alert("Ya dun goofed!\n" + reasonForScriptFailure(script));
+            return;
+        }
+        
         importCustomRoles(script);
-
+        commitNewScript(script);
+        
         setGameState(state => {
             return {
                 ...state,
                 script
             };
         });
+        
     }
-
+    console.log("Name:", gameState.script[0].name);
+    console.log(ALL_SCRIPTS.map(x => x[0].name))
+    console.log(ALL_SCRIPTS)
     return (
         <>
             <span className="SideDropdown__scriptHeader">Current Script</span>
@@ -89,6 +94,7 @@ export default function ScriptChoices() {
                 ref={selectRef}
                 className="SideDropdown__scriptSelect"
                 style={{ backgroundImage }}
+                value={gameState.script[0].name}
                 onChange={changeScript}
             >
                 {optionJsx}
