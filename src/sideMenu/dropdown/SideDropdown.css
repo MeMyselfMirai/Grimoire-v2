@@ -88,11 +88,14 @@
     text-align: center;
     height: 1.5em;
     width: 90%;
+    text-shadow: 0 0 10px black;
     box-shadow: 0 0 10px darkblue;
     background-position: 50% calc(50% + 0.75em);
     border: none;
     border-radius: 0.5em;
     color: white;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .SideDropdown__uploadLabel {
@@ -114,7 +117,62 @@
     font-size: 20pt;
     color: white;
     height: 30px;
+    line-height: 0.8;
     font-weight: bold;
     font-family: PiratesBay;
     text-shadow: 0 0 10px black;
+    margin: 0;
+}
+
+.SideDropdown__scriptAuthor {
+    font-size: 15pt;
+    color: white;
+    opacity: 0.75;
+    height: 15px;
+    line-height: 0.8;
+    font-weight: bold;
+    font-family: PiratesBay;
+    text-shadow: 0 0 10px black;
+    margin: 0
+}
+
+.PlayerCount__header {
+    font-family: Piratesbay;
+    color: white;
+    text-shadow: 0 0 10px black;
+    font-size: 30pt;
+}
+
+.PlayerCount__container {
+    position: relative;
+    height: 60px;
+    border-radius: 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+}
+
+.PlayerCount__button {
+    height: 60px;
+    background-size: 50%;
+    cursor: pointer;
+    user-select: none;
+    flex-grow: 1;
+}
+
+.PlayerCount__input {
+    flex-grow: 0.5;
+    font-size: 40px;
+    text-align: center;
+    display: inline-block;
+    position: static;
+    background-color: grey;
+    border: none;
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+}
+.PlayerCount__input::-webkit-inner-spin-button, 
+.PlayerCount__input::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
 }

@@ -4,10 +4,12 @@ import DownloadButton from "./DownloadButton";
 import UploadButton from "./UploadButton";
 import BackgroundButton from "./BackgroundButton";
 import ScriptChoices from "./ScriptChoices";
+import PlayerCount from "./PlayerCount";
 
 export default function SideDropdown() {
 
     const [open, setOpen] = useState(false);
+
 
     function toggle() {
         setOpen(!open);
@@ -35,6 +37,7 @@ export default function SideDropdown() {
                     <DownloadButton />
                 </div>
                 <ScriptChoices />
+                <PlayerCount />
             </div>
         </div>
     )

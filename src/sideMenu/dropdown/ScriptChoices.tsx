@@ -31,10 +31,15 @@ export default function ScriptChoices() {
     const index = ALL_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
     
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
+    const boxShadow = "0 0 10px " + color;
     const backgroundImage = SCRIPT_BACKGROUNDS[index] ?? SCRIPT_BACKGROUNDS[5];
     
     const defaultNames = ALL_SCRIPTS.map(script => script[0].name);
     const optionJsx = defaultNames.map(name => <option key={name} >{name}</option>);
+
+    const authorJsx = [undefined, "undefined", ""].includes(gameState.script[0].author) ? 
+            <></> : 
+            <p style={{ color }} className="SideDropdown__scriptAuthor" >{"By: " + gameState.script[0].author}</p>;
     
     function changeScript() {
         if (selectRef.current === null) return;
@@ -92,7 +97,7 @@ export default function ScriptChoices() {
             <select
                 ref={selectRef}
                 className="SideDropdown__scriptSelect"
-                style={{ backgroundImage }}
+                style={{ backgroundImage, boxShadow }}
                 value={gameState.script[0].name}
                 onChange={changeScript}
             >
@@ -109,7 +114,8 @@ export default function ScriptChoices() {
             <br />
             <input ref={uploadRef} type="file" accept=".json" onChange={uploadScript} hidden />
             <hr />
-            <span style={{ color }} className="SideDropdown__scriptName" >{gameState.script[0].name}</span>
+            <p style={{ color }} className="SideDropdown__scriptName" >{gameState.script[0].name}</p>
+            {authorJsx}
             <hr />
         </>
     )
