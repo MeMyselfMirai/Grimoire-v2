@@ -11,6 +11,7 @@ import { MapLike } from "typescript";
 import TeamSection from "./TeamSection";
 import { Team } from "../../types/Team";
 import { sortAlphabetical, sortSao } from "../../data/roleSorting";
+import { playerCounts, roleDistribution } from "../../data/countData";
 
 /**
  * Construct the side menu's individual items using the given script.
@@ -18,12 +19,13 @@ import { sortAlphabetical, sortSao } from "../../data/roleSorting";
  * @param createCallback What the individual menu items should do to create a new token
  * @returns 
  */
-export function populateJSX(
+function populateJSX(
         gameState: GameState, 
         searchFilter: string,
         sortMethod: (r1: Role, r2: Role) => number,
         createCallback: (id: string) => void
     ): MapLike<JSX.Element[]> {
+
     const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
     const tokens = gameState.playerTokens;
 
@@ -59,16 +61,22 @@ export function populateJSX(
 function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): JSX.Element[] {
     const tokens = gameState.playerTokens;
 
-    const teamCounts: MapLike<number> = {};
-    tokens.forEach(token => {
-        const team = ROLES[token.id].team;
-        if (!(team in teamCounts)) teamCounts[team] = 0
-        teamCounts[team] += 1;
-    });
+    const actual = playerCounts(gameState.playerTokens);
+    const [townsfolk, outsiders, minions] = roleDistribution(gameState.playerCount);
+
+    const expected = {
+        [Team.Townsfolk]: townsfolk,
+        [Team.Outsider]: outsiders,
+        [Team.Minion]: minions,
+        [Team.Demon]: 1,
+        [Team.Traveller]: undefined,
+        [Team.Fabled]: undefined,
+        [Team.Loric]: undefined,
+    }
 
     return Object.values(Team)
         .map<JSX.Element>((team: Team) => (
-            <TeamSection key={team} teamId={team}>
+            <TeamSection key={team} teamId={team} expectedCount={expected[team]} actualCount={actual[team]}>
                 {elements[team] ?? []}
             </TeamSection>
         ));

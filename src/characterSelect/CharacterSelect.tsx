@@ -15,7 +15,7 @@ import { MapLike } from "typescript";
  * @param callback What the individual menu items should do to create a new token
  * @returns 
  */
-export function populateJSX(gameState: GameState, callback: (id: string) => void): MapLike<JSX.Element[]> {
+function populateJSX(gameState: GameState, callback: (id: string) => void): MapLike<JSX.Element[]> {
     const script = gameState.script.slice(1) as (RoleIdentifier | Role)[];
 
     const items: MapLike<JSX.Element[]> = {}

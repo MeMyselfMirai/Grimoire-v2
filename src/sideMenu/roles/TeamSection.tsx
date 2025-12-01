@@ -18,6 +18,9 @@ export default function TeamSection({teamId, actualCount, expectedCount, childre
     
     const team = TEAM_DATA[teamId];
 
+    let ratio = actualCount + "";
+    if (expectedCount !== undefined) ratio += " / " + expectedCount;
+
     return (
         <div>
             <div 
@@ -27,7 +30,7 @@ export default function TeamSection({teamId, actualCount, expectedCount, childre
             >
                 {team.header}
             </div>
-            <div className='MenuRoles__ratio'>{actualCount ?? 0}/{expectedCount ?? 0}</div>
+            <div className='MenuRoles__ratio'>{ratio}</div>
             <hr style={{ marginBlockEnd: "0em" }}></hr>
             {open ? children : []}
         </div>
