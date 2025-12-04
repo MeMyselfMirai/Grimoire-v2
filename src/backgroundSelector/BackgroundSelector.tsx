@@ -20,18 +20,22 @@ const BACKGROUND_ASSETS: string[] = [
     "assets/backgrounds/purple_circle_small.webp",
     "assets/backgrounds/purple_swirls.webp",
 
+    "assets/backgrounds/blue_circle_elaborate.png",
     "assets/backgrounds/blue_circle_large.webp",
     "assets/backgrounds/blue_circle_small.webp",
     "assets/backgrounds/blue_swirls.webp",
 
+    "assets/backgrounds/green_circle_elaborate.png",
     "assets/backgrounds/green_circle_large.webp",
     "assets/backgrounds/green_circle_small.webp",
     "assets/backgrounds/green_swirls.webp",
 
+    "assets/backgrounds/purple_circle_elaborate.png",
     "assets/backgrounds/light_green_circle_large.webp",
     "assets/backgrounds/light_green_circle_small.webp",
     "assets/backgrounds/light_green_swirls.webp",
 
+    "assets/backgrounds/orange_circle_elaborate.png",
     "assets/backgrounds/pink_circle_large.webp",
     "assets/backgrounds/pink_circle_small.webp",
     "assets/backgrounds/pink_swirls.webp",

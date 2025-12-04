@@ -61,6 +61,7 @@ export function modernizeLegacyScript(script: LegacyScript): Script {
 
 export function commitNewScript(script: Script) {
     if (scriptId(script) !== -1) return;
+    if (script[0].name === "Select a Script") return;
     ALL_SCRIPTS.push(script);
     EXTRA_SCRIPTS.push(script);
     saveLocalScripts();

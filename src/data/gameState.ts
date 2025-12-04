@@ -8,7 +8,7 @@ import { GameState } from "../types/GameState";
 export function load(): GameState {
     if (localStorage.getItem("state") == null) {
         return {
-            background: "",
+            background: "url(assets/backgrounds/red_troublebrewing_logo.webp)",
             isNight: false,
             orientation: "landscape",
             playerCount: 12,
@@ -17,8 +17,8 @@ export function load(): GameState {
             script: [
                 {
                     id: "_meta",
-                    author: "TPI Official",
-                    name: "Test Game Script"
+                    name: "Select a Script",
+                    author: ""
                 }
             ],
             scriptColor: "blue",
