@@ -1,15 +1,25 @@
-import { useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import "./SideDropdown.css"
 import DownloadButton from "./DownloadButton";
 import UploadButton from "./UploadButton";
 import BackgroundButton from "./BackgroundButton";
 import ScriptChoices from "./ScriptChoices";
 import PlayerCount from "./PlayerCount";
+import { GameContext, GameContextType } from "../../data/gameState";
 
 export default function SideDropdown() {
-
+    const {gameState} = useContext(GameContext) as GameContextType;
     const [open, setOpen] = useState(false);
+    const dropdownRef = useRef<any>(null);  
+    const contentRef = useRef<any>(null);  
 
+    useEffect(() => {
+        if (dropdownRef.current === null) return;
+        if (contentRef.current === null) return;
+
+        dropdownRef.current.style.height = (open ? 70 + contentRef.current.scrollHeight : 40) + "px";
+        
+    }, [open, gameState.script, gameState.playerCount])
 
     function toggle() {
         setOpen(!open);
@@ -18,7 +28,7 @@ export default function SideDropdown() {
     const focusClass = open ? " SideDropdown__open" : "";
 
     return (
-        <div className={"SideDropdown__container" + focusClass}>
+        <div ref={dropdownRef} className={"SideDropdown__container" + focusClass}>
             <div 
                 className="SideDropdown__toggle"
                 style={{backgroundImage: "url(assets/steel_bg.png)"}}
@@ -30,7 +40,7 @@ export default function SideDropdown() {
                     alt={open ? "collapse" : "expand"} 
                 />
             </div>
-            <div className="SideDropdown__content">
+            <div ref={contentRef} className="SideDropdown__content">
                 <div className="SideDropdown__buttonContainer">
                     <UploadButton />
                     <BackgroundButton />
