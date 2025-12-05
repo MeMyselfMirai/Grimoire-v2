@@ -2,13 +2,17 @@ import { useContext, useRef } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ALL_SCRIPTS, SCRIPT_COLORS } from "../../data/scriptData";
+import { ALL_SCRIPTS, saveLocalScripts, SCRIPT_COLORS } from "../../data/scriptData";
 
 
 export default function ScriptInfo() {
     const { gameState, setGameState } = useContext(GameContext) as AppContextType & GameContextType;
     const titleRef = useRef<any>(null);
     const authorRef = useRef<any>(null);
+
+    const author = [undefined, "undefined", ""].includes(gameState.script[0].author) 
+            ? "By: unknown" 
+            : "By: " + gameState.script[0].author;
     
     const index = ALL_SCRIPTS.map(s => s[0].name.trim()).indexOf(gameState.script[0].name.trim());
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
@@ -16,7 +20,7 @@ export default function ScriptInfo() {
     function editTitle() {
         if (titleRef === null) return;
         ALL_SCRIPTS[index][0].name = titleRef.current.value;
-        console.log(`INPUT: "${titleRef.current.value}"`)
+        saveLocalScripts();
         setGameState(state => {
             return {
                 ...state,
@@ -37,8 +41,8 @@ export default function ScriptInfo() {
         if (author.startsWith("By: ")) {
             author = author.slice(4);
         }
-        console.log(`INPUT: "${titleRef.current.value}"`)
         ALL_SCRIPTS[index][0].author = author;
+        saveLocalScripts();
         setGameState(state => {
             return {
                 ...state,
@@ -53,13 +57,11 @@ export default function ScriptInfo() {
         })
     }
 
-    console.log(`SCRIPT NAME: "${ALL_SCRIPTS[index]?.[0]?.name}"`)
-
 
     const authorJsx = (
             <TextareaAutosize 
                 ref={authorRef}
-                value={[undefined, "undefined", ""].includes(gameState.script[0].author) ? "By: unknown" : "By: " + gameState.script[0].author}
+                value={author}
                 spellCheck="false"
                 style={{ color }} 
                 className="SideDropdown__scriptAuthor"

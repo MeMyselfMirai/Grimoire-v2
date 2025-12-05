@@ -52,7 +52,8 @@ export function loadLocalScripts() {
     ALL_SCRIPTS = DEFAULT_SCRIPTS.concat(EXTRA_SCRIPTS);
 }
 
-function saveLocalScripts() {
+export function saveLocalScripts() {
+    EXTRA_SCRIPTS = ALL_SCRIPTS.slice(DEFAULT_SCRIPTS.length);
     localStorage.setItem("scripts", JSON.stringify(EXTRA_SCRIPTS));
 }
 
@@ -80,7 +81,6 @@ export function commitNewScript(script: Script) {
     if (scriptId(script) !== -1) return;
     if (script[0].name === "Select a Script") return;
     ALL_SCRIPTS.push(script);
-    EXTRA_SCRIPTS.push(script);
     saveLocalScripts();
 }
 
