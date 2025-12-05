@@ -115,7 +115,10 @@
 
 .SideDropdown__scriptName {
     font-size: 20pt;
-    color: white;
+    background-color:#00000000;
+    border: none;
+    text-align: center;
+    width: 100%;
     height: auto;
     min-height: 30px;
     line-height: 0.8;
@@ -123,6 +126,12 @@
     font-family: PiratesBay;
     text-shadow: 0 0 10px black;
     margin: 0;
+    resize: none;
+    overflow: hidden
+}
+.SideDropdown__scriptName:focus {
+    outline: 1px #666 groove;
+    border-radius: 15px;
 }
 
 .SideDropdown__scriptAuthor {

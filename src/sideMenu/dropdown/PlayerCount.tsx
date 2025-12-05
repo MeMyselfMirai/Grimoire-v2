@@ -32,7 +32,6 @@ export default function PlayerCount() {
 
     function onChange() {
         if (inputRef.current === null) return;
-        console.log(inputRef.current.valueAsNumber);
         if (Number.isNaN(inputRef.current.valueAsNumber)) {
             inputRef.current.value = "5";
         }

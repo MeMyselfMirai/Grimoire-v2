@@ -6,6 +6,7 @@ import BackgroundButton from "./BackgroundButton";
 import ScriptChoices from "./ScriptChoices";
 import PlayerCount from "./PlayerCount";
 import { GameContext, GameContextType } from "../../data/gameState";
+import ScriptInfo from "./ScriptInfo";
 
 export default function SideDropdown() {
     const {gameState} = useContext(GameContext) as GameContextType;
@@ -18,7 +19,7 @@ export default function SideDropdown() {
         if (contentRef.current === null) return;
 
         dropdownRef.current.style.height = (open ? 70 + contentRef.current.scrollHeight : 40) + "px";
-        
+
     }, [open, gameState.script, gameState.playerCount])
 
     function toggle() {
@@ -47,6 +48,7 @@ export default function SideDropdown() {
                     <DownloadButton />
                 </div>
                 <ScriptChoices />
+                <ScriptInfo />
                 <PlayerCount />
             </div>
         </div>

@@ -1,45 +1,23 @@
 import { useContext, useRef } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ALL_SCRIPTS, commitNewScript, modernizeLegacyScript } from "../../data/scriptData";
+import { ALL_SCRIPTS, commitNewScript, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS } from "../../data/scriptData";
 import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
 import { importCustomRoles } from "../../data/roleData";
-
-const SCRIPT_COLORS = [
-    "#F00000",
-    "#C0C000",
-    "#C000C0",
-    "#00C000",
-    "#c3ac87",
-    "#0000F0",
-]
-
-const SCRIPT_BACKGROUNDS = [
-    "url(assets/backgrounds/red_circle_small.webp)",
-    "url(assets/backgrounds/yellow_circle_small.webp)",
-    "url(assets/backgrounds/purple_circle_small.webp)",
-    "url(assets/backgrounds/green_circle_small.webp)",
-    "url(assets/backgrounds/blue_circle_small.webp)",
-    "url(assets/backgrounds/blue_circle_small.webp)",
-]
 
 export default function ScriptChoices() {
     const { gameState, setGameState } = useContext(GameContext) as AppContextType & GameContextType;
     const selectRef = useRef<any>(null);
     const uploadRef = useRef<any>(null);
 
-    const index = ALL_SCRIPTS.map(s => s[0].name).indexOf(gameState.script[0].name);
+    const index = ALL_SCRIPTS.map(s => sanitizeName(s[0].name)).indexOf(sanitizeName(gameState.script[0].name));
     
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
     const boxShadow = "0 0 10px " + color;
     const backgroundImage = SCRIPT_BACKGROUNDS[index] ?? SCRIPT_BACKGROUNDS[5];
     
-    const defaultNames = ALL_SCRIPTS.map(script => script[0].name);
-    const optionJsx = defaultNames.map(name => <option key={name} >{name}</option>);
-
-    const authorJsx = [undefined, "undefined", ""].includes(gameState.script[0].author) ? 
-            <></> : 
-            <p style={{ color }} className="SideDropdown__scriptAuthor" >{"By: " + gameState.script[0].author}</p>;
+    const defaultNames = ALL_SCRIPTS.map(script => sanitizeName(script[0].name));
+    const optionJsx = defaultNames.map((name, index) => <option key={name + index.toString()} >{name}</option>);
     
     function changeScript() {
         if (selectRef.current === null) return;
@@ -90,6 +68,7 @@ export default function ScriptChoices() {
         });
         
     }
+    console.log("VALUE: " + sanitizeName(gameState.script[0].name));
     return (
         <>
             <span className="SideDropdown__scriptHeader">Current Script</span>
@@ -98,7 +77,7 @@ export default function ScriptChoices() {
                 ref={selectRef}
                 className="SideDropdown__scriptSelect"
                 style={{ backgroundImage, boxShadow }}
-                value={gameState.script[0].name}
+                value={sanitizeName(gameState.script[0].name)}
                 onChange={changeScript}
             >
                 {optionJsx}
@@ -113,9 +92,6 @@ export default function ScriptChoices() {
             </label>
             <br />
             <input ref={uploadRef} type="file" accept=".json" onChange={uploadScript} hidden />
-            <hr />
-            <p style={{ color }} className="SideDropdown__scriptName" >{gameState.script[0].name}</p>
-            {authorJsx}
             <hr />
         </>
     )

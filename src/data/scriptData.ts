@@ -13,13 +13,30 @@ const DEFAULT_SCRIPT_PATHS = Object.freeze([
     "scripts/Unreleased Experimental.json",
 ]);
 
+export const SCRIPT_COLORS = [
+    "#F00000",
+    "#C0C000",
+    "#C000C0",
+    "#00C000",
+    "#c3ac87",
+    "#0000F0",
+]
+
+export const SCRIPT_BACKGROUNDS = [
+    "url(assets/backgrounds/red_circle_small.webp)",
+    "url(assets/backgrounds/yellow_circle_small.webp)",
+    "url(assets/backgrounds/purple_circle_small.webp)",
+    "url(assets/backgrounds/green_circle_small.webp)",
+    "url(assets/backgrounds/blue_circle_small.webp)",
+    "url(assets/backgrounds/blue_circle_small.webp)",
+]
+
 
 export var DEFAULT_SCRIPTS: Script[] = [];
 
 export var EXTRA_SCRIPTS: Script[] = [];
 
 export var ALL_SCRIPTS: Script[] = [];
-
 
 export async function initScripts() {
     DEFAULT_SCRIPT_PATHS.map(async (path, index) => {
@@ -65,4 +82,8 @@ export function commitNewScript(script: Script) {
     ALL_SCRIPTS.push(script);
     EXTRA_SCRIPTS.push(script);
     saveLocalScripts();
+}
+
+export function sanitizeName(name: string) {
+    return name.replaceAll(/[\n\t]+/g, " ").trim()
 }

@@ -9,7 +9,6 @@ import { GameContextType, GameContext } from "../data/gameState";
 function Background() {
 
     const {gameState} = useContext(GameContext) as GameContextType;
-    console.log(gameState)
 
     return (
         <div className="Background__image" style={{backgroundImage: gameState.background}}></div>
