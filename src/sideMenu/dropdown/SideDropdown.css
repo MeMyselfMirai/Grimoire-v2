@@ -136,7 +136,9 @@
 
 .SideDropdown__scriptAuthor {
     font-size: 15pt;
-    color: white;
+    background-color:#00000000;
+    border: none;
+    text-align: center;
     opacity: 0.75;
     height: auto;
     min-height: 15px;
@@ -144,7 +146,13 @@
     font-weight: bold;
     font-family: PiratesBay;
     text-shadow: 0 0 10px black;
-    margin: 0
+    margin: 0;
+    resize: none;
+    overflow: hidden
+}
+.SideDropdown__scriptAuthor:focus {
+    outline: 1px #666 groove;
+    border-radius: 15px;
 }
 
 .PlayerCount__header {
