@@ -116,7 +116,8 @@
 .SideDropdown__scriptName {
     font-size: 20pt;
     color: white;
-    height: 30px;
+    height: auto;
+    min-height: 30px;
     line-height: 0.8;
     font-weight: bold;
     font-family: PiratesBay;
@@ -128,7 +129,8 @@
     font-size: 15pt;
     color: white;
     opacity: 0.75;
-    height: 15px;
+    height: auto;
+    min-height: 15px;
     line-height: 0.8;
     font-weight: bold;
     font-family: PiratesBay;
