@@ -59,8 +59,6 @@ function populateJSX(
 }
 
 function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): JSX.Element[] {
-    const tokens = gameState.playerTokens;
-
     const actual = playerCounts(gameState.playerTokens);
     const [townsfolk, outsiders, minions] = roleDistribution(gameState.playerCount);
 

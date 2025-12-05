@@ -84,6 +84,11 @@ export function commitNewScript(script: Script) {
     saveLocalScripts();
 }
 
+export function deleteScriptByIndex(index: number) {
+    ALL_SCRIPTS = ALL_SCRIPTS.slice(0, index).concat(ALL_SCRIPTS.slice(index+1));
+    saveLocalScripts();
+}
+
 export function sanitizeName(name: string) {
     return name.replaceAll(/[\n\t]+/g, " ").trim()
 }

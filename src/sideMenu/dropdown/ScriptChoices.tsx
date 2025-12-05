@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ALL_SCRIPTS, commitNewScript, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS } from "../../data/scriptData";
+import { ALL_SCRIPTS, commitNewScript, deleteScriptByIndex, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS } from "../../data/scriptData";
 import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
 import { importCustomRoles } from "../../data/roleData";
 
@@ -28,6 +28,17 @@ export default function ScriptChoices() {
                 script: ALL_SCRIPTS[selectRef.current.selectedIndex]
             };
         })
+    }
+
+    function deleteScript() {
+        if (index < 6) return;
+        deleteScriptByIndex(index);
+        setGameState(state => {
+            return {
+                ...state,
+                script: ALL_SCRIPTS[0]
+            }
+        });
     }
     
     function openUploadDialog() {
@@ -68,20 +79,27 @@ export default function ScriptChoices() {
         });
         
     }
-    console.log("VALUE: " + sanitizeName(gameState.script[0].name));
+
     return (
         <>
             <span className="SideDropdown__scriptHeader">Current Script</span>
             <br />
-            <select
-                ref={selectRef}
-                className="SideDropdown__scriptSelect"
-                style={{ backgroundImage, boxShadow }}
-                value={sanitizeName(gameState.script[0].name)}
-                onChange={changeScript}
-            >
-                {optionJsx}
-            </select>
+            <div className="SideDropdown__scriptSelectContainer">
+                <select
+                    ref={selectRef}
+                    className="SideDropdown__scriptSelect"
+                    style={{ backgroundImage, boxShadow }}
+                    value={sanitizeName(gameState.script[0].name)}
+                    onChange={changeScript}
+                    >
+                    {optionJsx}
+                </select>
+                <div 
+                    className="SideDropdown__scriptDelete General__backgroundImage" 
+                    style={{backgroundImage: "url(assets/delete.png)", backgroundColor: index < 6 ? "gray" : "red"}}
+                    onClick={deleteScript}
+                />
+            </div>
             <div style={{height: "15px"}}/>
             <label 
                 className="SideDropdown__uploadLabel" 
