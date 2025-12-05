@@ -3,7 +3,14 @@ import "./BackgroundSelector.css"
 import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 
-
+/**
+ * A list of all of the background assets, as URLs that link to the relevant 
+ * file in the public folder. 
+ * 
+ * These are in groups of 4 based on the color schemes of the sets of images.
+ * It's assumed that most screens will be 2 or 4 images wide when displaying a
+ * preview.
+ */
 const BACKGROUND_ASSETS: string[] = [
     "assets/backgrounds/red_troublebrewing_logo.webp",
     "assets/backgrounds/red_circle_large.webp",
@@ -44,6 +51,14 @@ const BACKGROUND_ASSETS: string[] = [
     "assets/backgrounds/user_center.webp",
 ]
 
+/**
+ * Display the background selector item. This selector takes up the entire
+ * screen, only shows up if a user wants to select a new image, and will
+ * automatically close when the user next clicks. If they click on an image,
+ * then the background will be set to that image. 
+ * 
+ * @returns A JSX object to faciliate the above.
+ */
 export default function BackgroundSelector() {
     const {setGameState, appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
 

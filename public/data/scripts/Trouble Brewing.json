@@ -1,0 +1,88 @@
+[
+    {
+        "id": "_meta",
+        "author": "The Pandemonium Institute",
+        "name": "Trouble Brewing"
+    },
+    {
+        "id": "chef"
+    },
+    {
+        "id": "empath"
+    },
+    {
+        "id": "fortuneteller"
+    },
+    {
+        "id": "investigator"
+    },
+    {
+        "id": "librarian"
+    },
+    {
+        "id": "mayor"
+    },
+    {
+        "id": "monk"
+    },
+    {
+        "id": "washerwoman"
+    },
+    {
+        "id": "virgin"
+    },
+    {
+        "id": "undertaker"
+    },
+    {
+        "id": "soldier"
+    },
+    {
+        "id": "slayer"
+    },
+    {
+        "id": "ravenkeeper"
+    },
+    {
+        "id": "saint"
+    },
+    {
+        "id": "recluse"
+    },
+    {
+        "id": "drunk"
+    },
+    {
+        "id": "butler"
+    },
+    {
+        "id": "spy"
+    },
+    {
+        "id": "baron"
+    },
+    {
+        "id": "poisoner"
+    },
+    {
+        "id": "scarletwoman"
+    },
+    {
+        "id": "imp"
+    },
+    {
+        "id": "gunslinger"
+    },
+    {
+        "id": "scapegoat"
+    },
+    {
+        "id": "beggar"
+    },
+    {
+        "id": "bureaucrat"
+    },
+    {
+        "id": "thief"
+    }
+]
