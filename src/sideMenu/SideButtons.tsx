@@ -7,15 +7,18 @@ import { Visibility } from "../types/Visibility";
 function shuffleTokens(tokens: TokenData[]): TokenData[] {
     const output = tokens.filter(token => token.visibility !== Visibility.Assigned);
     tokens = tokens.filter(token => token.visibility === Visibility.Assigned);
-    const pos = tokens.map(t => t.position);
-    for (let i = pos.length - 1; i >= 0; i--) {
+    const positions = tokens.map(t => t.position);
+    const names = tokens.map(t => t.name);
+    for (let i = positions.length - 1; i >= 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [pos[i], pos[j]] = [pos[j], pos[i]];
+        [positions[i], positions[j]] = [positions[j], positions[i]];
+        [names[i], names[j]] = [names[j], names[i]];
     }
     return output.concat(tokens.map((token, i) => {
         return {
             ...token,
-            position: pos[i]
+            position: positions[i],
+            name: names[i]
         }
     }));
 }
