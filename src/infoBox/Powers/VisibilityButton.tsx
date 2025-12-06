@@ -1,12 +1,11 @@
 import { useContext } from "react";
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { nextVisibility, Visibility } from "../../types/Visibility";
 import { getToken } from "../../util";
 
 
 export default function VisibilityButton() {
-    const {gameState, setGameState, appState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {gameState, setGameState, appState} = useContext(GameContext) as GameContextType;
     const token = getToken(appState.activeTokenUid, gameState)!;
     const index = gameState.playerTokens.indexOf(token);
     

@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { ROLES, TEAM_DATA } from "../data/roleData";
+import { TEAM_DATA } from "../data/roleData";
+import { Role } from "../types/Role";
 
 
 type JinxItemType = {
-    firstRoleId: string,
-    secondRoleId: string,
+    firstRole: Role,
+    secondRole: Role,
     reason: string
 }
 
-export default function JinxItem({firstRoleId, secondRoleId, reason}: JinxItemType) {
+export default function JinxItem({firstRole, secondRole, reason}: JinxItemType) {
     const [open, setOpen] = useState(false);
     const ref = useRef<any>(null);
 
@@ -20,9 +21,6 @@ export default function JinxItem({firstRoleId, secondRoleId, reason}: JinxItemTy
             ref.current.style.height = "";
         }
     })
-
-    const firstRole = ROLES[firstRoleId];
-    const secondRole = ROLES[secondRoleId];
 
     return (
         <div

@@ -1,13 +1,12 @@
 import { useContext } from "react";
 import "./Shroud.css"
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 import ShroudIcons from "./ShroudIcons";
 import ShroudTitle from "./ShroudTitle";
 
 
 export default function Shroud() {
-    const {appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {appState, setAppState} = useContext(GameContext) as GameContextType;
 
     const shroud = appState.activeShroud;
 

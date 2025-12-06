@@ -1,22 +1,21 @@
 import { useContext, useRef } from "react";
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ALL_SCRIPTS, commitNewScript, deleteScriptByIndex, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS } from "../../data/scriptData";
+import { commitNewScript, deleteScriptByIndex, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS } from "../../data/scriptData";
 import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
-import { importCustomRoles } from "../../data/roleData";
+import { appendCustomRoles } from "../../data/roleData";
 
 export default function ScriptChoices() {
-    const { gameState, setGameState } = useContext(GameContext) as AppContextType & GameContextType;
+    const { gameState, setGameState, roles, setRoles, scripts, setScripts } = useContext(GameContext) as GameContextType;
     const selectRef = useRef<any>(null);
     const uploadRef = useRef<any>(null);
 
-    const index = ALL_SCRIPTS.map(s => sanitizeName(s[0].name)).indexOf(sanitizeName(gameState.script[0].name));
+    const index = scripts.map(s => sanitizeName(s[0].name)).indexOf(sanitizeName(gameState.script[0].name));
     
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
     const boxShadow = "0 0 10px " + color;
     const backgroundImage = SCRIPT_BACKGROUNDS[index] ?? SCRIPT_BACKGROUNDS[5];
     
-    const defaultNames = ALL_SCRIPTS.map(script => sanitizeName(script[0].name));
+    const defaultNames = scripts.map(script => sanitizeName(script[0].name));
     const optionJsx = defaultNames.map((name, index) => <option key={name + index.toString()} >{name}</option>);
     
     function changeScript() {
@@ -25,18 +24,18 @@ export default function ScriptChoices() {
         setGameState(state => {
             return {
                 ...state,
-                script: ALL_SCRIPTS[selectRef.current.selectedIndex]
+                script: scripts[selectRef.current.selectedIndex]
             };
         })
     }
 
     function deleteScript() {
         if (index < 6) return;
-        deleteScriptByIndex(index);
+        deleteScriptByIndex(index, setScripts);
         setGameState(state => {
             return {
                 ...state,
-                script: ALL_SCRIPTS[0]
+                script: scripts[0]
             }
         });
     }
@@ -62,14 +61,14 @@ export default function ScriptChoices() {
 
         script = modernizeLegacyScript(script);
         
-        if (!isCompleteScript(script)) {
+        if (!isCompleteScript(script, roles)) {
             console.error("Invalid Script:", script);
-            window.alert("Ya dun goofed!\n" + reasonForScriptFailure(script));
+            window.alert("Ya dun goofed!\n" + reasonForScriptFailure(script, roles));
             return;
         }
         
-        importCustomRoles(script);
-        commitNewScript(script);
+        appendCustomRoles(script, roles, setRoles);
+        commitNewScript(script, scripts, setScripts);
         
         setGameState(state => {
             return {

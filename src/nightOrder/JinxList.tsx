@@ -1,14 +1,13 @@
 import { useContext } from "react";
 import { GameContext, GameContextType } from "../data/gameState";
 import { Jinx } from "../types/Role";
-import { ROLES } from "../data/roleData";
 import JinxItem from "./JinxItem";
 import { Visibility } from "../types/Visibility";
 
 type FullJinx = Jinx & {id2: string}
 
 export default function JinxList() {
-    const { gameState } = useContext(GameContext) as GameContextType;
+    const { gameState, roles } = useContext(GameContext) as GameContextType;
 
     const availableRoles = gameState.playerTokens
         .filter(token => token.visibility !== Visibility.Bluff)
@@ -17,7 +16,7 @@ export default function JinxList() {
 
     const jinxes: FullJinx[]= [];
     for (const roleId of availableRoles) {
-        const role = ROLES[roleId];
+        const role = roles[roleId];
         if (role.jinx === undefined) continue;
         for (const jinx of role.jinx!) {
             if (availableRoles.indexOf(jinx.id) === -1) continue;
@@ -36,8 +35,8 @@ export default function JinxList() {
     const order = jinxes.map(jinx => (
         <JinxItem 
             key={jinx.id2 + " " + jinx.id}
-            firstRoleId={jinx.id2} 
-            secondRoleId={jinx.id} 
+            firstRole={roles[jinx.id2]} 
+            secondRole={roles[jinx.id]} 
             reason={jinx.reason}
         />
     ))

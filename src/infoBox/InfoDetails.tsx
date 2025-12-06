@@ -1,9 +1,10 @@
-import { ROLES } from "../data/roleData";
+import { useContext } from "react";
 import SampleToken from "../token/SampleToken";
 import { Role } from "../types/Role";
 import { TokenData } from "../types/TokenData";
 import { Visibility } from "../types/Visibility";
 import { InfoTabType } from "./InfoBox";
+import { GameContext, GameContextType } from "../data/gameState";
 
 type InfoDetailsType = InfoTabType & {
     token: TokenData
@@ -38,7 +39,9 @@ function generateFlavor(role: Role) {
 
 function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
 
-    const role = ROLES[token.id];
+    const {roles} = useContext(GameContext) as GameContextType;
+
+    const role = roles[token.id];
 
     let name = token.name ?? "";
     let mask = <></>

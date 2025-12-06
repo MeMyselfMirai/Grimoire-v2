@@ -3,7 +3,6 @@ import { ReminderData } from "../types/Reminder"
 import DraggableReminder from "./DraggableReminder"
 import { Position } from "../types/Position"
 import { useContext } from "react"
-import { AppContextType } from "../data/appState"
 import { GameContext, GameContextType } from "../data/gameState"
 
 
@@ -17,7 +16,7 @@ type ReminderSpawnerType = {
 }
 
 export default function ReminderSpawner({roleId, text, top, left, ownerUid, className}: ReminderSpawnerType) {
-    const {setGameState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {setGameState} = useContext(GameContext) as GameContextType;
 
     const dummyReminder: ReminderData = {
         id: roleId,

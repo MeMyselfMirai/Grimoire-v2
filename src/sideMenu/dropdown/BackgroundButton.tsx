@@ -1,10 +1,9 @@
 import { useContext } from "react";
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
 
 
 export default function BackgroundButton() {
-    const {setAppState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {setAppState} = useContext(GameContext) as GameContextType;
 
     function openBackgroundSelector() {
         setAppState(oldState => {

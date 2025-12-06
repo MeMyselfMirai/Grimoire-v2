@@ -1,18 +1,16 @@
-import { ROLES } from "../../data/roleData"
-
+import { Role } from "../../types/Role";
 
 type MenuRoleType = {
-    roleId: string,
+    role: Role,
     amount: number,
     callback: (id: string) => void
 }
 
-function MenuRole({roleId, amount, callback}: MenuRoleType) {
-    const data = ROLES[roleId];
+function MenuRole({role, amount, callback}: MenuRoleType) {
 
     return (
-        <div title={data.ability} className="MenuRole__container" onClick={() => callback(roleId)}>
-            <label className="MenuRole__label">{data.name}</label>
+        <div title={role.ability} className="MenuRole__container" onClick={() => callback(role.id)}>
+            <label className="MenuRole__label">{role.name}</label>
             <div className="MenuRole__count">{amount}</div>
             &nbsp;
             <hr style={{marginBlockEnd: "0em"}} />

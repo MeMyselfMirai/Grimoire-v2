@@ -1,5 +1,8 @@
 import { createContext, Dispatch, SetStateAction } from "react";
 import { GameState } from "../types/GameState";
+import { AppState } from "./appState";
+import { RoleData } from "../types/Role";
+import { Script } from "../types/Script";
 
 /**
  * Load the Game State from storage.
@@ -47,4 +50,10 @@ export const GameContext = createContext<any>(null);
 export type GameContextType = {
     gameState: GameState, 
     setGameState: Dispatch<SetStateAction<GameState>>
+    appState: AppState, 
+    setAppState: Dispatch<SetStateAction<AppState>>
+    roles: RoleData,
+    setRoles:  Dispatch<SetStateAction<RoleData>>,
+    scripts: Script[],
+    setScripts:  Dispatch<SetStateAction<Script[]>>,
 };

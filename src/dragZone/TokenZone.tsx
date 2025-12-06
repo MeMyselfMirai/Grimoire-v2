@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { DraggableEvent, DraggableData } from "react-draggable";
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 import DraggableToken from "../token/DraggableToken";
 import { GameState } from "../types/GameState";
@@ -8,7 +7,7 @@ import { nextViability } from "../types/Viability";
 
 
 export default function TokenZone() {
-    const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType & AppContextType;
+    const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType;
 
     function handleDrag(_: DraggableEvent, ui: DraggableData, index: number) {
         setGameState(oldState => {

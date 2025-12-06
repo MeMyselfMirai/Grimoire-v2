@@ -1,7 +1,7 @@
+import { RoleData } from "../types/Role";
 import { Team } from "../types/Team";
 import { TokenData } from "../types/TokenData";
 import { Visibility } from "../types/Visibility";
-import { ROLES } from "./roleData";
 
 
 const ROLE_DISTRIBUTION: Array<[number, number, number]> = [
@@ -32,7 +32,7 @@ export function roleDistribution(playerCount: number) {
     return ROLE_DISTRIBUTION[playerCount];
 }
 
-export function playerCounts(tokens: TokenData[]): { [key in Team]: number } {
+export function playerCounts(tokens: TokenData[], roles: RoleData): { [key in Team]: number } {
     const output: {[key in Team]: number} = {
         [Team.Townsfolk]: 0,
         [Team.Outsider]: 0,
@@ -44,7 +44,7 @@ export function playerCounts(tokens: TokenData[]): { [key in Team]: number } {
     };
     for (const token of tokens) {
         if (token.visibility !== Visibility.Assigned) continue;
-        const role = ROLES[token.id];
+        const role = roles[token.id];
         output[role.team]++;
     }
     return output;

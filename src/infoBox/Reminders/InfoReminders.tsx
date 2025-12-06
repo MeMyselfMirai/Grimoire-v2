@@ -1,9 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { InfoTabType } from "../InfoBox";
 import { getToken } from "../../util";
-import { ROLES } from "../../data/roleData";
 import SampleReminder from "../../reminder/SampleReminder";
 import ReminderSpawner from "../../reminder/ReminderSpawner";
 
@@ -14,14 +12,14 @@ type GhostProp = {
 }
 
 function InfoReminders({focused, focusCallback}: InfoTabType) {
-    const {gameState, appState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {gameState, appState, roles} = useContext(GameContext) as GameContextType;
 
     const landingRef = useRef<HTMLDivElement>(null)
     const [ghosts, setGhosts] = useState<GhostProp[]>([])
 
     const roleId = getToken(appState.activeTokenUid, gameState)!.id;
 
-    const role = ROLES[roleId];
+    const role = roles[roleId];
 
 
     useEffect(() => {

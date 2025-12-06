@@ -1,10 +1,9 @@
 import { useContext, useRef } from "react"
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
 
 
 export default function DownloadButton() {
-    const {gameState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {gameState} = useContext(GameContext) as GameContextType;
 
     const linkRef = useRef<HTMLAnchorElement>(null);
     

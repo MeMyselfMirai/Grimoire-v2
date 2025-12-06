@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Background from './background/Background';
 import DragZone from './dragZone/DragZone';
 import { GameContext, load, save } from './data/gameState';
-import { areRolesLoading, importCustomRoles, initRoles } from './data/roleData';
 import SideMenu from './sideMenu/SideMenu';
 import InfoBox from './infoBox/InfoBox';
 import { DEFAULT_APP_STATE } from './data/appState';
@@ -12,35 +11,50 @@ import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
 import BackgroundSelector from './backgroundSelector/BackgroundSelector';
-import { commitNewScript, initScripts, loadLocalScripts } from './data/scriptData';
+import { RoleData } from './types/Role';
+import { Script } from './types/Script';
+import init from './data/init';
+import { saveLocalScripts } from './data/scriptData';
 
 function App() {
 
     const [gameState, setGameState] = useState(load())
     const [appState, setAppState] = useState(DEFAULT_APP_STATE);
-    const [loading, setLoading] = useState(areRolesLoading);
+    const [roles, setRoles] = useState<RoleData>({});
+    const [scripts, setScripts] = useState<Script[]>([]);
+
+    // Instead of initRoles do this
+    useEffect(() => {
+        if (Object.keys(roles).length > 0) return;
+        init(gameState, setRoles, setScripts); 
+    }, [gameState, roles]);
+
+    // Whenever an update happens, save the game state.
+    useEffect(() => {
+        save(gameState);
+        console.log("Saved the game");
+    }, [gameState])
     
-    if (loading) {
-        // Kludge because I can't figure out why the ROLES object isn't updating instantly when set.
-        Promise.allSettled([initRoles(), initScripts()]).then(_ => {
-            setTimeout(() => { 
-                loadLocalScripts();
-                importCustomRoles(gameState.script); 
-                commitNewScript(gameState.script);
-                setLoading(areRolesLoading);
-            }, 500);
-        });
+    // Whenever an import or deletion happens, save the scripts.
+    useEffect(() => {
+        if (scripts.length < 6) return;
+        saveLocalScripts(scripts);
+        console.log("Saved local scripts");
+    }, [scripts]);
+
+    if (Object.keys(roles).length === 0) {
         return (<>
-            <p style={{color: 'black', position:"absolute", fontSize:"40px"}}> LOADING...</p>
+            <p style={{ color: 'black', position: "absolute", fontSize: "40px" }}> LOADING...</p>
         </>)
     }
 
-    // Whenever an update happens, save the game state.
-    save(gameState);
-    console.log("Saved this world")
-
     return (
-        <GameContext value={{gameState, setGameState, appState, setAppState}}>
+        <GameContext value={{ 
+            gameState, setGameState, 
+            appState, setAppState,
+            roles, setRoles,
+            scripts, setScripts,
+        }}>
             <Background />
             <DragZone />
             <BottomButtons />

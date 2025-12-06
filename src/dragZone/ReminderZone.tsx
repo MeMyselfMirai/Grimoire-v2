@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { DraggableEvent, DraggableData } from "react-draggable";
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 import { GameState } from "../types/GameState";
 import DraggableReminder from "../reminder/DraggableReminder";
@@ -8,7 +7,7 @@ import DraggableReminder from "../reminder/DraggableReminder";
 
 export default function ReminderZone() {
 
-    const { gameState, setGameState, appState, setAppState } = useContext(GameContext) as GameContextType & AppContextType;
+    const { gameState, setGameState, appState, setAppState } = useContext(GameContext) as GameContextType;
 
     if (!appState.tokenDataVisible) return <></>
 

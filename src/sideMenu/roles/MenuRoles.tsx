@@ -1,8 +1,8 @@
 import { JSX, useCallback, useContext, useMemo, useRef, useState } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ROLES, TEAM_DATA } from "../../data/roleData";
+import { TEAM_DATA } from "../../data/roleData";
 import { GameState } from "../../types/GameState";
-import { Role } from "../../types/Role";
+import { Role, RoleData } from "../../types/Role";
 import { isRole, RoleIdentifier } from "../../types/Script";
 import { Viability } from "../../types/Viability";
 import { Visibility } from "../../types/Visibility";
@@ -21,6 +21,7 @@ import { playerCounts, roleDistribution } from "../../data/countData";
  */
 function populateJSX(
         gameState: GameState, 
+        roles: RoleData,
         searchFilter: string,
         sortMethod: (r1: Role, r2: Role) => number,
         createCallback: (id: string) => void
@@ -42,7 +43,7 @@ function populateJSX(
     })
 
     script.map(r => {
-            if (!isRole(r)) return ROLES[r.id];
+            if (!isRole(r, roles)) return roles[r.id];
             return r as Role;
         })
         .sort(sortMethod)
@@ -51,15 +52,15 @@ function populateJSX(
             if (!role.name.replace(/\W/g, "").toLowerCase().includes(searchFilter.replace(/\W/g, "").toLowerCase())) return;
             const amount = characterDict[role.id] ?? 0;
             items[role.team].push((
-                <MenuRole roleId={role.id} amount={amount} key={role.id} callback={createCallback}></MenuRole>
+                <MenuRole role={role} amount={amount} key={role.id} callback={createCallback} />
             ));
         })
 
     return items;
 }
 
-function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): JSX.Element[] {
-    const actual = playerCounts(gameState.playerTokens);
+function aggregateJSX(gameState: GameState, roles: RoleData, elements: MapLike<JSX.Element[]>): JSX.Element[] {
+    const actual = playerCounts(gameState.playerTokens, roles);
     const [townsfolk, outsiders, minions] = roleDistribution(gameState.playerCount);
 
     const expected = {
@@ -82,7 +83,7 @@ function aggregateJSX(gameState: GameState, elements: MapLike<JSX.Element[]>): J
 
 function MenuRoles() {
 
-    const {gameState, setGameState} = useContext(GameContext) as GameContextType;
+    const {gameState, setGameState, roles} = useContext(GameContext) as GameContextType;
 
     const [usingSao, setUsingSao] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
@@ -117,10 +118,10 @@ function MenuRoles() {
     }, [setGameState]);
 
     const roleJSX = useMemo(
-            () => populateJSX(gameState, searchTerm, sortMethod, createToken),
-            [gameState, searchTerm, sortMethod, createToken]
+            () => populateJSX(gameState, roles, searchTerm, sortMethod, createToken),
+            [gameState, roles, searchTerm, sortMethod, createToken]
     )
-    const sectionJSX = aggregateJSX(gameState, roleJSX);
+    const sectionJSX = aggregateJSX(gameState, roles, roleJSX);
     
     return (
         <>

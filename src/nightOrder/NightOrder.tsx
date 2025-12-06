@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import "./NightOrder.css"
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 import TopButtons, { NightOrderTab } from "./TopButtons";
 import NightOrderList from "./NightOrderList";
@@ -8,7 +7,7 @@ import JinxList from "./JinxList";
 
 
 export default function NightOrder() {
-    const { appState } = useContext(GameContext) as AppContextType & GameContextType;
+    const { appState } = useContext(GameContext) as GameContextType;
 
     if (!appState.tokenDataVisible) return <></>
 

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import './DragZone.css';
 import { GameContextType, GameContext } from "../data/gameState";
-import { AppContextType } from "../data/appState";
 import TokenZone from "./TokenZone";
 import ReminderZone from "./ReminderZone";
 
@@ -11,7 +10,7 @@ import ReminderZone from "./ReminderZone";
  * @returns 
  */
 function DragZone() {
-    const {setAppState} = useContext(GameContext) as GameContextType & AppContextType;
+    const {setAppState} = useContext(GameContext) as GameContextType;
 
 
 

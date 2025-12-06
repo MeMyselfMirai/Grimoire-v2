@@ -1,5 +1,4 @@
 import { useContext } from "react"
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 
 
@@ -11,7 +10,7 @@ import { GameContext, GameContextType } from "../data/gameState";
  * @returns the JSX of a button to do the above. 
  */
 function ToggleDrag() {
-    const {appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {appState, setAppState} = useContext(GameContext) as GameContextType;
 
     function onToggle() {
         setAppState(oldState => {

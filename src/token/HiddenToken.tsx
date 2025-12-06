@@ -1,8 +1,9 @@
-import { ROLES } from "../data/roleData"
+import { useContext } from "react"
 import { Team } from "../types/Team"
 import { TokenData } from "../types/TokenData"
 import { Viability } from "../types/Viability"
 import { Visibility } from "../types/Visibility"
+import { GameContext, GameContextType } from "../data/gameState"
 
 type HiddenTokenType = {
     token: TokenData
@@ -10,7 +11,10 @@ type HiddenTokenType = {
 }
 
 export default function HiddenToken({ token, className }: HiddenTokenType) {
-    const role = ROLES[token.id];
+
+    const { roles } = useContext(GameContext) as GameContextType;
+
+    const role = roles[token.id];
 
     if (token.visibility !== Visibility.Assigned) return <></>
     

@@ -1,0 +1,34 @@
+import { GameState } from "../types/GameState";
+import { isCompleteRole, RoleData } from "../types/Role";
+import { Script } from "../types/Script";
+import { getJSON } from "../util";
+import { DEFAULT_SCRIPT_PATHS, getLocalScripts } from "./scriptData";
+
+
+export default async function init(gameState: GameState, setRoles: any, setScripts: any) {
+    const roles = await getJSON("tokens.json") as RoleData;
+    const scripts: Script[] = [];
+    for (const path of DEFAULT_SCRIPT_PATHS) {
+        const script = await getJSON(path) as Script;
+        scripts.push(script);
+    }
+
+    const localScripts = getLocalScripts();
+    console.log(localScripts.concat(gameState.script));
+    localScripts.concat([gameState.script]).forEach((script, i) => {
+        console.log(i);
+        if (scripts.map(s => JSON.stringify(s)).includes(JSON.stringify(script))) return;
+        if (script[0].name === "Select a Script") return;
+        scripts.push(script);
+        script.slice(1).forEach(role => {
+            if (roles[role.id] !== undefined) return;
+            if (!isCompleteRole(role)) {
+                throw new Error(`Script contains a role "${role.id}" for which there is no data!`);
+            }
+            roles[role.id] = role;
+        });
+    });
+
+    setRoles(roles);
+    setScripts(scripts);
+}

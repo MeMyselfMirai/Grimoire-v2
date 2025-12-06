@@ -1,5 +1,4 @@
-import { ROLES } from "../data/roleData"
-import { isCompleteRole, Role } from "./Role"
+import { isCompleteRole, Role, RoleData } from "./Role"
 
 
 export type Meta = {
@@ -33,8 +32,8 @@ function hasRoleId(obj: any): obj is RoleIdentifier {
  * @param role A role object from the script
  * @returns true iff the item has all of its role data
  */
-export function isRole(role: RoleIdentifier | Role): role is Role {
-    return ROLES[role.id] === undefined;
+export function isRole(role: RoleIdentifier | Role, roles: RoleData): role is Role {
+    return roles[role.id] === undefined;
 }
 
 export type Script = [Meta, ...Array<RoleIdentifier | Role>]
@@ -50,7 +49,7 @@ export function isGenericScript(obj: any): obj is Script {
     return true;
 }
 
-export function isCompleteScript(obj: any): obj is Script {
+export function isCompleteScript(obj: any, roles: RoleData): obj is Script {
     if (!Array.isArray(obj)) return false;
     if (!isMeta(obj[0])) return false;
 
@@ -58,7 +57,7 @@ export function isCompleteScript(obj: any): obj is Script {
         if (typeof role !== "object") return false;
         if (typeof role.id !== "string") return false;
         if (isCompleteRole(role)) continue;
-        if (ROLES[role.id] === undefined) {
+        if (roles[role.id] === undefined) {
             return false;
         }
     }
@@ -66,7 +65,7 @@ export function isCompleteScript(obj: any): obj is Script {
     return true;
 }
 
-export function reasonForScriptFailure(obj: any): string {
+export function reasonForScriptFailure(obj: any, roles: RoleData): string {
     if (!Array.isArray(obj)) {
         return "Your input should be an array. Did you accidentally import a GameState file?"
     }
@@ -78,7 +77,7 @@ export function reasonForScriptFailure(obj: any): string {
         if (typeof role === "string") return "Scripts that are just a list of strings are unsupported. That script must be really old."
         if (typeof role !== "object") return `The role at position ${i} is not a proper object.`
         if (typeof role.id !== "string") return `The role at position ${i} has a missing or malformed id.`
-        if (ROLES[role.id] !== undefined) continue
+        if (roles[role.id] !== undefined) continue
         if (!isCompleteRole(role)) return `The role with id "${role.id}" is not known by this Grimoire, and has a missing or incomplete implementation. Is it homebrew? Did TPI just release it?`;
     }
 
