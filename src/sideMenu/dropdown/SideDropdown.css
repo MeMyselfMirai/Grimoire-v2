@@ -102,6 +102,14 @@
     -webkit-appearance: none;
 }
 
+.SideDropdown__scriptOption {
+    font-size: 0.7em;
+    font-family: PiratesBay;
+    text-shadow: none;
+    color: black;
+
+}
+
 .SideDropdown__scriptDelete {
     height: 1em;
     width: 1em; 

@@ -16,7 +16,7 @@ export default function ScriptChoices() {
     const backgroundImage = SCRIPT_BACKGROUNDS[index] ?? SCRIPT_BACKGROUNDS[5];
     
     const defaultNames = scripts.map(script => sanitizeName(script[0].name));
-    const optionJsx = defaultNames.map((name, index) => <option key={name + index.toString()} >{name}</option>);
+    const optionJsx = defaultNames.map((name, index) => <option className="SideDropdown__scriptOption" key={name + index.toString()} >{name}</option>);
     
     function changeScript() {
         if (selectRef.current === null) return;
