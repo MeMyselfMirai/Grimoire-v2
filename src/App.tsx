@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Background from './background/Background';
 import DragZone from './dragZone/DragZone';
@@ -13,25 +13,38 @@ import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
 import BackgroundSelector from './backgroundSelector/BackgroundSelector';
 import { commitNewScript, initScripts, loadLocalScripts } from './data/scriptData';
+import { getJSON } from './util';
 
 function App() {
 
     const [gameState, setGameState] = useState(load())
     const [appState, setAppState] = useState(DEFAULT_APP_STATE);
     const [loading, setLoading] = useState(areRolesLoading);
-    
-    if (loading) {
+
+    // Initially roles are empty
+    const [roles, setRoles] = useState([]);
+
+    // Instead of initRoles do this
+    useEffect(() => {
+        // Anonymous async closure is an easy way to do async/await rather than Promise.then
+        (async () => {
+            const jsonRoles = await getJSON("tokens.json");
+            setRoles(jsonRoles);
+        })(); // Execute async closure right away
+    }, []);
+
+    if (roles.length === 0) {
         // Kludge because I can't figure out why the ROLES object isn't updating instantly when set.
         Promise.allSettled([initRoles(), initScripts()]).then(_ => {
-            setTimeout(() => { 
+            setTimeout(() => {
                 loadLocalScripts();
-                importCustomRoles(gameState.script); 
+                importCustomRoles(gameState.script);
                 commitNewScript(gameState.script);
                 setLoading(areRolesLoading);
             }, 500);
         });
         return (<>
-            <p style={{color: 'black', position:"absolute", fontSize:"40px"}}> LOADING...</p>
+            <p style={{ color: 'black', position: "absolute", fontSize: "40px" }}> LOADING...</p>
         </>)
     }
 
@@ -40,7 +53,7 @@ function App() {
     console.log("Saved this world")
 
     return (
-        <GameContext value={{gameState, setGameState, appState, setAppState}}>
+        <GameContext value={{ gameState, setGameState, appState, setAppState }}>
             <Background />
             <DragZone />
             <BottomButtons />
