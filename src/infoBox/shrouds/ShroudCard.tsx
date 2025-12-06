@@ -1,19 +1,25 @@
 import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { Shroud } from "../../types/Role"
+import { getToken } from "../../util";
 
 
 type ShroudCardType = {
     shroud: Shroud;
 }
 
-export default function ShroudCard({shroud}: ShroudCardType) {
-    const {setAppState} = useContext(GameContext) as GameContextType;
+export default function ShroudCard({ shroud }: ShroudCardType) {
+    const { gameState, appState, setAppState } = useContext(GameContext) as GameContextType;
 
     function showShroud() {
-        const defaultIcons: undefined[] = [];
+        const defaultIcons: (string | undefined)[] = [];
         for (let i = 0; i < (shroud.icons ?? 0); i++) {
-            defaultIcons.push(undefined);
+            let iconId: (string | undefined);
+            if (shroud.autofill) {
+                // TODO: autofill should generally use the token that created this shroud.
+                iconId = getToken(appState.activeTokenUid, gameState)!.id;
+            }
+            defaultIcons.push(iconId);
         }
         setAppState(oldState => {
             return {
@@ -27,10 +33,10 @@ export default function ShroudCard({shroud}: ShroudCardType) {
     }
 
     return (
-        <div 
-            className="InfoShrouds__card" 
+        <div
+            className="InfoShrouds__card"
             onClick={showShroud}
-            style={{backgroundImage: `url(assets/cards/card-${shroud.cardColor}.png)`}}
+            style={{ backgroundImage: `url(assets/cards/card-${shroud.cardColor}.png)` }}
         >
             <span className="InfoShrouds__cardTitle">{shroud.cardTitle}</span>
         </div>
