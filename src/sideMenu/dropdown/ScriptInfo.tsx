@@ -16,9 +16,6 @@ export default function ScriptInfo() {
     const index = scripts.map(s => s[0].name.trim()).indexOf(gameState.script[0].name.trim());
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
 
-    console.log(gameState.script[0]);
-    console.log(scripts.map(x => x[0]));
-
     function editTitle() {
         if (titleRef === null) return;
         setScripts(scripts => {

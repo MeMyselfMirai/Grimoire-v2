@@ -1,33 +1,54 @@
 import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { Shroud } from "../../types/Role"
+import { RoleData, Shroud } from "../../types/Role"
 import { getToken } from "../../util";
+import { GameState } from "../../types/GameState";
+import { ActiveShroud, AppState } from "../../data/appState";
+import { Visibility } from "../../types/Visibility";
 
 
 type ShroudCardType = {
     shroud: Shroud;
 }
 
+function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState, roles: RoleData): ActiveShroud {
+    const newShroud = {...shroud};
+    const token = getToken(appState.activeTokenUid, gameState)!;
+
+    if (shroud.cardTitle === "Your Ability Text") {
+        newShroud.title += roles[token.id].ability
+    }
+
+    const shownIcons: (string | undefined)[] = [];
+    if (shroud.cardTitle === "Demon Bluffs") {
+        gameState.playerTokens
+                .filter(token => token.visibility === Visibility.Bluff)
+                .map(token => token.id)
+                .forEach(id => shownIcons.push(id));
+    }
+
+    for (let i = shownIcons.length; i < (shroud.icons ?? 0); i++) {
+        let iconId: string | undefined;
+        if (shroud.autofill) {
+            iconId = token.id;
+        }
+        shownIcons.push(iconId);
+    }
+
+    return {
+        ...newShroud,
+        shownIcons
+    }
+}
+
 export default function ShroudCard({ shroud }: ShroudCardType) {
-    const { gameState, appState, setAppState } = useContext(GameContext) as GameContextType;
+    const { gameState, appState, setAppState, roles } = useContext(GameContext) as GameContextType;
 
     function showShroud() {
-        const defaultIcons: (string | undefined)[] = [];
-        for (let i = 0; i < (shroud.icons ?? 0); i++) {
-            let iconId: (string | undefined);
-            if (shroud.autofill) {
-                // TODO: autofill should generally use the token that created this shroud.
-                iconId = getToken(appState.activeTokenUid, gameState)!.id;
-            }
-            defaultIcons.push(iconId);
-        }
         setAppState(oldState => {
             return {
                 ...oldState,
-                activeShroud: {
-                    ...shroud,
-                    shownIcons: defaultIcons
-                }
+                activeShroud: completeShroud(shroud, appState, gameState, roles),
             }
         });
     }

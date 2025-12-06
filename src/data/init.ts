@@ -14,9 +14,7 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
     }
 
     const localScripts = getLocalScripts();
-    console.log(localScripts.concat(gameState.script));
     localScripts.concat([gameState.script]).forEach((script, i) => {
-        console.log(i);
         if (scripts.map(s => JSON.stringify(s)).includes(JSON.stringify(script))) return;
         if (script[0].name === "Select a Script") return;
         scripts.push(script);
