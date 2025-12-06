@@ -1,10 +1,8 @@
 import { useContext } from "react";
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 import { Visibility } from "../types/Visibility";
 import { MapLike } from "typescript";
 import { Viability } from "../types/Viability";
-import { ROLES } from "../data/roleData";
 import { NightOrderTab } from "./TopButtons";
 import NightOrderItem from "./NightOrderItem";
 
@@ -15,7 +13,7 @@ type NightOrderData = {
 }
 
 export default function NightOrderList() {
-    const { gameState, appState } = useContext(GameContext) as AppContextType & GameContextType;
+    const { gameState, appState, roles } = useContext(GameContext) as GameContextType;
     
     const firstNight = appState.nightOrderData.currentTab === NightOrderTab.FirstNight
     const timeKey = firstNight ? "firstNight" : "otherNight";
@@ -36,12 +34,12 @@ export default function NightOrderList() {
         });
 
     const order = Object.values(nightOrderData)
-        .filter(data => ROLES[data.id][timeKey] !== undefined && ROLES[data.id][timeKey]! !== 0)
-        .sort((a,b) => ROLES[a.id][timeKey]! - ROLES[b.id][timeKey]!)
+        .filter(data => roles[data.id][timeKey] !== undefined && roles[data.id][timeKey]! !== 0)
+        .sort((a,b) => roles[a.id][timeKey]! - roles[b.id][timeKey]!)
         .map((data) => (
             <NightOrderItem 
                 key={data.id + "_" + timeKey} 
-                roleId={data.id} 
+                role={roles[data.id]} 
                 alive={data.alive} 
                 assigned={data.assigned}
                 firstNight={firstNight}

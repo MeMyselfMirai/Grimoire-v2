@@ -1,12 +1,11 @@
 import { useContext, useRef } from "react"
 import { isValidGamestate } from "../../types/GameState";
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { importCustomRoles } from "../../data/roleData";
+import { appendCustomRoles } from "../../data/roleData";
 
 
 export default function UploadButton() {
-    const {setGameState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {setGameState, roles, setRoles} = useContext(GameContext) as GameContextType;
 
     const inputRef = useRef<any>(null);
 
@@ -26,7 +25,7 @@ export default function UploadButton() {
             window.alert("Error importing state. We do not support script migration from grimoire v1 yet, sorry.");
             return;
         }
-        importCustomRoles(state.script);
+        appendCustomRoles(state.script, roles, setRoles);
         setGameState(state);
     }
 

@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { ROLES, TEAM_DATA } from "../data/roleData"
+import { TEAM_DATA } from "../data/roleData"
+import { Role } from "../types/Role";
 
 
 type NightOrderItemType = {
-    roleId: string;
+    role: Role;
     alive: boolean;
     assigned: boolean;
     firstNight: boolean;
 }
 
-export default function NightOrderItem({roleId, alive, assigned, firstNight }: NightOrderItemType) {
+export default function NightOrderItem({role, alive, assigned, firstNight }: NightOrderItemType) {
     const [open, setOpen] = useState(false);
     const ref = useRef<any>(null);
 
@@ -22,8 +23,6 @@ export default function NightOrderItem({roleId, alive, assigned, firstNight }: N
         }
     })
 
-    const role = ROLES[roleId];
-    if (role === undefined) return <></>
     let color = TEAM_DATA[role.team].color;
     if (!alive) color = "#000000";
 

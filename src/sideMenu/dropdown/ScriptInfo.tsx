@@ -1,12 +1,11 @@
 import { useContext, useRef } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
-import { AppContextType } from "../../data/appState";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { ALL_SCRIPTS, saveLocalScripts, SCRIPT_COLORS } from "../../data/scriptData";
+import { SCRIPT_COLORS } from "../../data/scriptData";
 
 
 export default function ScriptInfo() {
-    const { gameState, setGameState } = useContext(GameContext) as AppContextType & GameContextType;
+    const { gameState, setGameState, scripts, setScripts } = useContext(GameContext) as GameContextType;
     const titleRef = useRef<any>(null);
     const authorRef = useRef<any>(null);
 
@@ -14,13 +13,23 @@ export default function ScriptInfo() {
             ? "By: unknown" 
             : "By: " + gameState.script[0].author;
     
-    const index = ALL_SCRIPTS.map(s => s[0].name.trim()).indexOf(gameState.script[0].name.trim());
+    const index = scripts.map(s => s[0].name.trim()).indexOf(gameState.script[0].name.trim());
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
 
     function editTitle() {
         if (titleRef === null) return;
-        ALL_SCRIPTS[index][0].name = titleRef.current.value;
-        saveLocalScripts();
+        setScripts(scripts => {
+            return [
+                ...scripts.slice(0, index),
+                [
+                    {
+                        ...scripts[index][0],
+                        author: titleRef.current.value,
+                    },
+                    ...scripts[index].slice(1),
+                ],
+            ]
+        })
         setGameState(state => {
             return {
                 ...state,
@@ -41,8 +50,18 @@ export default function ScriptInfo() {
         if (author.startsWith("By: ")) {
             author = author.slice(4);
         }
-        ALL_SCRIPTS[index][0].author = author;
-        saveLocalScripts();
+        setScripts(scripts => {
+            return [
+                ...scripts.slice(0, index),
+                [
+                    {
+                        ...scripts[index][0],
+                        author: authorRef.current.value,
+                    },
+                    ...scripts[index].slice(1),
+                ],
+            ]
+        })
         setGameState(state => {
             return {
                 ...state,

@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import { AppContextType } from "../../data/appState";
-import { GameContext } from "../../data/gameState";
+import { GameContext, GameContextType } from "../../data/gameState";
 import { Shroud } from "../../types/Role"
 
 
@@ -9,7 +8,7 @@ type ShroudCardType = {
 }
 
 export default function ShroudCard({shroud}: ShroudCardType) {
-    const {setAppState} = useContext(GameContext) as AppContextType;
+    const {setAppState} = useContext(GameContext) as GameContextType;
 
     function showShroud() {
         const defaultIcons: undefined[] = [];

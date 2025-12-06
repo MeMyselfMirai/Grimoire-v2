@@ -1,11 +1,12 @@
 import './Token.css';
 import TokenName from "./components/TokenName";
-import { ROLES } from "../data/roleData";
 import { TokenData } from '../types/TokenData';
 import DeathFlag from './components/DeathFlag';
 import { Visibility } from '../types/Visibility';
 import Shading from './components/Shading';
 import VisibilityIndicator from './components/VisibilityIndicator';
+import { useContext } from 'react';
+import { GameContext, GameContextType } from '../data/gameState';
 
 type TokenType = {
     token: TokenData
@@ -26,7 +27,9 @@ type TokenType = {
  */
 function Token({ token, focused = false, className, onClick }: TokenType) {
 
-    const data = ROLES[token.id];
+    const { roles } = useContext(GameContext) as GameContextType;
+
+    const data = roles[token.id];
     
     return (
         <div

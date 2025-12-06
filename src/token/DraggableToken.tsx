@@ -1,11 +1,12 @@
-import { MouseEventHandler, RefObject, useRef } from "react";
+import { MouseEventHandler, RefObject, useContext, useRef } from "react";
 import './Token.css';
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
 import Token from "./Token";
 import { TokenData } from "../types/TokenData";
-import { ROLES } from "../data/roleData";
 import { Team } from "../types/Team";
 import HiddenToken from "./HiddenToken";
+import { RoleData } from "../types/Role";
+import { GameContext, GameContextType } from "../data/gameState";
 
 type TokenType = {
     token: TokenData;
@@ -17,8 +18,8 @@ type TokenType = {
     onDrop: () => void;
 }
 
-function shouldAppearNormallyAnyway(token: TokenData): boolean {
-    const role = ROLES[token.id];
+function shouldAppearNormallyAnyway(token: TokenData, roles: RoleData): boolean {
+    const role = roles[token.id];
     if (role === undefined) return false;
     return role.team in [Team.Loric, Team.Fabled];
 }
@@ -34,6 +35,8 @@ function shouldAppearNormallyAnyway(token: TokenData): boolean {
  * @returns 
  */
 function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, onClick, onDrop}: TokenType) {
+
+    const { roles } = useContext(GameContext) as GameContextType;
 
     // Kludge to fix a reference error in Draggable 4.5.
     // https://github.com/react-grid-layout/react-draggable/issues/771#issuecomment-2545737391
@@ -79,7 +82,7 @@ function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, on
     }
 
     let innerToken = <Token token={token} focused={focused} className="Token__container" />
-    if (!isDataVisible && !shouldAppearNormallyAnyway(token)) {
+    if (!isDataVisible && !shouldAppearNormallyAnyway(token, roles)) {
         innerToken = <HiddenToken token={token} className="Token__container" />
     }
 

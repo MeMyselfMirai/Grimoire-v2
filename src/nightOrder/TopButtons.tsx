@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 
 export enum NightOrderTab {
@@ -10,7 +9,7 @@ export enum NightOrderTab {
 }
 
 export default function TopButtons() {
-    const { appState, setAppState } = useContext(GameContext) as AppContextType & GameContextType;
+    const { appState, setAppState } = useContext(GameContext) as GameContextType;
     const style = {backgroundImage: 'url("assets/vines.png")'};
 
     function setOpenTabTo(tabName: NightOrderTab) {

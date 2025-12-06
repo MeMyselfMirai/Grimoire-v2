@@ -1,10 +1,8 @@
 import { Role } from "../types/Role";
 import { LegacyScript, Script } from "../types/Script";
-import { getJSON } from "../util";
-import { importCustomRoles } from "./roleData";
 
 
-const DEFAULT_SCRIPT_PATHS = Object.freeze([
+export const DEFAULT_SCRIPT_PATHS = Object.freeze([
     "scripts/Trouble Brewing.json",
     "scripts/Bad Moon Rising.json",
     "scripts/Sects and Violets.json",
@@ -31,38 +29,14 @@ export const SCRIPT_BACKGROUNDS = [
     "url(assets/backgrounds/blue_circle_small.webp)",
 ]
 
+export function getLocalScripts(): Script[] {
+    const localScriptJson = localStorage.getItem("scripts") ?? "[]";
 
-export var DEFAULT_SCRIPTS: Script[] = [];
-
-export var EXTRA_SCRIPTS: Script[] = [];
-
-export var ALL_SCRIPTS: Script[] = [];
-
-export async function initScripts() {
-    DEFAULT_SCRIPT_PATHS.map(async (path, index) => {
-        return (getJSON(path) as Promise<Script>).then(value => DEFAULT_SCRIPTS[index] = value)
-    });
+    return JSON.parse(localScriptJson) as Script[];
 }
 
-export function loadLocalScripts() {
-    const localScriptData = localStorage.getItem("scripts") ?? "[]";
-
-    EXTRA_SCRIPTS = JSON.parse(localScriptData);
-    EXTRA_SCRIPTS.forEach(importCustomRoles);
-    ALL_SCRIPTS = DEFAULT_SCRIPTS.concat(EXTRA_SCRIPTS);
-}
-
-export function saveLocalScripts() {
-    EXTRA_SCRIPTS = ALL_SCRIPTS.slice(DEFAULT_SCRIPTS.length);
-    localStorage.setItem("scripts", JSON.stringify(EXTRA_SCRIPTS));
-}
-
-export function scriptId(script: Script): number {
-    const scriptJSON = JSON.stringify(script)
-    for (let i = 0; i < ALL_SCRIPTS.length; i++) {
-        if (JSON.stringify(ALL_SCRIPTS[i]) === scriptJSON) return i;
-    }
-    return -1;
+export function saveLocalScripts(scripts: Script[]) {
+    localStorage.setItem("scripts", JSON.stringify(scripts.slice(DEFAULT_SCRIPT_PATHS.length)));
 }
 
 export function modernizeLegacyScript(script: LegacyScript): Script {
@@ -77,16 +51,24 @@ export function modernizeLegacyScript(script: LegacyScript): Script {
     return modern;
 }
 
-export function commitNewScript(script: Script) {
-    if (scriptId(script) !== -1) return;
-    if (script[0].name === "Select a Script") return;
-    ALL_SCRIPTS.push(script);
-    saveLocalScripts();
+export function commitNewScript(newScript: Script, scripts: Script[], setScripts: any) {
+    if (scripts.map(x => JSON.stringify(x)).includes(JSON.stringify(newScript))) return;
+    if (newScript[0].name === "Select a Script") return;
+    setScripts((scripts: Script[]) => {
+        return [
+            ...scripts,
+            newScript
+        ]
+    });
 }
 
-export function deleteScriptByIndex(index: number) {
-    ALL_SCRIPTS = ALL_SCRIPTS.slice(0, index).concat(ALL_SCRIPTS.slice(index+1));
-    saveLocalScripts();
+export function deleteScriptByIndex(scriptId: number, setScripts: any) {
+    setScripts((scripts: Script[]) => {
+        return {
+            ...scripts.slice(0,scriptId),
+            ...scripts.slice(scriptId+1)
+        }
+    });
 }
 
 export function sanitizeName(name: string) {

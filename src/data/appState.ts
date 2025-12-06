@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from "react";
+import { createContext } from "react";
 import { Shroud } from "../types/Role";
 import { NightOrderTab } from "../nightOrder/TopButtons";
 
@@ -33,8 +33,3 @@ export const DEFAULT_APP_STATE: AppState = Object.freeze({
 })
 
 export const AppContext = createContext(null);
-
-export type AppContextType = {
-    appState: AppState, 
-    setAppState: Dispatch<SetStateAction<AppState>>
-};

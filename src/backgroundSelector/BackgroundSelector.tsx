@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import "./BackgroundSelector.css"
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 
 /**
@@ -60,7 +59,7 @@ const BACKGROUND_ASSETS: string[] = [
  * @returns A JSX object to faciliate the above.
  */
 export default function BackgroundSelector() {
-    const {setGameState, appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {setGameState, appState, setAppState} = useContext(GameContext) as GameContextType;
 
     if (!appState.isBackgroundSelectorOpen) return <></>;
 

@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { GameContext, GameContextType } from "../data/gameState";
-import { AppContextType } from "../data/appState";
 import "./InfoBox.css"
 import InfoDetails from "./InfoDetails";
 import InfoReminders from "./Reminders/InfoReminders";
@@ -22,7 +21,7 @@ export type InfoTabType = {
 
 function InfoBox() {
 
-    const {gameState, appState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {gameState, appState} = useContext(GameContext) as GameContextType;
     const [focus, setFocus] = useState(Focus.DETAILS);
 
     const token = getToken(appState.activeTokenUid, gameState);

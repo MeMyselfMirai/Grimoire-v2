@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { AppContextType } from "../data/appState";
 import { GameContext, GameContextType } from "../data/gameState";
 
 /**
@@ -13,7 +12,7 @@ import { GameContext, GameContextType } from "../data/gameState";
  * @returns 
  */
 export default function ToggleVisibility() {
-    const {appState, setAppState} = useContext(GameContext) as AppContextType & GameContextType;
+    const {appState, setAppState} = useContext(GameContext) as GameContextType;
 
     function onToggle() {
         setAppState(oldState => {
