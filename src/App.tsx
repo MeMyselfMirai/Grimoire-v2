@@ -26,7 +26,7 @@ function App() {
     // Instead of initRoles do this
     useEffect(() => {
         if (Object.keys(roles).length > 0) return;
-        init(gameState, setRoles, setScripts); 
+        init(gameState, setRoles, setScripts, setGameState);
     }, [gameState, roles]);
 
     // Whenever an update happens, save the game state.

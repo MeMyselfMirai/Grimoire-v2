@@ -5,7 +5,7 @@ import { getJSON } from "../util";
 import { DEFAULT_SCRIPT_PATHS, getLocalScripts } from "./scriptData";
 
 
-export default async function init(gameState: GameState, setRoles: any, setScripts: any) {
+export default async function init(gameState: GameState, setRoles: any, setScripts: any, setGameState: any) {
     const roles = await getJSON("tokens.json") as RoleData;
     const scripts: Script[] = [];
     for (const path of DEFAULT_SCRIPT_PATHS) {
@@ -31,4 +31,11 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
 
     setRoles(roles);
     setScripts(scripts);
+    setGameState((state: GameState) => {
+        if (state.script.length > 1) return state;
+        return {
+            ...state,
+            script: scripts[0]
+        }
+    })
 }
