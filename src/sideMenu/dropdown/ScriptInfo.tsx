@@ -16,6 +16,9 @@ export default function ScriptInfo() {
     const index = scripts.map(s => s[0].name.trim()).indexOf(gameState.script[0].name.trim());
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
 
+    console.log(gameState.script[0]);
+    console.log(scripts.map(x => x[0]));
+
     function editTitle() {
         if (titleRef === null) return;
         setScripts(scripts => {
@@ -24,7 +27,7 @@ export default function ScriptInfo() {
                 [
                     {
                         ...scripts[index][0],
-                        author: titleRef.current.value,
+                        name: titleRef.current.value,
                     },
                     ...scripts[index].slice(1),
                 ],
@@ -76,18 +79,6 @@ export default function ScriptInfo() {
         })
     }
 
-
-    const authorJsx = (
-            <TextareaAutosize 
-                ref={authorRef}
-                value={author}
-                spellCheck="false"
-                style={{ color }} 
-                className="SideDropdown__scriptAuthor"
-                disabled={index < 6}
-                onChange={editAuthor}
-            />
-    );
     return (
         <>
             <TextareaAutosize 
@@ -99,7 +90,15 @@ export default function ScriptInfo() {
                 disabled={index < 6}
                 onChange={editTitle}
             />
-            {authorJsx}
+            <TextareaAutosize 
+                ref={authorRef}
+                value={author}
+                spellCheck="false"
+                style={{ color }} 
+                className="SideDropdown__scriptAuthor"
+                disabled={index < 6}
+                onChange={editAuthor}
+            />
             <hr />
         </>
     )
