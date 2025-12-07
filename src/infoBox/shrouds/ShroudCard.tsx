@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { RoleData, Shroud } from "../../types/Role"
-import { getToken } from "../../util";
+import { distanceSquared, getToken } from "../../util";
 import { GameState } from "../../types/GameState";
 import { ActiveShroud, AppState } from "../../data/appState";
 import { Visibility } from "../../types/Visibility";
@@ -21,10 +21,13 @@ function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState
 
     const shownIcons: (string | undefined)[] = [];
     if (shroud.cardTitle === "Demon Bluffs") {
-        gameState.playerTokens
-                .filter(token => token.visibility === Visibility.Bluff)
-                .map(token => token.id)
-                .forEach(id => shownIcons.push(id));
+        const bluffs = gameState.playerTokens.filter(token => token.visibility === Visibility.Bluff);
+        const nearestBluff = bluffs.sort((a,b) => distanceSquared(a.position, token.position) - distanceSquared(b.position, token.position))[0];
+        bluffs
+            .sort((a,b) => distanceSquared(a.position, nearestBluff.position) - distanceSquared(b.position, nearestBluff.position))
+            .map(token => token.id)
+            .slice(0,3)
+            .forEach(id => shownIcons.push(id));
     }
 
     for (let i = shownIcons.length; i < (shroud.icons ?? 0); i++) {
