@@ -64,10 +64,10 @@ export function commitNewScript(newScript: Script, scripts: Script[], setScripts
 
 export function deleteScriptByIndex(scriptId: number, setScripts: any) {
     setScripts((scripts: Script[]) => {
-        return {
+        return [
             ...scripts.slice(0,scriptId),
             ...scripts.slice(scriptId+1)
-        }
+        ];
     });
 }
 
