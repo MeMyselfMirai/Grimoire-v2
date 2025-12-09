@@ -4,7 +4,10 @@ import { GameContext, GameContextType } from "../data/gameState";
 import { GameState } from "../types/GameState";
 import DraggableReminder from "../reminder/DraggableReminder";
 
-
+/**
+ * Provides a div containing the "reminder Zone", a region where all reminder tokens exist. 
+ * @returns 
+ */
 export default function ReminderZone() {
 
     const { gameState, setGameState, appState, setAppState } = useContext(GameContext) as GameContextType;

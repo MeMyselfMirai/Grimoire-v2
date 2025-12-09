@@ -5,6 +5,12 @@ import ViabilityButton from "./ViabilityButton";
 import VisibilityButton from "./VisibilityButton";
 import EditButton from "./EditButton";
 
+/**
+ * The Powers tab -- where all mutations and changes to this token occur.
+ * @param focused If this tab is focused
+ * @param focusCallback the callback to focus this tab. 
+ * @returns 
+ */
 function InfoPowers({focused, focusCallback}: InfoTabType) {
 
     return (

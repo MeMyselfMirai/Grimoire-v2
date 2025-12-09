@@ -2,6 +2,7 @@ import "./Reminder.css"
 import { ReminderData } from "../types/Reminder"
 import { RefObject, useContext, useRef } from "react"
 import { GameContext, GameContextType } from "../data/gameState"
+import { getImage } from "../types/Role"
 
 
 type ReminderType = {
@@ -28,7 +29,7 @@ export default function Reminder({reminder, className, promptDeletion}: Reminder
 
     return (
         <div ref={ref} className={classes} style={{backgroundImage: "url(assets/reminder.png"}}>
-            <img className="Reminder__image" src={role.image} alt={role.name}/>
+            <img className="Reminder__image" src={getImage(role)} alt={role.name}/>
             <p className="Reminder__text">{reminder.text}</p>
             {prompt}
         </div>

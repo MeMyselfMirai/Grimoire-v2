@@ -10,7 +10,8 @@ import { MapLike } from "typescript";
 
 /**
  * Construct the token select menu's individual items using the given script.
- * @param script The script in use. 
+ * @param gameState The Game State
+ * @param roles Global role data
  * @param callback What the individual menu items should do to create a new token
  * @returns 
  */
@@ -39,6 +40,13 @@ function populateJSX(gameState: GameState, roles: RoleData, callback: (id: strin
     return items;
 }
 
+/**
+ * Aggregate the token select menu's elements into the various teams
+ * @param gameState The Game State
+ * @param roles Global role data
+ * @param elements A map mapping teams to the JSX elements made by the populateJSX function.
+ * @returns 
+ */
 function aggregateJSX(gameState: GameState, roles: RoleData, elements: MapLike<JSX.Element[]>): JSX.Element[] {
     const tokens = gameState.playerTokens;
 
@@ -59,6 +67,12 @@ function aggregateJSX(gameState: GameState, roles: RoleData, elements: MapLike<J
     ));
 }
 
+/**
+ * The character selection section of the Side Menu. 
+ * Stores all characters, the teams they are under, and handles their creation
+ * if the Storyteller clicks on any of them. 
+ * @returns Relevant JSX
+ */
 export default function CharacterSelect() {
     const { gameState, appState, setAppState, roles } = useContext(GameContext) as GameContextType;
 

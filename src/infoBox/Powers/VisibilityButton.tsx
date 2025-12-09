@@ -3,7 +3,10 @@ import { GameContext, GameContextType } from "../../data/gameState";
 import { nextVisibility, Visibility } from "../../types/Visibility";
 import { getToken } from "../../util";
 
-
+/**
+ * Edit the token's visibility -- cycle between being assigned, a demon bluff, or hidden for administrative reasons. 
+ * @returns 
+ */
 export default function VisibilityButton() {
     const {gameState, setGameState, appState} = useContext(GameContext) as GameContextType;
     const token = getToken(appState.activeTokenUid, gameState)!;

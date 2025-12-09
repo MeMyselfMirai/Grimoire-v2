@@ -5,7 +5,10 @@ import DraggableToken from "../token/DraggableToken";
 import { GameState } from "../types/GameState";
 import { nextViability } from "../types/Viability";
 
-
+/**
+ * Provides a div containing the "token Zone", a region where all role tokens exist. 
+ * @returns 
+ */
 export default function TokenZone() {
     const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType;
 

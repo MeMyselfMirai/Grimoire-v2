@@ -3,9 +3,12 @@ import { Team } from "../types/Team";
 import { TokenData } from "../types/TokenData";
 import { Visibility } from "../types/Visibility";
 
-
+/**
+ * The default distribution of Townsfolk, Outsiders, and Minions in
+ * various player counts of a BOTC game. 
+ */
 const ROLE_DISTRIBUTION: Array<[number, number, number]> = [
-    // Dummy values
+    // Dummy values -- counts this low are impossible.
     [0,0,0],
     [0,0,0],
     [0,0,0],
@@ -28,10 +31,21 @@ const ROLE_DISTRIBUTION: Array<[number, number, number]> = [
     [9,2,3],
 ]
 
+/**
+ * Get the role distribution for a specific player count.
+ * @param playerCount The number of players.
+ * @returns The number of townsfolk, outsiders, and minions respectively expected.
+ */
 export function roleDistribution(playerCount: number) {
     return ROLE_DISTRIBUTION[playerCount];
 }
 
+/**
+ * Get the actual number of each role type assigned on the grim. 
+ * @param tokens A list of all tokens on the grim. 
+ * @param roles The canonical data for all roles. 
+ * @returns A map showing how many assigned tokens there are for each team.
+ */
 export function playerCounts(tokens: TokenData[], roles: RoleData): { [key in Team]: number } {
     const output: {[key in Team]: number} = {
         [Team.Townsfolk]: 0,

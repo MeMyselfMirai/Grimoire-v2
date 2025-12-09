@@ -2,7 +2,11 @@ import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { getToken } from "../../util";
 
-
+/**
+ * The edit button. When clicked, opens the Mutate menu and lets the
+ * Storyteller change the current token's role.
+ * @returns 
+ */
 export default function EditButton() {
     const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType;
 

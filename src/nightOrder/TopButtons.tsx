@@ -8,6 +8,11 @@ export enum NightOrderTab {
     OtherNight = "Other",
 }
 
+/**
+ * The top buttons -- the three buttons at the top that allow the Storyteller
+ * to toggle shoting the jinxes, the first night order, or the other night order.
+ * @returns 
+ */
 export default function TopButtons() {
     const { appState, setAppState } = useContext(GameContext) as GameContextType;
     const style = {backgroundImage: 'url("assets/vines.png")'};

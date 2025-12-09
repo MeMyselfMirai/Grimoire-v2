@@ -2,7 +2,12 @@ import {  isCompleteRole, RoleData } from "../types/Role";
 import { Script } from "../types/Script";
 import { Team } from "../types/Team";
 
-
+/**
+ * Add all custom roles in the given script to the roles dictionary.
+ * @param script The script that may contain new roles to add.
+ * @param roles A set of all currently known roles.
+ * @param setRoles A callback to add new roles.
+ */
 export function appendCustomRoles(script: Script, roles: RoleData, setRoles: any) {
     script.slice(1).forEach(role => {
         if (roles[role.id] === undefined) {

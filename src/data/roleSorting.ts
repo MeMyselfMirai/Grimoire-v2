@@ -108,6 +108,12 @@ export function sortSao(first: Role, second: Role) {
     return out;
 }
 
+/**
+ * Sort alphabetically by role name. 
+ * @param {Role} first One of the characters being compared
+ * @param {Role} second One of the characters being compared
+ * @returns an integer. If negative, then `first` comes first, otherwise `second`.
+ */
 export function sortAlphabetical(first: Role, second: Role) {
     return first.name > second.name ? 1 : -1
 }

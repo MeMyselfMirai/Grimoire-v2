@@ -4,7 +4,13 @@ import { Script } from "../types/Script";
 import { getJSON } from "../util";
 import { DEFAULT_SCRIPT_PATHS, getLocalScripts } from "./scriptData";
 
-
+/**
+ * Initialize the application by fetching data from the backend. 
+ * @param gameState The game state. Stored locally, so we retrieved it already. 
+ * @param setRoles A callback to set the global role data.
+ * @param setScripts A callback to set the global script data. 
+ * @param setGameState A callback to set the global game state.
+ */
 export default async function init(gameState: GameState, setRoles: any, setScripts: any, setGameState: any) {
     const roles = await getJSON("tokens.json") as RoleData;
     const scripts: Script[] = [];

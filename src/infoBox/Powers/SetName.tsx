@@ -2,7 +2,10 @@ import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { getToken } from "../../util";
 
-
+/**
+ * An input to set the name of this token. 
+ * @returns 
+ */
 export default function SetName() {
     const {gameState, setGameState, appState} = useContext(GameContext) as GameContextType;
     const token = getToken(appState.activeTokenUid, gameState)!;

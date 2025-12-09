@@ -11,6 +11,12 @@ type GhostProp = {
     text: string,
 }
 
+/**
+ * The Reminders tab -- where reminders for this token can be instantiated.
+ * @param focused If this tab is focused
+ * @param focusCallback the callback to focus this tab. 
+ * @returns 
+ */
 function InfoReminders({focused, focusCallback}: InfoTabType) {
     const {gameState, appState, roles} = useContext(GameContext) as GameContextType;
 

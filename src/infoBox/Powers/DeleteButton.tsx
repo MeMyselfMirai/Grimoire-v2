@@ -2,7 +2,10 @@ import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { getToken } from "../../util";
 
-
+/**
+ * Add the Delete Button. When clicked, removes the selected token. 
+ * @returns 
+ */
 export default function DeleteButton() {
     const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType;
     const token = getToken(appState.activeTokenUid, gameState)!;

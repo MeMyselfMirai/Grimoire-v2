@@ -10,6 +10,11 @@ type InfoDetailsType = InfoTabType & {
     token: TokenData
 }
 
+/**
+ * Generate the JSX, if any, for the flavor text of this token. 
+ * @param role 
+ * @returns 
+ */
 function generateFlavor(role: Role) {
     if (role.flavor === undefined) return (<></>);
     const flavor = `"${(role.flavor ?? "").replaceAll(/\n[\t ]*/g, " / ")}"`;
@@ -37,6 +42,12 @@ function generateFlavor(role: Role) {
 
 }
 
+/**
+ * The Details tab -- Provides basic details about this token's character.
+ * @param focused If this tab is focused
+ * @param focusCallback the callback to focus this tab. 
+ * @returns 
+ */
 function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
 
     const {roles} = useContext(GameContext) as GameContextType;

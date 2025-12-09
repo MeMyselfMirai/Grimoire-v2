@@ -6,7 +6,6 @@ import ReminderZone from "./ReminderZone";
 
 /**
  * Provides a div containing the entire "DragZone", a region where all draggable tokens exist. 
- * @param enabled Whether the dragzone allows tokens within it to be dragged.
  * @returns 
  */
 function DragZone() {

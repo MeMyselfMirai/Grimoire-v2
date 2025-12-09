@@ -4,6 +4,7 @@ import { TokenData } from "../types/TokenData"
 import { Viability } from "../types/Viability"
 import { Visibility } from "../types/Visibility"
 import { GameContext, GameContextType } from "../data/gameState"
+import { getImage } from "../types/Role"
 
 type HiddenTokenType = {
     token: TokenData
@@ -29,7 +30,7 @@ export default function HiddenToken({ token, className }: HiddenTokenType) {
     let travellerIndicatorJsx = <></>
     if (role?.team === Team.Traveller && token.viability === Viability.Alive) {
         // TODO: Images could be arrays of strings.
-        travellerIndicatorJsx = <img src={role.image} className="General__backgroundImage HiddenToken__roleIndicator" alt={role.name} />
+        travellerIndicatorJsx = <img src={getImage(role)} className="General__backgroundImage HiddenToken__roleIndicator" alt={role.name} />
     }
 
     return (

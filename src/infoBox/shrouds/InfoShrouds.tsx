@@ -1,14 +1,18 @@
 import { useContext } from "react";
-import { GameState } from "../../types/GameState";
 import { RoleData, Shroud } from "../../types/Role";
 import { InfoTabType } from "../InfoBox";
 import { GameContext, GameContextType } from "../../data/gameState";
 import ShroudCard from "./ShroudCard";
+import { Script } from "../../types/Script";
 
 export type ShroudMap = {
     [key: string]: Shroud
 }
 
+/**
+ * The default shrouds. These shrouds appear in the info box no matter what 
+ * characters are on the script. 
+ */
 const DEFAULT_SHROUDS: ShroudMap = Object.freeze({
     "GENERAL_INFO": { 
         "cardTitle": "General Info", 
@@ -82,10 +86,17 @@ const DEFAULT_SHROUDS: ShroudMap = Object.freeze({
     }
 });
 
-function completeShroudList(gameState: GameState, roles: RoleData) {
+/**
+ * Construct the entire shroud list, including shrouds relevant to 
+ * some of the characters.
+ * @param gameState The game state. 
+ * @param roles 
+ * @returns 
+ */
+function completeShroudList(script: Script, roles: RoleData) {
     const output = {...DEFAULT_SHROUDS};
-    gameState.script.slice(1)
-        .filter(role => roles[role.id].shrouds !== undefined)
+    script.slice(1)
+        .filter(role => roles[role.id]?.shrouds !== undefined)
         .forEach(role => {
             const shrouds = roles[role.id].shrouds!;
             for (const i in shrouds) {
@@ -96,9 +107,15 @@ function completeShroudList(gameState: GameState, roles: RoleData) {
     return output;
 }
 
+/**
+ * The Shrouds tab -- where Shrouds can be selected to be shown to players
+ * @param focused If this tab is focused
+ * @param focusCallback the callback to focus this tab. 
+ * @returns 
+ */
 function InfoShrouds({focused, focusCallback}: InfoTabType) {
     const {gameState, roles} = useContext(GameContext) as GameContextType;
-    const shrouds = completeShroudList(gameState, roles);
+    const shrouds = completeShroudList(gameState.script, roles);
     
     const shroudJsx = [];
     for (const id of Object.keys(shrouds)) {

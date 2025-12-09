@@ -3,7 +3,10 @@ import { GameContext, GameContextType } from "../../data/gameState";
 import { nextViability, Viability } from "../../types/Viability";
 import { getToken } from "../../util";
 
-
+/**
+ * Edit the token's viability -- cycle it between being alive, dead, and deadvoted.
+ * @returns 
+ */
 export default function ViabilityButton() {
     const {gameState, setGameState, appState} = useContext(GameContext) as GameContextType;
     const token = getToken(appState.activeTokenUid, gameState)!;

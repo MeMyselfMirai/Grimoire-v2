@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { TEAM_DATA } from "../data/roleData";
-import { Role } from "../types/Role";
+import { getImage, Role } from "../types/Role";
 
 
 type JinxItemType = {
@@ -9,6 +9,13 @@ type JinxItemType = {
     reason: string
 }
 
+/**
+ * Create a Jinx with the following properties.
+ * @param firstRole The first role -- the character that causes the Jinx.
+ * @param secondRole The second role -- that character affected by the first character
+ * @param reason What to do when the roles are Jinxed. 
+ * @returns 
+ */
 export default function JinxItem({firstRole, secondRole, reason}: JinxItemType) {
     const [open, setOpen] = useState(false);
     const ref = useRef<any>(null);
@@ -31,8 +38,8 @@ export default function JinxItem({firstRole, secondRole, reason}: JinxItemType) 
         >
             <span className="NightOrderItem__text"> {reason} </span>
             <div className="NightOrderItem__image">
-                <img className="JinxItem__firstImage" src={firstRole.image} alt={firstRole.name} />
-                <img className="JinxItem__secondImage" src={secondRole.image} alt={secondRole.name} />
+                <img className="JinxItem__firstImage" src={getImage(firstRole)} alt={firstRole.name} />
+                <img className="JinxItem__secondImage" src={getImage(secondRole)} alt={secondRole.name} />
             </div>
         </div>
     )

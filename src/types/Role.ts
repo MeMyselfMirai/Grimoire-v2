@@ -53,7 +53,7 @@ export type Role = {
     ability: string,
     flavor?: string,
     team: Team,
-    image: string,
+    image: string | string[],
     reminders?: string[],
     firstNight?: number,
     firstNightReminder?: string,
@@ -61,7 +61,7 @@ export type Role = {
     otherNightReminder?: string,
     // change_makeup?: any[],
     shrouds?: Shroud[]
-    jinx?: Jinx[]
+    jinxes?: Jinx[]
 }
 
 export function isCompleteRole(obj: any): obj is Role {
@@ -97,10 +97,15 @@ export function isCompleteRole(obj: any): obj is Role {
         if (!obj.shrouds.every(isShroud)) return false;
     }
 
-    if (obj.jinx !== undefined) {
-        if (!Array.isArray(obj.jinx)) return false;
-        if (!obj.jinx.every(isJinx)) return false;
+    if (obj.jinxes !== undefined) {
+        if (!Array.isArray(obj.jinxes)) return false;
+        if (!obj.jinxes.every(isJinx)) return false;
     }
 
     return true;
+}
+
+export function getImage(role: Role) {
+    if (typeof role.image === "string") return role.image;
+    return role.image[0];
 }

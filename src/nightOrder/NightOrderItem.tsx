@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { TEAM_DATA } from "../data/roleData"
-import { Role } from "../types/Role";
+import { getImage, Role } from "../types/Role";
 
 
 type NightOrderItemType = {
@@ -10,6 +10,14 @@ type NightOrderItemType = {
     firstNight: boolean;
 }
 
+/**
+ * A generic night order item.
+ * @param role Role data about this night order item. 
+ * @param alive Whether any player given this role is alive. 
+ * @param assigned Whether this role is assigned to any player
+ * @param firstNight True iff this is the first night.
+ * @returns 
+ */
 export default function NightOrderItem({role, alive, assigned, firstNight }: NightOrderItemType) {
     const [open, setOpen] = useState(false);
     const ref = useRef<any>(null);
@@ -41,7 +49,7 @@ export default function NightOrderItem({role, alive, assigned, firstNight }: Nig
             onClick={() => setOpen(!open)}
         >
             <span className="NightOrderItem__text"> {info} </span>
-            <img className="NightOrderItem__image" src={role.image} alt={role.name}/>
+            <img className="NightOrderItem__image" src={getImage(role)} alt={role.name}/>
             {visibility}
         </div>
     )

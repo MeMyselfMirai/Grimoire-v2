@@ -7,6 +7,9 @@ import InfoShrouds from "./shrouds/InfoShrouds";
 import InfoPowers from "./Powers/InfoPowers";
 import { getToken } from "../util";
 
+/**
+ * An enum storing which Info Box tab is currently open.
+ */
 enum Focus {
     DETAILS,
     SHROUDS,
@@ -19,6 +22,12 @@ export type InfoTabType = {
     focusCallback: () => void
 }
 
+/**
+ * The info Box. A bar of infomration and actions along the botom of the screen
+ * that shows info on the state of a currently selected token. Only appears if
+ * there is a selected token to provide information about.
+ * @returns 
+ */
 function InfoBox() {
 
     const {gameState, appState} = useContext(GameContext) as GameContextType;

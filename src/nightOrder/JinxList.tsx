@@ -6,6 +6,10 @@ import { Visibility } from "../types/Visibility";
 
 type FullJinx = Jinx & {id2: string}
 
+/**
+ * The Jinx List -- a list of all jinxes, and what the Storyteller should be mindful of.
+ * @returns 
+ */
 export default function JinxList() {
     const { gameState, roles } = useContext(GameContext) as GameContextType;
 
@@ -17,8 +21,8 @@ export default function JinxList() {
     const jinxes: FullJinx[]= [];
     for (const roleId of availableRoles) {
         const role = roles[roleId];
-        if (role.jinx === undefined) continue;
-        for (const jinx of role.jinx!) {
+        if (role.jinxes === undefined) continue;
+        for (const jinx of role.jinxes!) {
             if (availableRoles.indexOf(jinx.id) === -1) continue;
             jinxes.push({...jinx, id2: roleId});
         }

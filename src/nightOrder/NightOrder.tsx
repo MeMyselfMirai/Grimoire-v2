@@ -5,7 +5,11 @@ import TopButtons, { NightOrderTab } from "./TopButtons";
 import NightOrderList from "./NightOrderList";
 import JinxList from "./JinxList";
 
-
+/**
+ * The Night order -- a side widget, whose buttons are at the top right, which
+ * indicates what the storyteller should be mindful of at certain times.
+ * @returns 
+ */
 export default function NightOrder() {
     const { appState } = useContext(GameContext) as GameContextType;
 

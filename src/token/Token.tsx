@@ -7,6 +7,7 @@ import Shading from './components/Shading';
 import VisibilityIndicator from './components/VisibilityIndicator';
 import { useContext } from 'react';
 import { GameContext, GameContextType } from '../data/gameState';
+import { getImage } from '../types/Role';
 
 type TokenType = {
     token: TokenData
@@ -39,7 +40,7 @@ function Token({ token, focused = false, className, onClick }: TokenType) {
             }}
             onClick={() => onClick?.()}
         >
-            <img className="Token__image General__backgroundImage" src={data.image} alt={data.name}/>
+            <img className="Token__image General__backgroundImage" src={getImage(data)} alt={data.name}/>
             <Shading token={token} focused={focused} className={className}></Shading>
             <TokenName name={data.name} />
             <DeathFlag token={token} />

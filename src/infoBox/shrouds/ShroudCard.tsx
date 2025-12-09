@@ -11,6 +11,15 @@ type ShroudCardType = {
     shroud: Shroud;
 }
 
+/**
+ * Fill out additional properties required for this shroud 
+ * (default tokens, some text), based on what shroud was selected.
+ * @param shroud The shroud being selected
+ * @param appState The state of the app.
+ * @param gameState The game state
+ * @param roles A list of all known roles.
+ * @returns A new shroud object with more details on what should be displayed.
+ */
 function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState, roles: RoleData): ActiveShroud {
     const newShroud = {...shroud};
     const token = getToken(appState.activeTokenUid, gameState)!;
@@ -22,7 +31,7 @@ function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState
     const shownIcons: (string | undefined)[] = [];
     if (shroud.cardTitle === "Demon Bluffs") {
         const bluffs = gameState.playerTokens.filter(token => token.visibility === Visibility.Bluff);
-        const nearestBluff = bluffs.sort((a,b) => distanceSquared(a.position, token.position) - distanceSquared(b.position, token.position))[0];
+        const nearestBluff = token// bluffs.sort((a,b) => distanceSquared(a.position, token.position) - distanceSquared(b.position, token.position))[0];
         bluffs
             .sort((a,b) => distanceSquared(a.position, nearestBluff.position) - distanceSquared(b.position, nearestBluff.position))
             .map(token => token.id)
@@ -44,6 +53,11 @@ function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState
     }
 }
 
+/**
+ * A single shroud card. 
+ * @param shroud The shroud this card represents. 
+ * @returns 
+ */
 export default function ShroudCard({ shroud }: ShroudCardType) {
     const { gameState, appState, setAppState, roles } = useContext(GameContext) as GameContextType;
 
