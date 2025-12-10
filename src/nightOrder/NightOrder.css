@@ -82,6 +82,17 @@
     pointer-events: none;
 }
 
+.NightOrderItem__reminder {
+    width: 18px;
+    position: relative;
+    top: 5px;
+}
+
+.NightOrderItem__emphasis {
+    color:wheat;
+    border-bottom: 4px solid white;
+}
+
 .NightOrderItem__image {
     width: 90px;
     height: 90px;

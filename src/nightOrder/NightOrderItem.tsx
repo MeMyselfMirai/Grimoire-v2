@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { JSX, useEffect, useRef, useState } from "react";
 import { TEAM_DATA } from "../data/roleData"
 import { getImage, Role } from "../types/Role";
 
@@ -8,6 +8,57 @@ type NightOrderItemType = {
     alive: boolean;
     assigned: boolean;
     firstNight: boolean;
+}
+
+const REMINDER_FLAG = ":reminder:"
+
+function infoJsx(info: string) {
+    // Terrible compiler, gooooooo
+    const tokens: string[] = [];
+    let token = "";
+    while (info.length > 0){
+        if (info.startsWith(REMINDER_FLAG)) {
+            tokens.push(token);
+            tokens.push(REMINDER_FLAG)
+            token = "";
+            info = info.slice(REMINDER_FLAG.length);
+        } else if (info.startsWith("*")) {
+            tokens.push(token);
+            tokens.push("*");
+            token = "";
+            info = info.slice(1);
+        } else {
+            token += info[0];
+            info = info.slice(1);
+        }
+    }
+    tokens.push(token);
+
+    const pieces: (string | JSX.Element)[] = [];
+    let withinBold: (string | JSX.Element)[] = [];
+    let bold = false;
+    for (const token of tokens) {
+        console.log(pieces)
+        let element: (string | JSX.Element) = token;
+        if (element === "*") {
+            if (bold) {
+                pieces.push(
+                    <strong className="NightOrderItem__emphasis">{withinBold}</strong>
+                );
+                withinBold = [];
+            }
+            bold = !bold;
+            continue;
+        }
+        if (element === REMINDER_FLAG) {
+            element = <img className="NightOrderItem__reminder" src="assets/reminder.png" alt="" />;
+        }
+
+        if (bold) withinBold.push(element);
+        else pieces.push(element);
+    }
+    
+    return <span className="NightOrderItem__text"> {pieces} </span>
 }
 
 /**
@@ -48,7 +99,7 @@ export default function NightOrderItem({role, alive, assigned, firstNight }: Nig
             style={{backgroundImage: `linear-gradient(to right, rgba(0,0,0,0) , ${color})`}}
             onClick={() => setOpen(!open)}
         >
-            <span className="NightOrderItem__text"> {info} </span>
+            {infoJsx(info)}
             <img className="NightOrderItem__image" src={getImage(role)} alt={role.name}/>
             {visibility}
         </div>
