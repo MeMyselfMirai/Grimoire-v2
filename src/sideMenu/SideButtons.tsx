@@ -2,11 +2,16 @@ import { useContext } from "react";
 import { GameContext, GameContextType } from "../data/gameState";
 import { TokenData } from "../types/TokenData";
 import { Visibility } from "../types/Visibility";
+import { RoleData } from "../types/Role";
+import { Team } from "../types/Team";
 
 
-function shuffleTokens(tokens: TokenData[]): TokenData[] {
-    const output = tokens.filter(token => token.visibility !== Visibility.Assigned);
-    tokens = tokens.filter(token => token.visibility === Visibility.Assigned);
+function shuffleTokens(tokens: TokenData[], roles: RoleData): TokenData[] {
+    const output = tokens
+        .filter(token => token.visibility !== Visibility.Assigned || [Team.Fabled, Team.Loric].includes(roles[token.id].team))
+    tokens = tokens
+        .filter(token => token.visibility === Visibility.Assigned)
+        .filter(token => ![Team.Fabled, Team.Loric].includes(roles[token.id].team))
     const positions = tokens.map(t => t.position);
     const names = tokens.map(t => t.name);
     for (let i = positions.length - 1; i >= 0; i--) {
@@ -23,7 +28,7 @@ function shuffleTokens(tokens: TokenData[]): TokenData[] {
     }));
 }
 
-function spreadTokens(tokens: TokenData[]): TokenData[] {
+function spreadTokens(tokens: TokenData[], roles: RoleData): TokenData[] {
     
     const center = { 
         y: document.documentElement.scrollHeight / 2, 
@@ -34,8 +39,10 @@ function spreadTokens(tokens: TokenData[]): TokenData[] {
     if (radius < 0) return tokens;
 
 
-    const firstHalf = tokens.filter(token => token.visibility !== Visibility.Assigned);
-    tokens = tokens.filter(token => token.visibility === Visibility.Assigned);
+    const firstHalf = tokens.filter(token => token.visibility !== Visibility.Assigned || [Team.Fabled, Team.Loric].includes(roles[token.id].team))
+    tokens = tokens
+        .filter(token => token.visibility === Visibility.Assigned)
+        .filter(token => ![Team.Fabled, Team.Loric].includes(roles[token.id].team))
     
     const total = tokens.length;
     const angleSeperation = Math.PI * 2 / total;
@@ -64,13 +71,13 @@ function spreadTokens(tokens: TokenData[]): TokenData[] {
 }
 
 function SideButtons() {
-    const { setGameState } = useContext(GameContext) as GameContextType;
+    const { setGameState, roles } = useContext(GameContext) as GameContextType;
 
     function shuffle() {
         setGameState(oldState => {
             return {
                 ...oldState,
-                playerTokens: shuffleTokens(oldState.playerTokens),
+                playerTokens: shuffleTokens(oldState.playerTokens, roles),
                 reminders: []
             }
         });
@@ -80,7 +87,7 @@ function SideButtons() {
         setGameState(oldState => {
             return {
                 ...oldState,
-                playerTokens: spreadTokens(oldState.playerTokens),
+                playerTokens: spreadTokens(oldState.playerTokens, roles),
                 reminders: []
             }
         });
