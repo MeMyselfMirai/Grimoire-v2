@@ -76,7 +76,7 @@ function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
 
     return (
         <div className={"InfoDetails__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
-            <SampleToken id={token.id} className="InfoDetails__token" onClick={focusCallback}></SampleToken>
+            <SampleToken id={token.id} alignment={token.alignment} className="InfoDetails__token" onClick={focusCallback}></SampleToken>
             {mask}
             <span className="InfoDetails__tokenName">{name}</span>
             <div className="InfoDetails__content">

@@ -1,3 +1,4 @@
+import { Alignment } from "./Alignment";
 import { isPosition, Position } from "./Position";
 import { Viability } from "./Viability";
 import { Visibility } from "./Visibility";
@@ -17,6 +18,8 @@ export type TokenData = {
 
     /** The viability state of this token -- whether it is alive or can vote. */
     viability: Viability;
+
+    alignment: Alignment;
 
     /** The position of this token on screen. */
     position: Position;

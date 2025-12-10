@@ -37,13 +37,13 @@ function infoJsx(info: string) {
     const pieces: (string | JSX.Element)[] = [];
     let withinBold: (string | JSX.Element)[] = [];
     let bold = false;
-    for (const token of tokens) {
-        console.log(pieces)
+    for (let i = 0; i < tokens.length; i++) {
+        token = tokens[i];
         let element: (string | JSX.Element) = token;
         if (element === "*") {
             if (bold) {
                 pieces.push(
-                    <strong className="NightOrderItem__emphasis">{withinBold}</strong>
+                    <strong key={i} className="NightOrderItem__emphasis">{withinBold}</strong>
                 );
                 withinBold = [];
             }
@@ -51,7 +51,7 @@ function infoJsx(info: string) {
             continue;
         }
         if (element === REMINDER_FLAG) {
-            element = <img className="NightOrderItem__reminder" src="assets/reminder.png" alt="" />;
+            element = <img key={i} className="NightOrderItem__reminder" src="assets/reminder.png" alt="" />;
         }
 
         if (bold) withinBold.push(element);

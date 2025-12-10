@@ -30,7 +30,7 @@ function Token({ token, focused = false, className, onClick }: TokenType) {
 
     const { roles } = useContext(GameContext) as GameContextType;
 
-    const data = roles[token.id];
+    const role = roles[token.id];
     
     return (
         <div
@@ -40,9 +40,9 @@ function Token({ token, focused = false, className, onClick }: TokenType) {
             }}
             onClick={() => onClick?.()}
         >
-            <img className="Token__image General__backgroundImage" src={getImage(data)} alt={data.name}/>
+            <img className="Token__image General__backgroundImage" src={getImage(role, token)} alt={role.name}/>
             <Shading token={token} focused={focused} className={className}></Shading>
-            <TokenName name={data.name} />
+            <TokenName name={role.name} />
             <DeathFlag token={token} />
             <VisibilityIndicator token={token}></VisibilityIndicator>
             <span className='Token__name'>{token.visibility === Visibility.Assigned ? token.name ?? "" : ""}</span>

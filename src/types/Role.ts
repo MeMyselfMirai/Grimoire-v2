@@ -1,4 +1,6 @@
+import { Alignment, getExpectedAlignment } from "./Alignment"
 import { Team } from "./Team"
+import { TokenData } from "./TokenData"
 
 export type RoleData = {
     [key: string]: Role
@@ -105,7 +107,23 @@ export function isCompleteRole(obj: any): obj is Role {
     return true;
 }
 
-export function getImage(role: Role) {
+export function getImage(role: Role, token?: TokenData): string {
     if (typeof role.image === "string") return role.image;
-    return role.image[0];
+    if (role.image.length === 1) return role.image[0];
+    if (token === undefined) return role.image[0];
+    if (token.alignment === undefined) return role.image[0];
+
+    const expected = getExpectedAlignment(role);
+    switch (expected) {
+        case Alignment.Storyteller:
+        default:
+            return role.image[0];
+        case Alignment.Good:
+        case Alignment.Evil:
+            return role.image[expected === token.alignment ? 0 : 1];
+        case Alignment.Traveller:
+            if (token.alignment === Alignment.Evil) return role.image[2];
+            if (token.alignment === Alignment.Good) return role.image[1];
+            return role.image[0];
+    }
 }

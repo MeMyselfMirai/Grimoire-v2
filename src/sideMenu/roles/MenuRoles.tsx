@@ -12,6 +12,7 @@ import TeamSection from "./TeamSection";
 import { Team } from "../../types/Team";
 import { sortAlphabetical, sortSao } from "../../data/roleSorting";
 import { playerCounts, roleDistribution } from "../../data/countData";
+import { getExpectedAlignment } from "../../types/Alignment";
 
 /**
  * Construct the side menu's individual items using the given script.
@@ -104,6 +105,7 @@ function MenuRoles() {
                 name: "",
                 visibility: Visibility.Assigned,
                 viability: Viability.Alive,
+                alignment: getExpectedAlignment(roles[id]),
                 position: {
                     top: window.innerHeight / 2 - 75,
                     left: window.innerWidth / 2 - 75,
@@ -115,7 +117,7 @@ function MenuRoles() {
                 playerTokens: [...prevState.playerTokens, newToken],
             };
         });
-    }, [setGameState]);
+    }, [setGameState, roles]);
 
     const roleJSX = useMemo(
             () => populateJSX(gameState, roles, searchTerm, sortMethod, createToken),

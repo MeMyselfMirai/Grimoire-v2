@@ -4,6 +4,7 @@ import DeleteButton from "./DeleteButton";
 import ViabilityButton from "./ViabilityButton";
 import VisibilityButton from "./VisibilityButton";
 import EditButton from "./EditButton";
+import AlignmentButton from "./AlignmentButton";
 
 /**
  * The Powers tab -- where all mutations and changes to this token occur.
@@ -29,10 +30,11 @@ function InfoPowers({focused, focusCallback}: InfoTabType) {
             <div className="InfoPowers__content">
                 <SetName></SetName>
                 <div className="InfoPowers__optionsContainer">
-                    <DeleteButton></DeleteButton>
-                    <ViabilityButton></ViabilityButton>
-                    <VisibilityButton></VisibilityButton>
-                    <EditButton></EditButton>
+                    <DeleteButton />
+                    <ViabilityButton />
+                    <VisibilityButton />
+                    <AlignmentButton />
+                    <EditButton />
                 </div>
             </div>
         </div>
