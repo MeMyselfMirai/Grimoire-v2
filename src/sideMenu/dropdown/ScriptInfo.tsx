@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import TextareaAutosize from 'react-textarea-autosize';
 import { GameContext, GameContextType } from "../../data/gameState";
-import { SCRIPT_COLORS } from "../../data/scriptData";
+import { SCRIPT_COLORS, scriptIndexOf } from "../../data/scriptData";
 
 
 export default function ScriptInfo() {
@@ -13,7 +13,7 @@ export default function ScriptInfo() {
             ? "By: unknown" 
             : "By: " + gameState.script[0].author;
     
-    const index = scripts.map(s => s[0].name.trim()).indexOf(gameState.script[0].name.trim());
+    const index = scriptIndexOf(gameState.script, scripts);
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
 
     function editTitle() {

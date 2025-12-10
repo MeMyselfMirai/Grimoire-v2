@@ -74,14 +74,26 @@ export function modernizeLegacyScript(script: LegacyScript): Script {
 }
 
 /**
+ * Find the index of the given script in the list of scripts.
+ * @param script The script to search for. 
+ * @param scripts The list of scripts to search in.
+ * @returns The index, or -1 if not found.
+ */
+export function scriptIndexOf(script: Script, scripts: Script[]) {
+    return scripts.map(x => JSON.stringify(x)).indexOf(JSON.stringify(script));
+}
+
+/**
  * Add a new script to the script list. If the "new" script is already in the list, do nothing.
  * @param newScript The script that may be added. 
  * @param scripts The list of all known scripts
  * @param setScripts A callback to add new scripts.
  */
 export function commitNewScript(newScript: Script, scripts: Script[], setScripts: any) {
-    if (scripts.map(x => JSON.stringify(x)).includes(JSON.stringify(newScript))) return;
     if (newScript[0].name === "Select a Script") return;
+    if (scriptIndexOf(newScript,scripts) >= 0) {
+        return;
+    }
     setScripts((scripts: Script[]) => {
         return [
             ...scripts,
@@ -108,9 +120,9 @@ export function deleteScriptByIndex(scriptId: number, setScripts: any) {
  * Sanitize the name of a script, removing any spaces or newlines.
  * This is relevant because <Select> tags also strip these out, and not following
  * its requirements will cause jarring desyncs. 
- * @param name The unsanitized name of the script. 
+ * @param script The script in question
  * @returns A sanitized name safe for use with <Select> tags.
  */
-export function sanitizeName(name: string) {
-    return name.replaceAll(/[\n\t]+/g, " ").trim()
+export function sanitizeName(script: Script) {
+    return script[0].name.replaceAll(/[\n\t]+/g, " ").trim()
 }

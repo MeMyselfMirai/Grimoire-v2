@@ -34,6 +34,9 @@ function generateFlavor(role: Role) {
         case "fabled":
             color = "rgb(230, 230, 176)"
             break;
+        case "loric":
+            color = "rgb(176, 230, 176)"
+            break;
         case "traveller":
             color = "rgb(230, 176, 230)"
     }

@@ -4,7 +4,7 @@ import { ReminderData } from "./types/Reminder";
 import { TokenData } from "./types/TokenData";
 
 export async function getJSON(path: string) {
-    const result = await fetch("/data/" + path);
+    const result = await fetch("/data/" + path + "?antiCache=" + Date.now());
     return await result.json();
 }
 

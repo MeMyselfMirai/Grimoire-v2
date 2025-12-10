@@ -2,7 +2,7 @@ import { GameState } from "../types/GameState";
 import { isCompleteRole, RoleData } from "../types/Role";
 import { Script } from "../types/Script";
 import { getJSON } from "../util";
-import { DEFAULT_SCRIPT_PATHS, getLocalScripts } from "./scriptData";
+import { DEFAULT_SCRIPT_PATHS, getLocalScripts, scriptIndexOf } from "./scriptData";
 
 /**
  * Initialize the application by fetching data from the backend. 
@@ -19,9 +19,9 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
         scripts.push(script);
     }
 
-    const localScripts = getLocalScripts();
-    localScripts.concat([gameState.script]).forEach((script, i) => {
-        if (scripts.map(s => JSON.stringify(s)).includes(JSON.stringify(script))) return;
+    const localScripts = getLocalScripts().concat([gameState.script]);
+    localScripts.forEach(script => {
+        if (scriptIndexOf(script, scripts) >= 0) return;
         if (script[0].name === "Select a Script") return;
         scripts.push(script);
         script.slice(1).forEach(role => {

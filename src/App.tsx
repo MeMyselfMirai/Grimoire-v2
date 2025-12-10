@@ -23,8 +23,6 @@ function App() {
     const [roles, setRoles] = useState<RoleData>({});
     const [scripts, setScripts] = useState<Script[]>([]);
 
-    console.log(roles)
-    // Instead of initRoles do this
     useEffect(() => {
         if (Object.keys(roles).length > 0) return;
         init(gameState, setRoles, setScripts, setGameState);

@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { commitNewScript, deleteScriptByIndex, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS } from "../../data/scriptData";
+import { commitNewScript, deleteScriptByIndex, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS, scriptIndexOf } from "../../data/scriptData";
 import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
 import { appendCustomRoles } from "../../data/roleData";
 
@@ -9,14 +9,16 @@ export default function ScriptChoices() {
     const selectRef = useRef<any>(null);
     const uploadRef = useRef<any>(null);
 
-    const index = scripts.map(s => sanitizeName(s[0].name)).indexOf(sanitizeName(gameState.script[0].name));
+    const index = scriptIndexOf(gameState.script, scripts);
     
     const color = SCRIPT_COLORS[index] ?? SCRIPT_COLORS[5];
     const boxShadow = "0 0 10px " + color;
     const backgroundImage = SCRIPT_BACKGROUNDS[index] ?? SCRIPT_BACKGROUNDS[5];
     
-    const defaultNames = scripts.map(script => sanitizeName(script[0].name));
-    const optionJsx = defaultNames.map((name, index) => <option className="SideDropdown__scriptOption" key={name + index.toString()} >{name}</option>);
+    const defaultNames = scripts.map(script => sanitizeName(script));
+    const optionJsx = defaultNames.map((name, index) => 
+            <option className="SideDropdown__scriptOption" key={name + index.toString()} >{`${index+1}. ${name}`}</option>
+    );
     
     function changeScript() {
         if (selectRef.current === null) return;
@@ -88,7 +90,7 @@ export default function ScriptChoices() {
                     ref={selectRef}
                     className="SideDropdown__scriptSelect"
                     style={{ backgroundImage, boxShadow }}
-                    value={sanitizeName(gameState.script[0].name)}
+                    value={`${index+1}. ${sanitizeName(gameState.script)}`}
                     onChange={changeScript}
                     >
                     {optionJsx}

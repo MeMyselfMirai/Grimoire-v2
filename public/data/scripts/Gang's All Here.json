@@ -53,6 +53,9 @@
 		"id": "beggar"
 	},
 	{
+		"id": "bigwig"
+	},
+	{
 		"id": "bishop"
 	},
 	{
@@ -63,6 +66,9 @@
 	},
 	{
 		"id": "boomdandy"
+	},
+	{
+		"id": "bootlegger"
 	},
 	{
 		"id": "bountyhunter"
@@ -180,6 +186,9 @@
 	},
 	{
 		"id": "gangster"
+	},
+	{
+		"id": "gardener"
 	},
 	{
 		"id": "general"
@@ -464,6 +473,9 @@
 		"id": "tinker"
 	},
 	{
+		"id": "tor"
+	},
+	{
 		"id": "towncrier"
 	},
 	{
@@ -513,6 +525,9 @@
 	},
 	{
 		"id": "zealot"
+	},
+	{
+		"id": "zenomancer"
 	},
 	{
 		"id": "zombuul"
