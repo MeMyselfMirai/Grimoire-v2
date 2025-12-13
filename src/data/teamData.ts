@@ -63,3 +63,7 @@ export function playerCounts(tokens: TokenData[], roles: RoleData): { [key in Te
     }
     return output;
 }
+
+export function isStorytellerToken(token: TokenData, roles: RoleData) {
+    return [Team.Loric, Team.Fabled].includes(roles[token.id].team);
+}

@@ -5,7 +5,7 @@ import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
 import { appendCustomRoles } from "../../data/roleData";
 
 export default function ScriptChoices() {
-    const { gameState, setGameState, roles, setRoles, scripts, setScripts } = useContext(GameContext) as GameContextType;
+    const { gameState, setGameState, setAppState, roles, setRoles, scripts, setScripts } = useContext(GameContext) as GameContextType;
     const selectRef = useRef<any>(null);
     const uploadRef = useRef<any>(null);
 
@@ -33,13 +33,26 @@ export default function ScriptChoices() {
 
     function deleteScript() {
         if (index < 6) return;
-        deleteScriptByIndex(index, setScripts);
-        setGameState(state => {
+        function callback() {
+            deleteScriptByIndex(index, setScripts);
+            setGameState(state => {
+                return {
+                    ...state,
+                    script: scripts[0]
+                }
+            });
+        }
+
+        setAppState(state => {
             return {
                 ...state,
-                script: scripts[0]
+                dialog: {
+                    message: "This will delete the selected script. You will need to upload it again. This will also clear the board. Are you sure you want to do this?",
+                    allowCancel: true,
+                    callback
+                }
             }
-        });
+        })
     }
     
     function openUploadDialog() {

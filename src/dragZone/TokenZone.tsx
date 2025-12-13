@@ -4,13 +4,15 @@ import { GameContext, GameContextType } from "../data/gameState";
 import DraggableToken from "../token/DraggableToken";
 import { GameState } from "../types/GameState";
 import { nextViability } from "../types/Viability";
+import { Team } from "../types/Team";
+import { isStorytellerToken } from "../data/teamData";
 
 /**
  * Provides a div containing the "token Zone", a region where all role tokens exist. 
  * @returns 
  */
 export default function TokenZone() {
-    const {gameState, setGameState, appState, setAppState} = useContext(GameContext) as GameContextType;
+    const {gameState, setGameState, appState, setAppState, roles} = useContext(GameContext) as GameContextType;
 
     function handleDrag(_: DraggableEvent, ui: DraggableData, index: number) {
         setGameState(oldState => {
@@ -43,6 +45,8 @@ export default function TokenZone() {
             });
             return;
         }
+        
+        if (isStorytellerToken(token, roles)) return;
         
         setGameState(oldState => {
             return {

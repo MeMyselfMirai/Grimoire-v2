@@ -11,7 +11,7 @@ import { MapLike } from "typescript";
 import TeamSection from "./TeamSection";
 import { Team } from "../../types/Team";
 import { sortAlphabetical, sortSao } from "../../data/roleSorting";
-import { playerCounts, roleDistribution } from "../../data/countData";
+import { playerCounts, roleDistribution } from "../../data/teamData";
 import { getExpectedAlignment } from "../../types/Alignment";
 
 /**

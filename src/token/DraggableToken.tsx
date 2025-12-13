@@ -7,6 +7,7 @@ import { Team } from "../types/Team";
 import HiddenToken from "./HiddenToken";
 import { RoleData } from "../types/Role";
 import { GameContext, GameContextType } from "../data/gameState";
+import { isStorytellerToken } from "../data/teamData";
 
 type TokenType = {
     token: TokenData;
@@ -16,12 +17,6 @@ type TokenType = {
     onDrag: (e: DraggableEvent, ui: DraggableData) => void;
     onClick: MouseEventHandler<HTMLElement>;
     onDrop: () => void;
-}
-
-function shouldAppearNormallyAnyway(token: TokenData, roles: RoleData): boolean {
-    const role = roles[token.id];
-    if (role === undefined) return false;
-    return role.team in [Team.Loric, Team.Fabled];
 }
 
 /**
@@ -82,7 +77,7 @@ function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, on
     }
 
     let innerToken = <Token token={token} focused={focused} className="Token__container" />
-    if (!isDataVisible && !shouldAppearNormallyAnyway(token, roles)) {
+    if (!isDataVisible && !isStorytellerToken(token, roles)) {
         innerToken = <HiddenToken token={token} className="Token__container" />
     }
 
