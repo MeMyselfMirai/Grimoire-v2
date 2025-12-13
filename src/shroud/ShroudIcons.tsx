@@ -59,17 +59,23 @@ export default function ShroudIcons() {
         )
     })
 
+    let extraIcons = <></>;
+    if (!appState.activeShroud!.autofill === true) {
+        extraIcons = 
+            <div 
+                className="Shroud__extraIconsButton" 
+                style={{backgroundImage: "url(assets/person_add.png)"}}
+                onClick={addIcon}
+            />
+    }
+
     return (
         <>
             <div className="Shroud__iconsContainer">
                 {iconJsx}
             </div>
-            <div 
-                className="Shroud__extraIconsButton" 
-                style={{backgroundImage: "url(assets/person_add.png)"}}
-                onClick={addIcon}
-            ></div>
             <br />
+            {extraIcons}
         </>
     )
 }

@@ -2,13 +2,14 @@ import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
 import { nextViability, Viability } from "../../types/Viability";
 import { getToken } from "../../util";
+import { isStorytellerToken } from "../../data/teamData";
 
 /**
  * Edit the token's viability -- cycle it between being alive, dead, and deadvoted.
  * @returns 
  */
 export default function ViabilityButton() {
-    const {gameState, setGameState, appState} = useContext(GameContext) as GameContextType;
+    const {gameState, setGameState, appState, roles} = useContext(GameContext) as GameContextType;
     const token = getToken(appState.activeTokenUid, gameState)!;
     const index = gameState.playerTokens.indexOf(token);
 
@@ -40,6 +41,8 @@ export default function ViabilityButton() {
             };
         })
     }
+
+    if (isStorytellerToken(token, roles)) return <></>;
     
 
     return (
