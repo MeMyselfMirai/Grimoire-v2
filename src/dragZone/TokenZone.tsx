@@ -4,7 +4,6 @@ import { GameContext, GameContextType } from "../data/gameState";
 import DraggableToken from "../token/DraggableToken";
 import { GameState } from "../types/GameState";
 import { nextViability } from "../types/Viability";
-import { Team } from "../types/Team";
 import { isStorytellerToken } from "../data/teamData";
 
 /**

@@ -1,12 +1,17 @@
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './SideMenu.css';
 import MenuRoles from './roles/MenuRoles';
 import SideButtons from './SideButtons';
 import SideDropdown from './dropdown/SideDropdown';
+import { GameContext, GameContextType } from '../data/gameState';
 
 function SideMenu() {
+    const { appState } = useContext(GameContext) as GameContextType;
+
     const [offset, setOffset] = useState(-300);
+
+    if (!appState.tokenDataVisible) return <></>;
 
     function openMenu() {
         setOffset(0);

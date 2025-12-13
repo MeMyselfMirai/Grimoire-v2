@@ -3,9 +3,7 @@ import './Token.css';
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
 import Token from "./Token";
 import { TokenData } from "../types/TokenData";
-import { Team } from "../types/Team";
 import HiddenToken from "./HiddenToken";
-import { RoleData } from "../types/Role";
 import { GameContext, GameContextType } from "../data/gameState";
 import { isStorytellerToken } from "../data/teamData";
 
