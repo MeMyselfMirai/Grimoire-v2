@@ -19,21 +19,29 @@ export type AppState = {
     /** Whether dragging is enabled. */
     draggingEnabled: boolean,
 
+    /** Whether the background selector UI is shown. */
+    isBackgroundSelectorOpen: boolean
+
     /** The Reminder UIDs of any reminders that are presently showing the "prompt deletion" flag. */
     promptedReminders: number[],
 
-    /** Whether token data is visible (eg: not town square mode) */
-    tokenDataVisible: boolean,
     nightOrderData: {
         // TODO: Denest this by one; I initially figured other properties would be relevant.
         currentTab: NightOrderTab
     }
 
+    /** Whether token data is visible (eg: not town square mode) */
+    tokenDataVisible: boolean,
+
     /** The currently active shroud, if any. Null if no shroud is currently being shown. */
     activeShroud?: ActiveShroud,
 
-    /** Whether the background selector UI is shown. */
-    isBackgroundSelectorOpen: boolean
+    /** Data about the dialog */
+    dialog?: {
+        message: string,
+        allowCancel: boolean,
+        callback: () => void,
+    }
 
     /** 
      * The callback to run in the mutate menu when any token is selected. 

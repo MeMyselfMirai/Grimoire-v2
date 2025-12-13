@@ -15,6 +15,7 @@ import { RoleData } from './types/Role';
 import { Script } from './types/Script';
 import init from './data/init';
 import { saveLocalScripts } from './data/scriptData';
+import Dialog from './dialog/Dialog';
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
             <BackgroundSelector />
             <Shroud />
             <CharacterSelect />
+            <Dialog />
         </GameContext>
     );
 }

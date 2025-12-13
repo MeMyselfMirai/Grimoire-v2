@@ -71,7 +71,7 @@ function spreadTokens(tokens: TokenData[], roles: RoleData): TokenData[] {
 }
 
 function SideButtons() {
-    const { setGameState, roles } = useContext(GameContext) as GameContextType;
+    const { setGameState, setAppState, roles } = useContext(GameContext) as GameContextType;
 
     function shuffle() {
         setGameState(oldState => {
@@ -94,14 +94,29 @@ function SideButtons() {
     }
 
     function clearAll() {
+        const callback = () => {
+            setGameState(oldState => {
+                return {
+                    ...oldState,
+                    playerTokens: [],
+                    reminders: [],
+                }
+            });
+        }
+
         // TODO: CONFIRMATIONS
-        setGameState(oldState => {
+        setAppState(state => {
             return {
-                ...oldState,
-                playerTokens: [],
-                reminders: [],
+                ...state,
+                dialog: {
+                    message: "This will delete all tokens and reminders. Are you sure you want to do this?",
+                    allowCancel: true,
+                    callback
+                }
             }
-        });
+        })
+
+        
     }
 
     return (
