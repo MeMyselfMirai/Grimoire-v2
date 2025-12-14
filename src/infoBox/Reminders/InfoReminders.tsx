@@ -64,6 +64,7 @@ function InfoReminders({focused, focusCallback}: InfoTabType) {
     if (role.reminders !== undefined) {
         for (const reminderText of role.reminders!) {
             staticJsx.push(<SampleReminder 
+                key={reminderText}
                 id={roleId}
                 text={reminderText}
                 className="InfoReminders__staticReminder"

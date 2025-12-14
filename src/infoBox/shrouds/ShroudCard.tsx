@@ -29,7 +29,7 @@ function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState
     }
 
     const shownIcons: (string | undefined)[] = [];
-    if (shroud.cardTitle === "Demon Bluffs") {
+    if (shroud.autofill === "_bluff") {
         const bluffs = gameState.playerTokens.filter(token => token.visibility === Visibility.Bluff);
         const nearestBluff = token// bluffs.sort((a,b) => distanceSquared(a.position, token.position) - distanceSquared(b.position, token.position))[0];
         bluffs
@@ -41,7 +41,10 @@ function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState
 
     for (let i = shownIcons.length; i < (shroud.icons ?? 0); i++) {
         let iconId: string | undefined;
-        if (shroud.autofill) {
+        if (i === 0 && shroud.autofill !== undefined && !shroud.autofill!.startsWith("_")) {
+            iconId = shroud.autofill;
+        }
+        if (shroud.autofill === "_self") {
             iconId = token.id;
         }
         shownIcons.push(iconId);

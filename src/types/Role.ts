@@ -25,7 +25,7 @@ export type Shroud = {
     title: string,
     icons?: number
     iconsFixed?: boolean
-    autofill?: boolean
+    autofill?: string
     epilog?: string
 }
 
@@ -42,7 +42,7 @@ function isShroud(obj: any): obj is Shroud {
     if (obj.icons < 0) return false;
 
     if (obj.iconsFixed !== undefined && typeof obj.iconsFixed !== "boolean") return false;
-    if (obj.autofill !== undefined && typeof obj.autofill !== "boolean") return false;
+    if (obj.autofill !== undefined && typeof obj.autofill !== "string") return false;
 
     if (obj.epilog !== undefined && typeof obj.epilog !== "string") return false;
 

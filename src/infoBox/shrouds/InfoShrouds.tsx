@@ -54,35 +54,36 @@ const DEFAULT_SHROUDS: ShroudMap = Object.freeze({
         "cardTitle": "Demon Bluffs",
         "cardColor": "blue",
         "title": "These Characters are Not In Play", 
-        "icons": 3
+        "icons": 3,
+        "autofill": "_bluff"
     },
     "CHOSEN_BY": {
         "cardTitle": "You Were Chosen By", 
         "cardColor": "blue",
         "title": "You Have Been Chosen By", 
         "icons": 1,
-        "autofill": true
+        "autofill": "_self"
     },
     "YOU_ARE": { 
         "cardTitle": "You Are", 
         "cardColor": "purple",
         "title": "You Are", 
         "icons": 1,
-        "autofill": true
+        "autofill": "_self"
     },
     "YOUR_ABILITY": { 
         "cardTitle": "Your Ability Text", 
         "cardColor": "purple",
         "title": "Your ability is: ", 
         "icons": 1,
-        "autofill": true
+        "autofill": "_self"
     },
     "THIS_PLAYER_IS": {
         "cardTitle": "This Player Is", 
         "cardColor": "purple",
         "title": "This Player Is",
         "icons": 1,
-        "autofill": true
+        "autofill": "_self"
     }
 });
 
