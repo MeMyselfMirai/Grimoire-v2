@@ -8,7 +8,7 @@ import ReminderZone from "./ReminderZone";
  * Provides a div containing the entire "DragZone", a region where all draggable tokens exist. 
  * @returns 
  */
-function DragZone() {
+export default function DragZone() {
     const {setAppState} = useContext(GameContext) as GameContextType;
 
 
@@ -31,5 +31,3 @@ function DragZone() {
         </>
     );
 }
-
-export default DragZone;

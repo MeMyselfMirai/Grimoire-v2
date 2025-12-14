@@ -17,7 +17,7 @@ type GhostProp = {
  * @param focusCallback the callback to focus this tab. 
  * @returns 
  */
-function InfoReminders({focused, focusCallback}: InfoTabType) {
+export default function InfoReminders({focused, focusCallback}: InfoTabType) {
     const {gameState, appState, roles} = useContext(GameContext) as GameContextType;
 
     const landingRef = useRef<HTMLDivElement>(null)
@@ -91,5 +91,3 @@ function InfoReminders({focused, focusCallback}: InfoTabType) {
         </div>
     )
 }
-
-export default InfoReminders;

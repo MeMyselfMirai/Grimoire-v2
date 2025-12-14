@@ -9,7 +9,7 @@ import { GameContext, GameContextType } from "../data/gameState";
  * 
  * @returns the JSX of a button to do the above. 
  */
-function ToggleDrag() {
+export default function ToggleDrag() {
     const {appState, setAppState} = useContext(GameContext) as GameContextType;
 
     function onToggle() {
@@ -28,5 +28,3 @@ function ToggleDrag() {
         </div>
     )
 }
-
-export default ToggleDrag;

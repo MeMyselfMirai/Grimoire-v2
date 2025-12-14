@@ -1,4 +1,4 @@
-.Shroud__container {
+.Card__container {
     position: absolute;
     display: flex;
     align-items: center;
@@ -8,7 +8,7 @@
     height: 100%;
 }
 
-.Shroud__closeButton {
+.Card__closeButton {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -19,11 +19,11 @@
     cursor: pointer;
 }
 
-.Shroud__closeButton:hover {
+.Card__closeButton:hover {
     opacity: 0.6;
 }
 
-.Shroud__content {
+.Card__content {
     height: fit-content;
     width: 100%;
     position: absolute;
@@ -31,7 +31,7 @@
     pointer-events: none;
 }
 
-.Shroud__title {
+.Card__title {
     width: 65%;
     overflow-x: hidden;
 
@@ -40,27 +40,28 @@
     color: white;
     font-family: PiratesBay;
     font-size: 60pt;
+    border-radius: 20px;
     pointer-events: all;
     resize: none;
     text-align: center;
     vertical-align: bottom;
 }
 
-.Shroud__title::selection {
+.Card__title::selection {
     background: #888;
 }
 
-.Shroud__title:focus {
+.Card__title:focus {
     outline: 1px #666 groove;
 }
 
-.Shroud__iconsContainer {
+.Card__iconsContainer {
     text-align: center;
     width: 100%;
     pointer-events: all;
 }
 
-.Shroud__iconContainer {
+.Card__iconContainer {
     position: relative;
     margin: 10px;
     width: 350px;
@@ -74,14 +75,14 @@
     background-repeat: no-repeat;
 }
 
-.Shroud__icon {
+.Card__icon {
     position: absolute;
     left: 25px;
     width: 300px;
     height: 300px;
 }
 
-.Shroud__extraIconsButton {
+.Card__extraIconsButton {
     position: relative;
     margin: 10px;
     width: 50px;
@@ -96,7 +97,7 @@
     background-repeat: no-repeat;
 }
 
-.Shroud__epilog {
+.Card__epilog {
     color: #AAA;
     font-family: Dumbledor;
     font-size: 20pt;

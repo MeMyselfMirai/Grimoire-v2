@@ -27,7 +27,7 @@ type TokenType = {
  * @param enabled Whether this token should be allowed to be dragged around.
  * @returns 
  */
-function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, onClick, onDrop}: TokenType) {
+export default function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, onClick, onDrop}: TokenType) {
 
     const { roles } = useContext(GameContext) as GameContextType;
 
@@ -95,5 +95,3 @@ function DraggableToken({ token, focused, dragEnabled, isDataVisible, onDrag, on
         </Draggable>
     );
 }
-
-export default DraggableToken;

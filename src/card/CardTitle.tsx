@@ -2,11 +2,11 @@ import { useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 
 
-type ShroudTitleType = {
+type CardTitleType = {
     title: string
 }
 
-export default function ShroudTitle({ title }: ShroudTitleType) {
+export default function CardTitle({ title }: CardTitleType) {
     const ref = useRef<any>(null)
     const [value, setValue] = useState(title);
 
@@ -19,7 +19,7 @@ export default function ShroudTitle({ title }: ShroudTitleType) {
     return (
         <TextareaAutosize 
             ref={ref} 
-            className="Shroud__title" 
+            className="Card__title" 
             placeholder='You Learn...' 
             value={value} 
             onChange={onChange}

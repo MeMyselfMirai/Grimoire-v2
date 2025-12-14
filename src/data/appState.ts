@@ -1,11 +1,11 @@
 import { createContext } from "react";
-import { Shroud } from "../types/Role";
+import { Card } from "../types/Role";
 import { NightOrderTab } from "../nightOrder/TopButtons";
 
 /**
- * The current Shroud. Is a Shroud, but includes data on which tokens are in the menu as well.
+ * The current Card. Is a Card, but includes data on which tokens are in the menu as well.
  */
-export type ActiveShroud = Shroud & {
+export type ActiveCard = Card & {
     shownIcons: (string | undefined)[]
 }
 
@@ -33,8 +33,8 @@ export type AppState = {
     /** Whether token data is visible (eg: not town square mode) */
     tokenDataVisible: boolean,
 
-    /** The currently active shroud, if any. Null if no shroud is currently being shown. */
-    activeShroud?: ActiveShroud,
+    /** The currently active card, if any. Null if no card is currently being shown. */
+    activeCard?: ActiveCard,
 
     /** Data about the dialog */
     dialog?: {

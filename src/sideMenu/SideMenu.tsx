@@ -6,7 +6,7 @@ import SideButtons from './SideButtons';
 import SideDropdown from './dropdown/SideDropdown';
 import { GameContext, GameContextType } from '../data/gameState';
 
-function SideMenu() {
+export default function SideMenu() {
     const { appState } = useContext(GameContext) as GameContextType;
 
     const [offset, setOffset] = useState(-300);
@@ -37,5 +37,3 @@ function SideMenu() {
         </>
     )
 }
-
-export default SideMenu;

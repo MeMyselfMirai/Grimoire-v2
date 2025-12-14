@@ -12,7 +12,7 @@ import AlignmentButton from "./AlignmentButton";
  * @param focusCallback the callback to focus this tab. 
  * @returns 
  */
-function InfoPowers({focused, focusCallback}: InfoTabType) {
+export default function InfoPowers({focused, focusCallback}: InfoTabType) {
 
     return (
         <div 
@@ -40,5 +40,3 @@ function InfoPowers({focused, focusCallback}: InfoTabType) {
         </div>
     )
 }
-
-export default InfoPowers;

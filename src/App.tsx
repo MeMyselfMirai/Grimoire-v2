@@ -6,7 +6,7 @@ import { GameContext, load, save } from './data/gameState';
 import SideMenu from './sideMenu/SideMenu';
 import InfoBox from './infoBox/InfoBox';
 import { DEFAULT_APP_STATE } from './data/appState';
-import Shroud from './shroud/Shroud';
+import Card from './card/Card';
 import CharacterSelect from './characterSelect/CharacterSelect';
 import BottomButtons from './bottomButtons/BottomButtons';
 import NightOrder from './nightOrder/NightOrder';
@@ -62,7 +62,7 @@ function App() {
             <SideMenu />
             <InfoBox />
             <BackgroundSelector />
-            <Shroud />
+            <Card />
             <CharacterSelect />
             <Dialog />
         </GameContext>

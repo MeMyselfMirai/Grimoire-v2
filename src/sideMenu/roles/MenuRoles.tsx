@@ -82,7 +82,7 @@ function aggregateJSX(gameState: GameState, roles: RoleData, elements: MapLike<J
         ));
 }
 
-function MenuRoles() {
+export default function MenuRoles() {
 
     const {gameState, setGameState, roles} = useContext(GameContext) as GameContextType;
 
@@ -144,5 +144,3 @@ function MenuRoles() {
         </>
     );
 }
-
-export default MenuRoles;

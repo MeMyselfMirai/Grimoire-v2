@@ -6,7 +6,7 @@ type MenuRoleType = {
     callback: (id: string) => void
 }
 
-function MenuRole({role, amount, callback}: MenuRoleType) {
+export default function MenuRole({role, amount, callback}: MenuRoleType) {
 
     return (
         <div title={role.ability} className="MenuRole__container" onClick={() => callback(role.id)}>
@@ -17,5 +17,3 @@ function MenuRole({role, amount, callback}: MenuRoleType) {
         </div>
     )
 }
-
-export default MenuRole;

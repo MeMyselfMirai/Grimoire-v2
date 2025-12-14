@@ -51,7 +51,7 @@ function generateFlavor(role: Role) {
  * @param focusCallback the callback to focus this tab. 
  * @returns 
  */
-function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
+export default function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
 
     const {roles} = useContext(GameContext) as GameContextType;
 
@@ -88,5 +88,3 @@ function InfoDetails({token, focused, focusCallback}: InfoDetailsType) {
         </div>
     )
 }
-
-export default InfoDetails;

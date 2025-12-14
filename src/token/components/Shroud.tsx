@@ -6,7 +6,7 @@ type DeathFlagType = {
     token: TokenData
 }
 
-function DeathFlag({token}: DeathFlagType) {
+export default function Shroud({token}: DeathFlagType) {
     if (token.viability === Viability.Alive || token.visibility !== Visibility.Assigned) {
         return (<></>)
     }
@@ -25,4 +25,3 @@ function DeathFlag({token}: DeathFlagType) {
     )
 }
 
-export default DeathFlag;

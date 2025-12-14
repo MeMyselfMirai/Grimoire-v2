@@ -5,7 +5,7 @@ type TokenNameType = {name: string}
  * @param name The name to display.
  * @returns 
  */
-function TokenName({name}: TokenNameType) {
+export default function TokenName({name}: TokenNameType) {
     return (
         <svg viewBox="0 0 150 150" className="TokenName__graphic">
             <path d="M 13 75 C 13 150, 138 150, 138 75" id="curve" fill="transparent" />
@@ -17,5 +17,3 @@ function TokenName({name}: TokenNameType) {
         </svg>
     )
 }
-
-export default TokenName;

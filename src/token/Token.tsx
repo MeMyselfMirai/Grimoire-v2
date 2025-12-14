@@ -1,7 +1,7 @@
 import './Token.css';
 import TokenName from "./components/TokenName";
 import { TokenData } from '../types/TokenData';
-import DeathFlag from './components/DeathFlag';
+import Shroud from './components/Shroud';
 import { Visibility } from '../types/Visibility';
 import Shading from './components/Shading';
 import VisibilityIndicator from './components/VisibilityIndicator';
@@ -26,7 +26,7 @@ type TokenType = {
  * @param enabled Whether this token should be allowed to be dragged around.
  * @returns 
  */
-function Token({ token, focused = false, className, onClick }: TokenType) {
+export default function Token({ token, focused = false, className, onClick }: TokenType) {
 
     const { roles } = useContext(GameContext) as GameContextType;
 
@@ -43,11 +43,9 @@ function Token({ token, focused = false, className, onClick }: TokenType) {
             <img className="Token__image General__backgroundImage" src={getImage(role, token)} alt={role.name}/>
             <Shading token={token} focused={focused} className={className}></Shading>
             <TokenName name={role.name} />
-            <DeathFlag token={token} />
+            <Shroud token={token} />
             <VisibilityIndicator token={token}></VisibilityIndicator>
             <span className='Token__name'>{token.visibility === Visibility.Assigned ? token.name ?? "" : ""}</span>
         </div>
     );
 }
-
-export default Token;

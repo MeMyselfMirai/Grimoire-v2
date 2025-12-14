@@ -3,17 +3,17 @@ import { GameContext, GameContextType } from "../data/gameState";
 import SampleToken from "../token/SampleToken";
 
 
-export default function ShroudIcons() {
+export default function CardIcons() {
     const {appState, setAppState} = useContext(GameContext) as GameContextType;
 
     function addIcon() {
         setAppState(oldState => {
             return {
                 ...oldState,
-                activeShroud: {
-                    ...oldState.activeShroud!,
+                activeCard: {
+                    ...oldState.activeCard!,
                     shownIcons: [
-                        ...oldState.activeShroud!.shownIcons,
+                        ...oldState.activeCard!.shownIcons,
                         undefined
                     ]
                 }
@@ -23,11 +23,11 @@ export default function ShroudIcons() {
 
     function selectCallback(id: string, index: number) {
         setAppState(oldState => {
-            const oldIcons = oldState.activeShroud!.shownIcons;
+            const oldIcons = oldState.activeCard!.shownIcons;
             return {
                 ...oldState,
-                activeShroud: {
-                    ...oldState.activeShroud!,
+                activeCard: {
+                    ...oldState.activeCard!,
                     shownIcons: [
                         ...oldIcons.slice(0,index),
                         id,
@@ -47,23 +47,23 @@ export default function ShroudIcons() {
         });
     }
 
-    const icons = appState.activeShroud!.shownIcons;
+    const icons = appState.activeCard!.shownIcons;
 
     const iconJsx = icons.map((id, index) => {
         let token = <></>
-        if (id !== undefined) token = <SampleToken id={id} className="Shroud__icon General__backgroundImage" />;
+        if (id !== undefined) token = <SampleToken id={id} className="Card__icon General__backgroundImage" />;
         return (
-            <div key={index} className="Shroud__iconContainer" style={{backgroundImage:" url(assets/person_add.png)"}} onClick={() => changeIcon(index)}>
+            <div key={index} className="Card__iconContainer" style={{backgroundImage:" url(assets/person_add.png)"}} onClick={() => changeIcon(index)}>
                 {token}
             </div>
         )
     })
 
     let extraIcons = <></>;
-    if (!appState.activeShroud!.autofill === true) {
+    if (!appState.activeCard!.autofill === true) {
         extraIcons = 
             <div 
-                className="Shroud__extraIconsButton" 
+                className="Card__extraIconsButton" 
                 style={{backgroundImage: "url(assets/person_add.png)"}}
                 onClick={addIcon}
             />
@@ -71,7 +71,7 @@ export default function ShroudIcons() {
 
     return (
         <>
-            <div className="Shroud__iconsContainer">
+            <div className="Card__iconsContainer">
                 {iconJsx}
             </div>
             <br />

@@ -238,17 +238,17 @@
     font-size: 16px;
 }
 
-/** The shrouds tab */
-.InfoShrouds__container {
+/** The cards tab */
+.InfoCards__container {
     width: 100px;
     transition: width ease-in-out 0.2s;
 }
 
-.InfoBox__focus.InfoShrouds__container {
+.InfoBox__focus.InfoCards__container {
     width: calc(100% - 450px);
 }
 
-.InfoShrouds__content {
+.InfoCards__content {
     position: absolute;
     top: 0px;
     left: 100px;
@@ -262,11 +262,11 @@
     scrollbar-width: none;
 }
 
-.InfoShrouds__content::-webkit-scrollbar {
+.InfoCards__content::-webkit-scrollbar {
     display: none;
 }
 
-.InfoShrouds__card {
+.InfoCards__item {
     width: calc(100% - 5px);
     height: 80px;
     background-size: 100% 100%;
@@ -278,7 +278,7 @@
     position: relative;
 }
 
-.InfoShrouds__cardTitle {
+.InfoCards__itemTitle {
     font-size: 30pt;
     position: absolute;
     top: calc(50% - 20pt);

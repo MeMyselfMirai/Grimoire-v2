@@ -1,86 +1,86 @@
 import { useContext } from "react";
-import { RoleData, Shroud } from "../../types/Role";
+import { RoleData, Card } from "../../types/Role";
 import { InfoTabType } from "../InfoBox";
 import { GameContext, GameContextType } from "../../data/gameState";
-import ShroudCard from "./ShroudCard";
+import CardItem from "./CardItem";
 import { Script } from "../../types/Script";
 
-export type ShroudMap = {
-    [key: string]: Shroud
+export type CardMap = {
+    [key: string]: Card
 }
 
 /**
- * The default shrouds. These shrouds appear in the info box no matter what 
+ * The default cards. These cards appear in the info box no matter what 
  * characters are on the script. 
  */
-const DEFAULT_SHROUDS: ShroudMap = Object.freeze({
+const DEFAULT_CARDS: CardMap = Object.freeze({
     "GENERAL_INFO": { 
-        "cardTitle": "General Info", 
-        "cardColor": "green",
+        "listTitle": "General Info", 
+        "color": "green",
         "title": "You Learn...",
         "icons": 0
     },
     "USE_ABILITY": { 
-        "cardTitle": "Use Your Ability?",
-        "cardColor": "brown",
+        "listTitle": "Use Your Ability?",
+        "color": "brown",
         "title": "Use Your Ability?", 
         "icons": 0
     },
     "CHOOSE_SOMEONE": {
-        "cardTitle": "Choose Player(s)",
-        "cardColor": "brown",
+        "listTitle": "Choose Player(s)",
+        "color": "brown",
         "title": "Choose a Player", 
         "icons": 0
     },
     "CHOOSE_CHARACTER": {
-        "cardTitle": "Choose Character(s)",
-        "cardColor": "brown",
+        "listTitle": "Choose Character(s)",
+        "color": "brown",
         "title": "Choose a Character", 
         "icons": 1
     },
     "MINIONS": { 
-        "cardTitle": "This is Your Demon",
-        "cardColor": "red",
+        "listTitle": "This is Your Demon",
+        "color": "red",
         "title": "This Is Your Demon", 
         "icons": 0,
     },
     "DEMONS": {
-        "cardTitle": "These Are Your Minions",
-        "cardColor": "red",
+        "listTitle": "These Are Your Minions",
+        "color": "red",
         "title": "These Are Your Minions",
         "icons": 0,
     },
     "BLUFFS": {
-        "cardTitle": "Demon Bluffs",
-        "cardColor": "blue",
+        "listTitle": "Demon Bluffs",
+        "color": "blue",
         "title": "These Characters are Not In Play", 
         "icons": 3,
         "autofill": "_bluff"
     },
     "CHOSEN_BY": {
-        "cardTitle": "You Were Chosen By", 
-        "cardColor": "blue",
+        "listTitle": "You Were Chosen By", 
+        "color": "blue",
         "title": "You Have Been Chosen By", 
         "icons": 1,
         "autofill": "_self"
     },
     "YOU_ARE": { 
-        "cardTitle": "You Are", 
-        "cardColor": "purple",
+        "listTitle": "You Are", 
+        "color": "purple",
         "title": "You Are", 
         "icons": 1,
         "autofill": "_self"
     },
     "YOUR_ABILITY": { 
-        "cardTitle": "Your Ability Text", 
-        "cardColor": "purple",
+        "listTitle": "Your Ability Text", 
+        "color": "purple",
         "title": "Your ability is: ", 
         "icons": 1,
         "autofill": "_self"
     },
     "THIS_PLAYER_IS": {
-        "cardTitle": "This Player Is", 
-        "cardColor": "purple",
+        "listTitle": "This Player Is", 
+        "color": "purple",
         "title": "This Player Is",
         "icons": 1,
         "autofill": "_self"
@@ -88,43 +88,43 @@ const DEFAULT_SHROUDS: ShroudMap = Object.freeze({
 });
 
 /**
- * Construct the entire shroud list, including shrouds relevant to 
+ * Construct the entire card list, including cards relevant to 
  * some of the characters.
  * @param gameState The game state. 
  * @param roles 
  * @returns 
  */
-function completeShroudList(script: Script, roles: RoleData) {
-    const output = {...DEFAULT_SHROUDS};
+function completeCardList(script: Script, roles: RoleData) {
+    const output = {...DEFAULT_CARDS};
     script.slice(1)
-        .filter(role => roles[role.id]?.shrouds !== undefined)
+        .filter(role => roles[role.id]?.cards !== undefined)
         .forEach(role => {
-            const shrouds = roles[role.id].shrouds!;
-            for (const i in shrouds) {
-                const shroudId = `${role.id}_${i}`;
-                output[shroudId] = shrouds[i];
+            const cards = roles[role.id].cards!;
+            for (const i in cards) {
+                const cardId = `${role.id}_${i}`;
+                output[cardId] = cards[i];
             }
         });
     return output;
 }
 
 /**
- * The Shrouds tab -- where Shrouds can be selected to be shown to players
+ * The Cards tab -- where Cards can be selected to be shown to players
  * @param focused If this tab is focused
  * @param focusCallback the callback to focus this tab. 
  * @returns 
  */
-function InfoShrouds({focused, focusCallback}: InfoTabType) {
+export default function InfoCards({focused, focusCallback}: InfoTabType) {
     const {gameState, roles} = useContext(GameContext) as GameContextType;
-    const shrouds = completeShroudList(gameState.script, roles);
+    const cards = completeCardList(gameState.script, roles);
     
-    const shroudJsx = [];
-    for (const id of Object.keys(shrouds)) {
-        shroudJsx.push(<ShroudCard key={id} shroud={shrouds[id]}></ShroudCard>);
+    const cardJsx = [];
+    for (const id of Object.keys(cards)) {
+        cardJsx.push(<CardItem key={id} card={cards[id]}></CardItem>);
     }
 
     return (
-        <div className={"InfoShrouds__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
+        <div className={"InfoCards__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
             <div 
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
                 style={{backgroundImage: "url('assets/light_green_swirls.webp')", backgroundPosition:"calc(50% - 140px)"}}
@@ -132,11 +132,9 @@ function InfoShrouds({focused, focusCallback}: InfoTabType) {
             >
                 <img className="InfoBox__tabImage" src="assets/list.png" alt=""></img>
             </div>
-            <div className="InfoShrouds__content">
-                {shroudJsx}
+            <div className="InfoCards__content">
+                {cardJsx}
             </div>
         </div>
     )
 }
-
-export default InfoShrouds;

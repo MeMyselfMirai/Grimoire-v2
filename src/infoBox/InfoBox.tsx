@@ -3,7 +3,7 @@ import { GameContext, GameContextType } from "../data/gameState";
 import "./InfoBox.css"
 import InfoDetails from "./InfoDetails";
 import InfoReminders from "./Reminders/InfoReminders";
-import InfoShrouds from "./shrouds/InfoShrouds";
+import InfoCards from "./Cards/InfoCards";
 import InfoPowers from "./Powers/InfoPowers";
 import { getToken } from "../util";
 
@@ -12,7 +12,7 @@ import { getToken } from "../util";
  */
 enum Focus {
     DETAILS,
-    SHROUDS,
+    CARDS,
     REMINDERS,
     POWERS
 }
@@ -28,7 +28,7 @@ export type InfoTabType = {
  * there is a selected token to provide information about.
  * @returns 
  */
-function InfoBox() {
+export default function InfoBox() {
 
     const {gameState, appState} = useContext(GameContext) as GameContextType;
     const [focus, setFocus] = useState(Focus.DETAILS);
@@ -46,10 +46,10 @@ function InfoBox() {
                 focused={focus === Focus.DETAILS}
                 focusCallback={() => setFocus(Focus.DETAILS)}
             ></InfoDetails>
-            <InfoShrouds
-                focused={focus === Focus.SHROUDS}
-                focusCallback={() => setFocus(Focus.SHROUDS)}
-            ></InfoShrouds>
+            <InfoCards
+                focused={focus === Focus.CARDS}
+                focusCallback={() => setFocus(Focus.CARDS)}
+            ></InfoCards>
             <InfoReminders
                 focused={focus === Focus.REMINDERS}
                 focusCallback={() => setFocus(Focus.REMINDERS)}
@@ -61,5 +61,3 @@ function InfoBox() {
         </div>
     )
 }
-
-export default InfoBox;

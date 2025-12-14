@@ -70,7 +70,7 @@ function spreadTokens(tokens: TokenData[], roles: RoleData): TokenData[] {
     return firstHalf.concat(secondHalf);
 }
 
-function SideButtons() {
+export default function SideButtons() {
     const { setGameState, setAppState, roles } = useContext(GameContext) as GameContextType;
 
     function shuffle() {
@@ -139,5 +139,3 @@ function SideButtons() {
         </div>
     )
 }
-
-export default SideButtons;

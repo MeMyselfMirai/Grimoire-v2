@@ -19,9 +19,9 @@ function isJinx(obj: any): obj is Jinx {
     return true;
 }
 
-export type Shroud = {
-    cardTitle: string,
-    cardColor: string,
+export type Card = {
+    listTitle: string,
+    color: string,
     title: string,
     icons?: number
     iconsFixed?: boolean
@@ -29,12 +29,12 @@ export type Shroud = {
     epilog?: string
 }
 
-function isShroud(obj: any): obj is Shroud {
+function isCard(obj: any): obj is Card {
     if (typeof obj !== "object") return false;
-    if (typeof obj.cardTitle !== "string") return false;
+    if (typeof obj.listTitle !== "string") return false;
 
-    if (typeof obj.cardColor !== "string") return false;
-    if (!["blue", "brown", "green", "orange", "purple", "red"].includes(obj.cardColor)) return false;
+    if (typeof obj.color !== "string") return false;
+    if (!["blue", "brown", "green", "orange", "purple", "red"].includes(obj.color)) return false;
 
     if (typeof obj.title !== "string") return false;
 
@@ -62,7 +62,7 @@ export type Role = {
     otherNight?: number,
     otherNightReminder?: string,
     // change_makeup?: any[],
-    shrouds?: Shroud[]
+    cards?: Card[]
     jinxes?: Jinx[]
 }
 
@@ -94,9 +94,9 @@ export function isCompleteRole(obj: any): obj is Role {
         if (typeof obj.otherNightReminder !== "string") return false;
     }
 
-    if (obj.shrouds !== undefined) {
-        if (!Array.isArray(obj.shrouds)) return false;
-        if (!obj.shrouds.every(isShroud)) return false;
+    if (obj.cards !== undefined) {
+        if (!Array.isArray(obj.cards)) return false;
+        if (!obj.cards.every(isCard)) return false;
     }
 
     if (obj.jinxes !== undefined) {

@@ -1,35 +1,35 @@
 import { useContext } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { RoleData, Shroud } from "../../types/Role"
+import { RoleData, Card } from "../../types/Role"
 import { distanceSquared, getToken } from "../../util";
 import { GameState } from "../../types/GameState";
-import { ActiveShroud, AppState } from "../../data/appState";
+import { ActiveCard, AppState } from "../../data/appState";
 import { Visibility } from "../../types/Visibility";
 
 
-type ShroudCardType = {
-    shroud: Shroud;
+type CardItemType = {
+    card: Card;
 }
 
 /**
- * Fill out additional properties required for this shroud 
- * (default tokens, some text), based on what shroud was selected.
- * @param shroud The shroud being selected
+ * Fill out additional properties required for this card 
+ * (default tokens, some text), based on what card was selected.
+ * @param card The card being selected
  * @param appState The state of the app.
  * @param gameState The game state
  * @param roles A list of all known roles.
- * @returns A new shroud object with more details on what should be displayed.
+ * @returns A new card object with more details on what should be displayed.
  */
-function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState, roles: RoleData): ActiveShroud {
-    const newShroud = {...shroud};
+function completeCard(card: Card, appState: AppState, gameState: GameState, roles: RoleData): ActiveCard {
+    const newCard = {...card};
     const token = getToken(appState.activeTokenUid, gameState)!;
 
-    if (shroud.cardTitle === "Your Ability Text") {
-        newShroud.title += roles[token.id].ability
+    if (card.listTitle === "Your Ability Text") {
+        newCard.title += roles[token.id].ability
     }
 
     const shownIcons: (string | undefined)[] = [];
-    if (shroud.autofill === "_bluff") {
+    if (card.autofill === "_bluff") {
         const bluffs = gameState.playerTokens.filter(token => token.visibility === Visibility.Bluff);
         const nearestBluff = token// bluffs.sort((a,b) => distanceSquared(a.position, token.position) - distanceSquared(b.position, token.position))[0];
         bluffs
@@ -39,47 +39,47 @@ function completeShroud(shroud: Shroud, appState: AppState, gameState: GameState
             .forEach(id => shownIcons.push(id));
     }
 
-    for (let i = shownIcons.length; i < (shroud.icons ?? 0); i++) {
+    for (let i = shownIcons.length; i < (card.icons ?? 0); i++) {
         let iconId: string | undefined;
-        if (i === 0 && shroud.autofill !== undefined && !shroud.autofill!.startsWith("_")) {
-            iconId = shroud.autofill;
+        if (i === 0 && card.autofill !== undefined && !card.autofill!.startsWith("_")) {
+            iconId = card.autofill;
         }
-        if (shroud.autofill === "_self") {
+        if (card.autofill === "_self") {
             iconId = token.id;
         }
         shownIcons.push(iconId);
     }
 
     return {
-        ...newShroud,
+        ...newCard,
         shownIcons
     }
 }
 
 /**
- * A single shroud card. 
- * @param shroud The shroud this card represents. 
+ * A single card in the list of cards. 
+ * @param card The card being represented. 
  * @returns 
  */
-export default function ShroudCard({ shroud }: ShroudCardType) {
+export default function CardItem({ card }: CardItemType) {
     const { gameState, appState, setAppState, roles } = useContext(GameContext) as GameContextType;
 
-    function showShroud() {
+    function showThisCard() {
         setAppState(oldState => {
             return {
                 ...oldState,
-                activeShroud: completeShroud(shroud, appState, gameState, roles),
+                activeCard: completeCard(card, appState, gameState, roles),
             }
         });
     }
 
     return (
         <div
-            className="InfoShrouds__card"
-            onClick={showShroud}
-            style={{ backgroundImage: `url(assets/cards/card-${shroud.cardColor}.png)` }}
+            className="InfoCards__item"
+            onClick={showThisCard}
+            style={{ backgroundImage: `url(assets/cards/card-${card.color}.png)` }}
         >
-            <span className="InfoShrouds__cardTitle">{shroud.cardTitle}</span>
+            <span className="InfoCards__itemTitle">{card.listTitle}</span>
         </div>
     )
 }
