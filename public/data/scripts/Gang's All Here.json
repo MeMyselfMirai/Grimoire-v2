@@ -371,6 +371,9 @@
 		"id": "politician"
 	},
 	{
+		"id": "pope"
+	},
+	{
 		"id": "poppygrower"
 	},
 	{
@@ -486,6 +489,9 @@
 	},
 	{
 		"id": "undertaker"
+	},
+	{
+		"id": "ventriloquist"
 	},
 	{
 		"id": "vigormortis"
