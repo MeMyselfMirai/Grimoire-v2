@@ -23,6 +23,9 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
     localScripts.forEach(script => {
         if (scriptIndexOf(script, scripts) >= 0) return;
         if (script[0].name === "Select a Script") return;
+        if (script[0].name === "Gang's All Here") {
+            script[0].name = "Gang's All Here (Outdated)"
+        }
         scripts.push(script);
         script.slice(1).forEach(role => {
             if (roles[role.id] !== undefined) return;
@@ -39,7 +42,7 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
         if (state.script.length > 1) return state;
         return {
             ...state,
-            script: scripts[0]
+            script: gameState.script.length > 1 ? gameState.script : scripts[0]
         }
     })
 }

@@ -28,7 +28,7 @@ export default function UploadButton() {
         }
 
         if (state.script[0].name === "Gang's All Here") {
-            state.script[0].name = "Gang's All Here (OUTDATED)";
+            state.script[0].name = "Gang's All Here (Outdated)";
         }
 
         appendCustomRoles(state.script, roles, setRoles);
