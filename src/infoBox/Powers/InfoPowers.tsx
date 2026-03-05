@@ -24,6 +24,7 @@ export default function InfoPowers({focused, focusCallback}: InfoTabType) {
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
                 style={{backgroundImage: "url('assets/yellow_swirls.webp')", backgroundPosition:"calc(50% + 140px)"}}
                 onClick={focusCallback}
+                role="button"
             >
                 <img className="InfoBox__tabImage" src="assets/power.png" alt=""></img>
             </div>

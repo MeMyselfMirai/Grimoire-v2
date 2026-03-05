@@ -54,6 +54,7 @@ export default function PlayerCount() {
                     className="General__backgroundImage PlayerCount__button" 
                     style={{backgroundColor: "red", backgroundImage: "url(assets/minus.svg"}}
                     onClick={decrement}
+                    role="button"
                 />
                 <input 
                     ref={inputRef}
@@ -68,6 +69,7 @@ export default function PlayerCount() {
                     className="General__backgroundImage PlayerCount__button" 
                     style={{backgroundColor: "lightgreen", backgroundImage: "url(assets/plus.svg)"}}
                     onClick={increment}
+                    role="button"
                 />
             </div>
         </>

@@ -9,7 +9,7 @@ type MenuRoleType = {
 export default function MenuRole({role, amount, callback}: MenuRoleType) {
 
     return (
-        <div title={role.ability} className="MenuRole__container" onClick={() => callback(role.id)}>
+        <div title={role.ability} className="MenuRole__container" onClick={() => callback(role.id)} role="button">
             <label className="MenuRole__label">{role.name}</label>
             <div className="MenuRole__count">{amount}</div>
             &nbsp;

@@ -66,6 +66,7 @@ export default function CardIcons() {
                 className="Card__extraIconsButton" 
                 style={{backgroundImage: "url(assets/person_add.png)"}}
                 onClick={addIcon}
+                role="button"
             />
     }
 

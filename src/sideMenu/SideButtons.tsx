@@ -125,16 +125,19 @@ export default function SideButtons() {
                 className="SideButtons__button General__backgroundImage SideButtons__clearAll" 
                 style={{backgroundImage: "url(assets/clean.svg)"}}
                 onClick={clearAll}
+                role="button"
             ></div>
             <div
                 className="SideButtons__button General__backgroundImage SideButtons__shuffle"
                 style={{backgroundImage: "url(assets/shuffle.svg)"}}
                 onClick={shuffle}
+                role="button"
             ></div>
             <div
                 className="SideButtons__button General__backgroundImage SideButtons__spread"
                 style={{backgroundImage: "url(assets/spread.svg)"}}
                 onClick={spread}
+                role="button"
             ></div>
         </div>
     )

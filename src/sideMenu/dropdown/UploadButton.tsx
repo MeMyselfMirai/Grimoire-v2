@@ -40,6 +40,7 @@ export default function UploadButton() {
         <>
             <div
                 onClick={clickUpload}
+                role="button"
                 className="SideDropdown__button General__backgroundImage"
                 style={{ backgroundColor: "#888888", backgroundImage: "url(assets/upload.svg)" }}
             />

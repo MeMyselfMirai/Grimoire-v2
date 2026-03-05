@@ -77,6 +77,7 @@ export default function CardItem({ card }: CardItemType) {
         <div
             className="InfoCards__item"
             onClick={showThisCard}
+            role="button"
             style={{ backgroundImage: `url(assets/cards/card-${card.color}.png)` }}
         >
             <span className="InfoCards__itemTitle">{card.listTitle}</span>

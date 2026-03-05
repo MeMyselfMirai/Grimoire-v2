@@ -129,6 +129,7 @@ export default function InfoCards({focused, focusCallback}: InfoTabType) {
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
                 style={{backgroundImage: "url('assets/light_green_swirls.webp')", backgroundPosition:"calc(50% - 140px)"}}
                 onClick={focusCallback}
+                role="button"
             >
                 <img className="InfoBox__tabImage" src="assets/list.png" alt=""></img>
             </div>

@@ -44,6 +44,7 @@ export default function TopButtons() {
                     className="TopButtons__button" 
                     style={tabStyle} 
                     onClick={() => setOpenTabTo(tab)}
+                    role="button"
                 >
                     {tab}
                 </div>

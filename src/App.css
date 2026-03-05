@@ -1,10 +1,10 @@
 @font-face {
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     src: url(/public/assets/fonts/piratesbay.ttf);
 }
 
 @font-face {
-    font-family: Dumbledor;
+    font-family: Dumbledor monospace;
     src: url(/public/assets/fonts/Dumbledor1.ttf);
 }
 

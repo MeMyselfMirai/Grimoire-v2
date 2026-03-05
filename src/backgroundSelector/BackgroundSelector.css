@@ -26,7 +26,6 @@
     padding: 50px;
     overflow-y: scroll;
     scrollbar-width: none;
-    display: inline-flex;
     flex-flow: wrap;
     justify-content: center;
 }

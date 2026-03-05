@@ -16,7 +16,6 @@
     overflow: hidden;
     box-sizing: border-box;
     border-radius: 100%;
-    pointer-events: all;
 }
 
 .Reminder__image {
@@ -32,7 +31,7 @@
 }
 
 .Reminder__text {
-    font-family: Dumbledor;
+    font-family: Dumbledor monospace;
     font-size: 12px;
     position: absolute;
     top: 50%;

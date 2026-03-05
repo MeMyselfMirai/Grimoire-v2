@@ -27,6 +27,7 @@ export default function TeamSection({teamId, actualCount, expectedCount, childre
                 className="SideMenu__header" 
                 style={{ color: team.color, filter: `grayscale(${open ? 0 : 100}%)`, transition: "0.5s" }}
                 onClick={() => setOpen(!open)}
+                role="button"
             >
                 {team.header}
             </div>

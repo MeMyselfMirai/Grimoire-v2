@@ -113,7 +113,7 @@
     display: block;
     color: rgb(192, 72, 72);
     font-size: 20pt;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     width: 250px;
     text-align: center;
     transition: bottom ease-in-out 0.5s;
@@ -138,7 +138,7 @@
     left: 0px;
     color: rgb(211, 211, 211);
     font-size: 50pt;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
 }
 
 .InfoDetails__playerName {
@@ -147,7 +147,7 @@
     left: 30px;
     color: rgb(192, 72, 72);
     font-size: 17pt;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
 }
 
 .InfoDetails__ability {
@@ -157,7 +157,7 @@
     left: 15px;
     color: darkgrey;
     font-size: 24pt;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     overflow-wrap: break-word;
     white-space: normal;
     text-align: left;
@@ -170,7 +170,7 @@
     left: 15px;
     font-size: 12pt;
     font-style: italic;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     overflow-wrap: break-word;
     white-space: normal;
     text-align: left;
@@ -273,7 +273,7 @@
     margin: 5px;
     cursor: pointer;
     color: white;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     text-align: center;
     position: relative;
 }
@@ -311,7 +311,7 @@
 .InfoPowers__nameLabel {
     color: rgb(175, 175, 175);
     font-size: 20pt;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
 }
 
 .InfoPowers__nameInput {
@@ -320,7 +320,7 @@
     color: black;
     font-size: 20pt;
     background-color: #afafaf;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
 }
 
 /** Their container has these properties.  */

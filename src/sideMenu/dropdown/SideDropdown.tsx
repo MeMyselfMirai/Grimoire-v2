@@ -34,6 +34,7 @@ export default function SideDropdown() {
                 className="SideDropdown__toggle"
                 style={{backgroundImage: "url(assets/steel_bg.png)"}}
                 onClick={toggle}
+                role="button"
             >
                 <img 
                     className="SideDropdown__toggleImage"

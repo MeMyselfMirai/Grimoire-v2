@@ -43,6 +43,7 @@ export default function EditButton() {
             className="InfoPowers__option" 
             style={{backgroundColor: "#00920C", backgroundImage: "url('assets/edit.png')"}}
             onClick={edit}
+            role="button"
         ></div>
     )
 }

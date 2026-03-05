@@ -55,6 +55,7 @@ export default function AlignmentButton() {
     return (
         <div 
             onClick={cycleAlignment}
+            role="button"
             className="InfoPowers__option" 
             style={{backgroundColor}}
         >

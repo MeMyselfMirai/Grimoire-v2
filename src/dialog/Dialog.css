@@ -29,7 +29,7 @@
 
 .Dialog__message {
     color: white;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     font-size: 48px;
     margin: 48px 20px 0px 20px;
     text-align: center;
@@ -47,7 +47,7 @@
     color: red;
     padding: 12px;
     font-size: 24px;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     min-width: 100px;
     margin: auto 10%;
 }

@@ -48,6 +48,7 @@ export default function ViabilityButton() {
     return (
         <div 
             onClick={cycleViability}
+            role="button"
             className="InfoPowers__option" 
             style={{backgroundColor: "#444444", backgroundImage: viabilityUrl}}
         ></div>

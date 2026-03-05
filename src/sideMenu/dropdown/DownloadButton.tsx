@@ -19,6 +19,7 @@ export default function DownloadButton() {
         <>
             <div 
                 onClick={download} 
+                role="button"
                 className="SideDropdown__button General__backgroundImage" 
                 style={{backgroundColor: "#888888", backgroundImage: "url(assets/download.svg)"}}
             />

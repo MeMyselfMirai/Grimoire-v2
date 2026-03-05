@@ -79,6 +79,7 @@ export default function InfoReminders({focused, focusCallback}: InfoTabType) {
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
                 style={{backgroundImage: "url('assets/blue_swirls.webp')"}}
                 onClick={focusCallback}
+                role="button"
             >
                 <img className="InfoBox__tabImage" src="assets/reminders.png" alt=""></img>
             </div>

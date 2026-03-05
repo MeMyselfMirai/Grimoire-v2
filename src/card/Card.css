@@ -38,7 +38,7 @@
     background-color: #00000000;
     border: none;
     color: white;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     font-size: 60pt;
     border-radius: 20px;
     pointer-events: all;
@@ -99,6 +99,6 @@
 
 .Card__epilog {
     color: #AAA;
-    font-family: Dumbledor;
+    font-family: Dumbledor monospace;
     font-size: 20pt;
 }

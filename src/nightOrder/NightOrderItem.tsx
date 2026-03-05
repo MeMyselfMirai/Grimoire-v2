@@ -98,6 +98,7 @@ export default function NightOrderItem({role, alive, assigned, firstNight }: Nig
             className={"NightOrderItem__container" + (open ? " NightOrderItem__open" : "")}
             style={{backgroundImage: `linear-gradient(to right, rgba(0,0,0,0) , ${color})`}}
             onClick={() => setOpen(!open)}
+            role="button"
         >
             {infoJsx(info)}
             <img className="NightOrderItem__image" src={getImage(role)} alt={role.name}/>

@@ -96,7 +96,7 @@ export default function CharacterSelect() {
 
 
     return (
-        <div className="CharacterSelect__container" onClick={() => closeMenu()}>
+        <div className="CharacterSelect__container" onClick={() => closeMenu()} >
             <div className="CharacterSelect__background">
                 <div className="CharacterSelect__content">
                     {sectionJSX}

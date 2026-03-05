@@ -139,6 +139,7 @@ export default function MenuRoles() {
                 className="MenuRoles__sort" 
                 style={{backgroundImage: 'url("assets/backgrounds/purple_swirls.webp")'}}
                 onClick={() => setUsingSao(!usingSao)}
+                role="button"
             >{"Sort order: " + (usingSao ? "SAO" : "A-Z")}</div>
             {sectionJSX}
         </>

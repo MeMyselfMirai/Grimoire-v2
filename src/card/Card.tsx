@@ -31,6 +31,7 @@ export default function Card() {
             <div 
                 className="Card__closeButton General__backgroundImage" 
                 onClick={closeCard}
+                role="button"
                 style={{backgroundImage: 'url("assets/close.png")'}}
             ></div>
             <div className="Card__content">

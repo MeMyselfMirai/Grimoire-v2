@@ -86,6 +86,7 @@ export default function BackgroundSelector() {
             key={link}
             className="BackgroundSelector__item" 
             onClick={() => setBackgroundTo(`url(${link})`)}
+            role="button"
         >
             <img
                 className="BackgroundSelector__image"

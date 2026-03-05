@@ -47,6 +47,7 @@ export default function VisibilityButton() {
     return (
         <div 
             onClick={cycleVisibility}
+            role="button"
             className="InfoPowers__option" 
             style={{backgroundColor: "#00639C", backgroundImage: visibilityUrl}}
         ></div>

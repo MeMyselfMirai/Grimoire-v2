@@ -35,6 +35,7 @@ export default function JinxItem({firstRole, secondRole, reason}: JinxItemType) 
             className={"NightOrderItem__container" + (open ? " NightOrderItem__open" : "")}
             style={{backgroundImage: `linear-gradient(to right, rgba(0,0,0,0) , ${TEAM_DATA.fabled.color})`}}
             onClick={() => setOpen(!open)}
+            role="button"
         >
             <span className="NightOrderItem__text"> {reason} </span>
             <div className="NightOrderItem__image">

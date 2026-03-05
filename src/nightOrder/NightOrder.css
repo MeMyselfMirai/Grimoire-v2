@@ -14,7 +14,7 @@
     display: block;
     height: 41px;
     text-align: center;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     font-size: 28pt;
     border: black 2px solid;
     color: #afafaf;
@@ -45,7 +45,6 @@
     pointer-events: all;
     display: flex;
     flex-flow: column;
-    pointer-events: all;
 }
 
 .NightOrderItem__container {
@@ -77,7 +76,7 @@
     transform: translateX(81px);
     padding: 10px;
     font-size: 15pt;
-    font-family: PiratesBay;
+    font-family: PiratesBay monospace;
     color: white;
     pointer-events: none;
 }
