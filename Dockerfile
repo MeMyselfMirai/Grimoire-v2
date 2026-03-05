@@ -11,7 +11,7 @@ CMD ["npm", "start"]
 FROM base AS build
 RUN npm run build
 
-FROM docker.io/nginxinc/nginx-unprivileged AS prod
+FROM docker.io/nginxinc/nginx-unprivileged:latest AS prod
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]

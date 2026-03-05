@@ -30,7 +30,7 @@ export default function Dialog() {
 
     let cancelButton = <></>;
     if (appState.dialog.allowCancel) {
-        cancelButton = <button className="Dialog__button" onClick={cancel} role="button">Cancel</button>
+        cancelButton = <button className="Dialog__button" onClick={cancel}>Cancel</button>
     }
 
     return (
@@ -39,7 +39,7 @@ export default function Dialog() {
                 <span className="Dialog__message"> {appState.dialog.message} </span>
                 <div className="Dialog__buttons">
                     {cancelButton}
-                    <button className="Dialog__button" onClick={ok} role="button">OK</button>
+                    <button className="Dialog__button" onClick={ok}>OK</button>
                 </div>
             </div>
         </div>
