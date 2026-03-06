@@ -1,5 +1,5 @@
 import { Role } from "../types/Role";
-import { LegacyScript, Script } from "../types/Script";
+import { JsonScript, Script } from "../types/Script";
 
 /**
  * The relative URLs for the various default scripts. 
@@ -61,16 +61,16 @@ export function saveLocalScripts(scripts: Script[]) {
  * @param script A script that may or may not use the legacy formatting.
  * @returns A script that is guaranteed to have the same roles and proper formatting.
  */
-export function modernizeLegacyScript(script: LegacyScript): Script {
-    const modern: Script = [script[0]];
-    for (let i = 1; i < script.length; i++) {
+export function formatImportedScript(script: JsonScript): Script {
+    const modern = [];
+    for (let i = 0; i < script.length; i++) {
         if (typeof script[i] === "string") {
             modern.push({id: script[i] as string});
         } else {
             modern.push(script[i] as Role);
         }
     }
-    return modern;
+    return modern as Script;
 }
 
 /**

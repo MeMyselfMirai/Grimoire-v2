@@ -101,6 +101,7 @@ export default function BackgroundSelector() {
             className="BackgroundSelector__container" 
             style={{ backgroundImage: "url(assets/background-img2.webp)"}}
             onClick={closeSelector}
+            role="button"
         >
             <div className="BackgroundSelector__aligner">
                 <div className="BackgroundSelector__content">

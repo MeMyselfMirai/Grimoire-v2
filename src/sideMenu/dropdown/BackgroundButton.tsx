@@ -17,6 +17,7 @@ export default function BackgroundButton() {
     return (
         <div 
             onClick={openBackgroundSelector}
+            role="button"
             className="SideDropdown__button General__backgroundImage"
             style={{backgroundColor: "#78258d", backgroundImage: "url(assets/wallpaper.svg)" }}
         />

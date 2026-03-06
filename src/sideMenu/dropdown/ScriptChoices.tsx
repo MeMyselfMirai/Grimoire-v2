@@ -1,7 +1,7 @@
 import { useContext, useRef } from "react";
 import { GameContext, GameContextType } from "../../data/gameState";
-import { commitNewScript, deleteScriptByIndex, modernizeLegacyScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS, scriptIndexOf } from "../../data/scriptData";
-import { isCompleteScript, reasonForScriptFailure } from "../../types/Script";
+import { commitNewScript, deleteScriptByIndex, formatImportedScript, sanitizeName, SCRIPT_BACKGROUNDS, SCRIPT_COLORS, scriptIndexOf } from "../../data/scriptData";
+import { isCompleteScript, reasonForScriptFailure, updateMeta } from "../../types/Script";
 import { appendCustomRoles } from "../../data/roleData";
 
 export default function ScriptChoices() {
@@ -74,13 +74,15 @@ export default function ScriptChoices() {
             return;
         }
 
-        script = modernizeLegacyScript(script);
+        script = formatImportedScript(script);
         
         if (!isCompleteScript(script, roles)) {
             console.error("Invalid Script:", script);
             window.alert("Ya dun goofed!\n" + reasonForScriptFailure(script, roles));
             return;
         }
+
+        script = updateMeta(script, roles);
         
         appendCustomRoles(script, roles, setRoles);
         commitNewScript(script, scripts, setScripts);

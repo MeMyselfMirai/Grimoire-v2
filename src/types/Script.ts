@@ -3,17 +3,65 @@ import { isCompleteRole, Role, RoleData } from "./Role"
 
 export type Meta = {
     id: "_meta",
-    author: string,
-    name: string
+    name: string,
+    author?: string,
+    bootlegger?: string[],
+    firstNight?: string[],
+    otherNight?: string[],
 }
 
 export function isMeta(obj: any) {
     if (typeof obj !== "object" || obj === null) return false;
     if (obj.id !== "_meta") return false;
-    if (typeof obj.author !== "string") return false;
     if (typeof obj.name !== "string") return false;
 
     return true;
+}
+
+/**
+ * Provide a default meta tag for a script that doesn't have one. 
+ * @returns 
+ */
+function defaultMeta(): Meta {
+    return {
+        id: "_meta",
+        name: "Unnamed Custom Script",
+        author: "anonymous",
+    };
+}
+
+/**
+ * Update the meta information for a script that either has no meta, has it in
+ * a nonstandard place, or 
+ * @param script 
+ * @param roles 
+ * @returns 
+ */
+export function updateMeta(script: Script, roles: RoleData): Script {
+    let meta = script.filter(isMeta)[0] as Meta ?? defaultMeta();
+    if (meta.firstNight === undefined) {
+        console.log(script.map(x => isCompleteRole(x) ? x : roles[x.id])
+            .filter(role => role?.firstNight !== undefined)
+            .sort((a,b) => a.firstNight! - b.firstNight!))
+        const firstNight = script.map(x => isCompleteRole(x) ? x : roles[x.id])
+            .filter(role => role?.firstNight !== undefined)
+            .filter(role => role.firstNight! !== 0)
+            .sort((a,b) => a.firstNight! - b.firstNight!)
+            .map(x => x.id)
+        meta.firstNight = firstNight;
+    }
+    if (meta.otherNight === undefined) {
+        const otherNight = script.map(x => isCompleteRole(x) ? x : roles[x.id])
+            .filter(role => role?.otherNight !== undefined)
+            .filter(role => role.otherNight! !== 0)
+            .sort((a,b) => a.otherNight! - b.otherNight!)
+            .map(x => x.id)
+        meta.otherNight = otherNight;
+    }
+    return [
+        meta,
+        ...script.filter(x => !isMeta(x))
+    ];
 }
 
 export type RoleIdentifier = {
@@ -38,7 +86,7 @@ export function isRole(role: RoleIdentifier | Role, roles: RoleData): role is Ro
 
 export type Script = [Meta, ...Array<RoleIdentifier | Role>]
 
-export type LegacyScript = [Meta, ...Array<string|Role>]
+export type JsonScript = [Meta, ...Array<string|Role>]
 
 export function isGenericScript(obj: any): obj is Script {
     if (!Array.isArray(obj)) return false;
@@ -51,9 +99,15 @@ export function isGenericScript(obj: any): obj is Script {
 
 export function isCompleteScript(obj: any, roles: RoleData): obj is Script {
     if (!Array.isArray(obj)) return false;
-    if (!isMeta(obj[0])) return false;
 
-    for (const role of obj.slice(1)) {
+    let hasMeta = false;
+    for (const role of obj) {
+        console.log(role)
+        if (isMeta(role)) {
+            if (hasMeta) return false;
+            hasMeta = true;
+            continue;
+        }
         if (typeof role !== "object") return false;
         if (typeof role.id !== "string") return false;
         if (isCompleteRole(role)) continue;
@@ -69,8 +123,8 @@ export function reasonForScriptFailure(obj: any, roles: RoleData): string {
     if (!Array.isArray(obj)) {
         return "Your input should be an array. Did you accidentally import a GameState file?"
     }
-    if (!isMeta(obj[0])) {
-        return "Scripts should begin with a meta tag."
+    if (obj.filter(isMeta).length > 1) {
+        return "Your script has multiple \"_meta\" tags.";
     }
     for (let i = 1; i < obj.length; i++) {
         const role = obj[i];
