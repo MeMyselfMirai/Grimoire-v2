@@ -1,8 +1,27 @@
 FROM node:18-alpine AS base
 WORKDIR /app
+RUN apk update && apk add \
+    git \
+    && rm -rf /var/cache/apk/*
+    
 COPY package*.json ./
 RUN npm install --ignore-scripts
-COPY . .
+COPY . . 
+
+# Download the important BOTC repo files into this container.
+# This downloads far less data than a generic 
+# RUN git clone https://github.com/ThePandemoniumInstitute/botc-release.git /app/botc-release
+RUN mkdir -p /app/botc-release
+WORKDIR /app/botc-release
+RUN git init && \
+    git remote add origin https://github.com/ThePandemoniumInstitute/botc-release.git && \
+    git config core.sparseCheckout true && \
+    echo "resources/" >> .git/info/sparse-checkout && \
+    git branch -m main && \
+    git pull origin main
+RUN mv /app/botc-release/resources/characters/*/* /app/public/assets/icons/official/
+WORKDIR /app
+RUN rm /app/botc-release -rf
 
 FROM base AS dev
 EXPOSE 3000
