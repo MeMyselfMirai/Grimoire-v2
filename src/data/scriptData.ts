@@ -41,10 +41,10 @@ export const SCRIPT_BACKGROUNDS = [
  * Get custom scripts from local storage, if any. 
  * @returns A list of all custom scripts we know of; may be empty.
  */
-export function getLocalScripts(): Script[] {
+export function getLocalScripts(): JsonScript[] {
     const localScriptJson = localStorage.getItem("scripts") ?? "[]";
 
-    return JSON.parse(localScriptJson) as Script[];
+    return JSON.parse(localScriptJson) as JsonScript[];
 }
 
 /**

@@ -1,88 +1,39 @@
 [
     {
         "id": "_meta",
-        "author": "The Pandemonium Institute",
-        "name": "Trouble Brewing"
+        "author": "TPI",
+        "name": "Trouble Brewing",
+        "background": "https://botc.app/assets/background5-CUu8vEFl.webp",
+        "almanac": "https://wiki.bloodontheclocktower.com/Trouble_Brewing",
+        "hideTitle": true,
+        "firstNight": ["dusk","angel","buddhist","toymaker","stormcatcher","bureaucrat","thief","apprentice","barista","minioninfo","demoninfo","poisoner","spy","washerwoman","librarian","investigator","chef","empath","fortuneteller","butler","dawn"],
+        "otherNight": ["dusk","duchess","toymaker","bureaucrat","thief","barista","bonecollector","harlot","poisoner","monk","spy","scarletwoman","imp","tor","ravenkeeper","undertaker","empath","fortuneteller","butler","dawn"]
     },
-    {
-        "id": "chef"
-    },
-    {
-        "id": "empath"
-    },
-    {
-        "id": "fortuneteller"
-    },
-    {
-        "id": "investigator"
-    },
-    {
-        "id": "librarian"
-    },
-    {
-        "id": "mayor"
-    },
-    {
-        "id": "monk"
-    },
-    {
-        "id": "washerwoman"
-    },
-    {
-        "id": "virgin"
-    },
-    {
-        "id": "undertaker"
-    },
-    {
-        "id": "soldier"
-    },
-    {
-        "id": "slayer"
-    },
-    {
-        "id": "ravenkeeper"
-    },
-    {
-        "id": "saint"
-    },
-    {
-        "id": "recluse"
-    },
-    {
-        "id": "drunk"
-    },
-    {
-        "id": "butler"
-    },
-    {
-        "id": "spy"
-    },
-    {
-        "id": "baron"
-    },
-    {
-        "id": "poisoner"
-    },
-    {
-        "id": "scarletwoman"
-    },
-    {
-        "id": "imp"
-    },
-    {
-        "id": "gunslinger"
-    },
-    {
-        "id": "scapegoat"
-    },
-    {
-        "id": "beggar"
-    },
-    {
-        "id": "bureaucrat"
-    },
-    {
-        "id": "thief"
-    }
+    "washerwoman",
+    "librarian",    
+    "investigator",
+    "chef",    
+    "empath",
+    "fortuneteller",
+    "undertaker",
+    "monk",
+    "ravenkeeper",
+    "virgin",
+    "slayer",
+    "soldier",    
+    "mayor",
+    "butler",
+    "drunk",
+    "recluse",
+    "saint",
+    "poisoner",
+    "spy",
+    "scarletwoman",
+    "baron",
+    "imp",
+    "bureaucrat",
+    "thief",
+    "gunslinger",
+    "scapegoat",
+    "beggar"
 ]

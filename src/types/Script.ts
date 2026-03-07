@@ -42,12 +42,12 @@ export function updateMeta(script: Script, roles: RoleData): Script {
     if (meta.firstNight === undefined) {
         console.log(script.map(x => isCompleteRole(x) ? x : roles[x.id])
             .filter(role => role?.firstNight !== undefined)
-            .sort((a,b) => a.firstNight! - b.firstNight!))
+            .sort((a,b) => a.firstNight! - b.firstNight!));
         const firstNight = script.map(x => isCompleteRole(x) ? x : roles[x.id])
             .filter(role => role?.firstNight !== undefined)
             .filter(role => role.firstNight! !== 0)
             .sort((a,b) => a.firstNight! - b.firstNight!)
-            .map(x => x.id)
+            .map(x => x.id);
         meta.firstNight = firstNight;
     }
     if (meta.otherNight === undefined) {

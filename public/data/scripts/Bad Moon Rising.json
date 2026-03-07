@@ -1,97 +1,42 @@
 [
     {
         "id": "_meta",
-        "author": "The Pandemonium Institute",
-        "name": "Bad Moon Rising"
+        "author": "TPI",
+        "name": "Bad Moon Rising",
+        "background": "https://botc.app/assets/background5-C8rPTCyH.webp",
+        "almanac": "https://wiki.bloodontheclocktower.com/Bad_Moon_Rising",
+        "hideTitle": true,
+        "firstNight": ["dusk", "angel", "buddhist", "toymaker", "stormcatcher", "bureaucrat", "thief", "apprentice", "barista", "minioninfo", "lunatic", "demoninfo", "sailor", "courtier", "godfather", "devilsadvocate", "pukka", "grandmother", "chambermaid", "dawn"],
+        "otherNight": ["dusk","duchess","toymaker","bureaucrat","thief","barista","bonecollector","harlot","sailor","innkeeper","courtier","gambler","devilsadvocate","lunatic","exorcist","zombuul","pukka","shabaloth","po","assassin","godfather","professor","gossip","tinker","moonchild","grandmother","tor","chambermaid","dawn"]
     },
-    {
-        "id": "chambermaid"
-    },
-    {
-        "id": "courtier"
-    },
-    {
-        "id": "exorcist"
-    },
-    {
-        "id": "fool"
-    },
-    {
-        "id": "gambler"
-    },
-    {
-        "id": "gossip"
-    },
-    {
-        "id": "grandmother"
-    },
-    {
-        "id": "innkeeper"
-    },
-    {
-        "id": "minstrel"
-    },
-    {
-        "id": "pacifist"
-    },
-    {
-        "id": "professor"
-    },
-    {
-        "id": "sailor"
-    },
-    {
-        "id": "tealady"
-    },
-    {
-        "id": "goon"
-    },
-    {
-        "id": "lunatic"
-    },
-    {
-        "id": "moonchild"
-    },
-    {
-        "id": "tinker"
-    },
-    {
-        "id": "assassin"
-    },
-    {
-        "id": "devilsadvocate"
-    },
-    {
-        "id": "godfather"
-    },
-    {
-        "id": "mastermind"
-    },
-    {
-        "id": "po"
-    },
-    {
-        "id": "pukka"
-    },
-    {
-        "id": "shabaloth"
-    },
-    {
-        "id": "zombuul"
-    },
-    {
-        "id": "apprentice"
-    },
-    {
-        "id": "matron"
-    },
-    {
-        "id": "voudon"
-    },
-    {
-        "id": "judge"
-    },
-    {
-        "id": "bishop"
-    }
+    "grandmother",
+    "sailor",
+    "chambermaid",
+    "exorcist",
+    "innkeeper",
+    "gambler",
+    "gossip",
+    "courtier",
+    "professor",
+    "minstrel",
+    "tealady",
+    "pacifist",
+    "fool",
+    "tinker",
+    "moonchild",
+    "goon",
+    "lunatic",
+    "godfather",
+    "devilsadvocate",
+    "assassin",
+    "mastermind",
+    "zombuul",
+    "pukka",
+    "shabaloth",
+    "po",
+    "apprentice",
+    "matron",
+    "judge",    
+    "bishop",
+    "voudon"
 ]

@@ -6,7 +6,6 @@ RUN apk update && apk add \
     
 COPY package*.json ./
 RUN npm install --ignore-scripts
-COPY . . 
 
 # Download the important BOTC repo files into this container.
 # This downloads far less data than a generic 
@@ -19,10 +18,13 @@ RUN git init && \
     echo "resources/" >> .git/info/sparse-checkout && \
     git branch -m main && \
     git pull origin main
-run mkdir -p /app/public/assets/icons/official
+RUN mkdir -p /app/public/assets/icons/official
 RUN mv /app/botc-release/resources/characters/*/* /app/public/assets/icons/official/
 WORKDIR /app
 RUN rm /app/botc-release -rf
+
+COPY . . 
+
 
 FROM base AS dev
 EXPOSE 3000
