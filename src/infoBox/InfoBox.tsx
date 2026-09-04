@@ -46,7 +46,7 @@ export default function InfoBox() {
 
     const alignment = onBottom ? "InfoBox__bottom" : "InfoBox__top";
     return (
-        <div className={"InfoBox__container " + alignment} style={{backgroundImage: "url('assets/vines.png')"}}>
+        <div className={"InfoBox__container " + alignment} style={{backgroundImage: "url('assets/backgrounds/vines.png')"}}>
             <InfoDetails 
                 token={token} 
                 focused={focus === Focus.DETAILS}

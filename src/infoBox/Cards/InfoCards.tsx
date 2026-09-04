@@ -127,11 +127,11 @@ export default function InfoCards({focused, focusCallback}: InfoTabType) {
         <div className={"InfoCards__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
             <div 
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
-                style={{backgroundImage: "url('assets/light_green_swirls.webp')", backgroundPosition:"calc(50% - 140px)"}}
+                style={{backgroundImage: "url('assets/backgrounds/cardsTab.webp')", backgroundPosition:"calc(50% - 140px)"}}
                 onClick={focusCallback}
                 role="button"
             >
-                <img className="InfoBox__tabImage" src="assets/list.png" alt="" draggable="false" />
+                <img className="InfoBox__tabImage" src="assets/buttons/cardsTab.png" alt="" draggable="false" />
             </div>
             <div className="InfoCards__content">
                 {cardJsx}

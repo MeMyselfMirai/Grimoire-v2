@@ -27,12 +27,12 @@ export default function Card() {
     }
 
     return (
-        <div className="Card__container" style={{backgroundImage: "url(assets/background-img2.webp)"}}>
+        <div className="Card__container" style={{backgroundImage: "url(assets/backgrounds/dark.webp)"}}>
             <div 
                 className="Card__closeButton General__backgroundImage" 
                 onClick={closeCard}
                 role="button"
-                style={{backgroundImage: 'url("assets/close.png")'}}
+                style={{backgroundImage: 'url("assets/buttons/close.png")'}}
             ></div>
             <div className="Card__content">
                 <CardTitle title={card.title}/>

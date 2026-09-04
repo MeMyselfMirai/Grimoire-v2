@@ -16,13 +16,13 @@ export default function ViabilityButton() {
     let viabilityUrl: string;
     switch (token.viability) {
         case Viability.Alive:
-            viabilityUrl = "url('assets/tombstone.png')";
+            viabilityUrl = "url('assets/buttons/killPlayer.png')";
             break;
         case Viability.Dead:
-            viabilityUrl = "url('assets/vote.png')";
+            viabilityUrl = "url('assets/buttons/removeVote.png')";
             break;
         case Viability.NoVote:
-            viabilityUrl = "url('assets/revive.png')";
+            viabilityUrl = "url('assets/icons/revivePlayer.png')";
             break;
     }
 

@@ -64,13 +64,13 @@ export default function InfoDetails({token, focused, focusCallback}: InfoDetails
         name = "(Demon Bluff)"
         mask = <>
             <div className="InfoDetails__tokenMask"></div>
-            <div className="InfoDetails__visibilityIndicator" style={{backgroundImage: "url(assets/visibility_off_yellow.png)"}}></div>
+            <div className="InfoDetails__visibilityIndicator" style={{backgroundImage: "url(assets/icons/bluffIndicator.png)"}}></div>
         </>;
     } else if (token.visibility === Visibility.Hidden) {
         name = " (Hidden Token)"
         mask = <>
             <div className="InfoDetails__tokenMask"></div>
-            <div className="InfoDetails__visibilityIndicator" style={{backgroundImage: "url(assets/visibility_off_red.png)"}}></div>
+            <div className="InfoDetails__visibilityIndicator" style={{backgroundImage: "url(assets/icons/hiddenIndicator.png)"}}></div>
         </>;
     }
 

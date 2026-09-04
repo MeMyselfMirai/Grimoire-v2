@@ -35,7 +35,7 @@ export default function DeleteButton() {
             onClick={deleteToken}
             role="button"
             className="InfoPowers__option" 
-            style={{backgroundColor: "#E60000", backgroundImage: "url('assets/delete.png')"}}
+            style={{backgroundColor: "#E60000", backgroundImage: "url('assets/buttons/delete.png')"}}
         ></div>
     )
 }

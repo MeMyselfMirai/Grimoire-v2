@@ -25,11 +25,11 @@ export default function Reminder({ reminder, className, promptDeletion }: Remind
 
     let prompt = <></>;
     if (promptDeletion) {
-        prompt = <img className="Reminder__prompt" src="/assets/delete.png" alt="Deletion prompt" />;
+        prompt = <img className="Reminder__prompt" src="/assets/buttons/delete.png" alt="Deletion prompt" />;
     }
 
     return (
-        <div ref={ref} className={classes} style={{ backgroundImage: "url(assets/reminder.png)" }}>
+        <div ref={ref} className={classes} style={{ backgroundImage: "url(assets/icons/reminder.png)" }}>
             <img className="Reminder__image" src={getImage(role)} alt={role.name} />
             <svg viewBox="0 0 140 140">
                 <path data-v-8b24badb="" d="M 70 70 m -42.4264 -42.4264 a 60 60 315 1 0 84.8528 84.8528 a 60 60 315 1 0 -84.8528 -84.8528" id="reminder-curve" fill="transparent"></path>

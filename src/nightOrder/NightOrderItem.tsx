@@ -51,7 +51,7 @@ function infoJsx(info: string) {
             continue;
         }
         if (element === REMINDER_FLAG) {
-            element = <img key={i} className="NightOrderItem__reminder" src="assets/reminder.png" alt="" />;
+            element = <img key={i} className="NightOrderItem__reminder" src="assets/icons/reminder.png" alt="" />;
         }
 
         if (bold) withinBold.push(element);
@@ -89,7 +89,7 @@ export default function NightOrderItem({role, alive, assigned, firstNight }: Nig
 
     let visibility = <></>
     if (!assigned) {
-        visibility = <img className="NightOrderItem__visibility" src="/assets/visibility_off_red.png" alt="Unassigned" />
+        visibility = <img className="NightOrderItem__visibility" src="/assets/icons/hiddenIndicator.png" alt="Unassigned" />
     }
 
     return (

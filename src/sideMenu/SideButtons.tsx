@@ -130,19 +130,19 @@ export default function SideButtons() {
             <div className="SideButtons__container">
                 <div
                     className="SideButtons__button General__backgroundImage SideButtons__shuffle"
-                    style={{ backgroundImage: "url(assets/shuffle.svg)" }}
+                    style={{ backgroundImage: "url(assets/buttons/shuffle.svg)" }}
                     onClick={shuffle}
                     role="button"
                 ></div>
                 <div
                     className="SideButtons__button General__backgroundImage SideButtons__spread"
-                    style={{ backgroundImage: "url(assets/spread.svg)" }}
+                    style={{ backgroundImage: "url(assets/buttons/spread.svg)" }}
                     onClick={spread}
                     role="button"
                 ></div>
                 <div
                     className="SideButtons__button General__backgroundImage SideButtons__bag"
-                    style={{ backgroundImage: "url(assets/bag.svg)" }}
+                    style={{ backgroundImage: "url(assets/buttons/bag.svg)" }}
                     onClick={bag}
                     role="button"
                 ></div>
@@ -150,7 +150,7 @@ export default function SideButtons() {
             <div className="SideButtons__container">
                 <div
                     className="SideButtons__button General__backgroundImage SideButtons__clearAll"
-                    style={{ backgroundImage: "url(assets/clean.svg)" }}
+                    style={{ backgroundImage: "url(assets/buttons/clearAll.svg)" }}
                     onClick={clearAll}
                     role="button"
                 ></div>

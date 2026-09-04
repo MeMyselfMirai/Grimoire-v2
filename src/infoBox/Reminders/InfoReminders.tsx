@@ -79,11 +79,11 @@ export default function InfoReminders({focused, focusCallback, onBottom}: InfoTa
         <div className={"InfoReminders__container InfoBox__tab" + (focused ? " InfoBox__focus" : "")}>
             <div 
                 className="InfoBox__tabHeader InfoBox__tabHeaderGeneric" 
-                style={{backgroundImage: "url('assets/blue_swirls.webp')"}}
+                style={{backgroundImage: "url('assets/backgrounds/remindersTab.webp')"}}
                 onClick={focusCallback}
                 role="button"
             >
-                <img className="InfoBox__tabImage" src="assets/reminders.png" alt="" draggable="false" />
+                <img className="InfoBox__tabImage" src="assets/buttons/remindersTab.png" alt="" draggable="false" />
             </div>
             <div ref={landingRef} className="InfoReminders__content">
                 {staticJsx}

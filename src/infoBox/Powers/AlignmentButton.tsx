@@ -35,8 +35,6 @@ export default function AlignmentButton() {
     }    
 
     function cycleAlignment() {
-        console.log(token.alignment, getNextAlignment(role, token))
-        console.log(gameState.playerTokens)
         setGameState(oldState => {
             return {
                 ...oldState,
@@ -59,7 +57,7 @@ export default function AlignmentButton() {
             className="InfoPowers__option" 
             style={{backgroundColor}}
         >
-            <img className="AlignmentButton__image" style={{transform}} src="assets/thumbs-up.svg" alt="" draggable="false" />
+            <img className="AlignmentButton__image" style={{transform}} src="assets/buttons/alignmentToggle.svg" alt="" draggable="false" />
         </div>
     )
 }

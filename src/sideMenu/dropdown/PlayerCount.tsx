@@ -52,7 +52,7 @@ export default function PlayerCount() {
             <div className="PlayerCount__container">
                 <div 
                     className="General__backgroundImage PlayerCount__button" 
-                    style={{backgroundColor: "red", backgroundImage: "url(assets/minus.svg"}}
+                    style={{backgroundColor: "red", backgroundImage: "url(assets/buttons/decrease.svg"}}
                     onClick={decrement}
                     role="button"
                 />
@@ -67,7 +67,7 @@ export default function PlayerCount() {
                 />
                 <div 
                     className="General__backgroundImage PlayerCount__button" 
-                    style={{backgroundColor: "lightgreen", backgroundImage: "url(assets/plus.svg)"}}
+                    style={{backgroundColor: "lightgreen", backgroundImage: "url(assets/buttons/increase.svg)"}}
                     onClick={increment}
                     role="button"
                 />

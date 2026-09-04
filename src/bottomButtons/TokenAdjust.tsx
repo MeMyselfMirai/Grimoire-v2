@@ -43,17 +43,17 @@ export default function TokenAdjust() {
             <div onClick={() => setTokenSize(gameState.tokenSize + 5)}
                 role="button"
                 className="BottomButtons__button BottomButtons__tokenAdjust"
-                style={{ backgroundImage: 'url("/assets/plus.svg")', backgroundSize: '50%', backgroundColor: 'grey', bottom: '80px' }}>
+                style={{ backgroundImage: 'url("/assets/buttons/increase.svg")', backgroundSize: '50%', backgroundColor: 'grey', bottom: '80px' }}>
             </div>
             <div onClick={() => setTokenSize(140)}
                 role="button"
                 className="BottomButtons__button BottomButtons__tokenAdjust"
-                style={{ backgroundImage: 'url("/assets/restart.svg")', backgroundColor: 'grey', bottom: '45px' }}>
+                style={{ backgroundImage: 'url("/assets/buttons/reset.svg")', backgroundColor: 'grey', bottom: '45px' }}>
             </div>
             <div onClick={() => setTokenSize(gameState.tokenSize - 5)}
                 role="button"
                 className="BottomButtons__button BottomButtons__tokenAdjust"
-                style={{ backgroundImage: 'url("/assets/minus.svg")', backgroundSize: '50%', backgroundColor: 'grey' }}>
+                style={{ backgroundImage: 'url("/assets/buttons/decrease.svg")', backgroundSize: '50%', backgroundColor: 'grey' }}>
             </div>
         </>
     )

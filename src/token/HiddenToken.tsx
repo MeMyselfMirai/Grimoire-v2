@@ -19,12 +19,12 @@ export default function HiddenToken({ token, className }: HiddenTokenType) {
 
     if (token.visibility !== Visibility.Assigned) return <></>
     
-    let image = "url('/assets/alive_token.png')"
-    if (token.viability !== Viability.Alive) image = "url('/assets/dead_token.png')"
+    let image = "url('/assets/icons/townSquareAlive.png')"
+    if (token.viability !== Viability.Alive) image = "url('/assets/icons/townSquareDead.png')"
 
     let deadvoteJsx = <></>;
     if (token.viability === Viability.Dead) {
-        deadvoteJsx = <img src="/assets/vote_token.png" className="General__backgroundImage HiddenToken__deadvote" alt="" />
+        deadvoteJsx = <img src="/assets/icons/townSquareVote.png" className="General__backgroundImage HiddenToken__deadvote" alt="" />
     }
 
     let travellerIndicatorJsx = <></>

@@ -29,7 +29,7 @@ export default function ToggleVisibility() {
         <div onClick={onToggle}
             role="button"
             className="BottomButtons__button BottomButtons__visibilityToggle"
-            style={{ backgroundImage: 'url("/assets/visibility_off.png")', backgroundColor: (appState.tokenDataVisible ? "grey" : "lightblue") }}>
+            style={{ backgroundImage: 'url("/assets/buttons/hideToken.png")', backgroundColor: (appState.tokenDataVisible ? "grey" : "lightblue") }}>
         </div>
     )
 }

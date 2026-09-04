@@ -32,13 +32,13 @@ export default function SideDropdown() {
         <div ref={dropdownRef} className={"SideDropdown__container" + focusClass}>
             <div 
                 className="SideDropdown__toggle"
-                style={{backgroundImage: "url(assets/steel_bg.png)"}}
+                style={{backgroundImage: "url(assets/backgrounds/steel.png)"}}
                 onClick={toggle}
                 role="button"
             >
                 <img 
                     className="SideDropdown__toggleImage"
-                    src="/assets/expand_more.png" 
+                    src="/assets/buttons/expand.png" 
                     alt={open ? "collapse" : "expand"} 
                 />
             </div>

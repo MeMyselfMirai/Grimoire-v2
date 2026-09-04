@@ -35,7 +35,7 @@ export default function Dialog() {
 
     return (
         <div className="Dialog__container">
-            <div className="Dialog__content" style={{backgroundImage: "url(assets/vines.png)"}}>
+            <div className="Dialog__content" style={{backgroundImage: "url(assets/backgrounds/vines.png)"}}>
                 <span className="Dialog__message"> {appState.dialog.message} </span>
                 <div className="Dialog__buttons">
                     {cancelButton}

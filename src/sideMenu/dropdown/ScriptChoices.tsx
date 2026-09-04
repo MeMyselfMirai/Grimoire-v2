@@ -112,7 +112,7 @@ export default function ScriptChoices() {
                 </select>
                 <div 
                     className="SideDropdown__scriptDelete General__backgroundImage" 
-                    style={{backgroundImage: "url(assets/delete.png)", backgroundColor: index < 6 ? "gray" : "red"}}
+                    style={{backgroundImage: "url(assets/buttons/delete.png)", backgroundColor: index < 6 ? "gray" : "red"}}
                     onClick={deleteScript}
                     role="button"
                 />
@@ -120,7 +120,7 @@ export default function ScriptChoices() {
             <div style={{height: "15px"}}/>
             <label 
                 className="SideDropdown__uploadLabel" 
-                style={{backgroundImage: "url(assets/backgrounds/green_swirls.webp)"}}
+                style={{backgroundImage: "url(assets/grimoire-backgrounds/green_swirls.webp)"}}
                 onClick={openUploadDialog}
                 role="button"
             >  

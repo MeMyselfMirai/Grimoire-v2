@@ -12,7 +12,7 @@
     background-size: cover; 
     left: 0px; 
     border-radius: 100%; 
-    /*background-image: url("/assets/alive_token.png"); */
+    /*background-image: url("/assets/icons/townSquareAlive.png"); */
     pointer-events: all; 
     cursor: move;
 }

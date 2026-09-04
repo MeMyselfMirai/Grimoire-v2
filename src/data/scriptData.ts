@@ -29,12 +29,12 @@ export const SCRIPT_COLORS = [
  * The default background images used for the various default scripts.
  */
 export const SCRIPT_BACKGROUNDS = [
-    "url(assets/backgrounds/red_circle_small.webp)",
-    "url(assets/backgrounds/yellow_circle_small.webp)",
-    "url(assets/backgrounds/purple_circle_small.webp)",
-    "url(assets/backgrounds/green_circle_small.webp)",
-    "url(assets/backgrounds/blue_circle_small.webp)",
-    "url(assets/backgrounds/blue_circle_small.webp)",
+    "url(assets/grimoire-backgrounds/red_circle_small.webp)",
+    "url(assets/grimoire-backgrounds/yellow_circle_small.webp)",
+    "url(assets/grimoire-backgrounds/purple_circle_small.webp)",
+    "url(assets/grimoire-backgrounds/green_circle_small.webp)",
+    "url(assets/grimoire-backgrounds/blue_circle_small.webp)",
+    "url(assets/grimoire-backgrounds/blue_circle_small.webp)",
 ]
 
 /**

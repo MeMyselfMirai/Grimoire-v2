@@ -9,7 +9,7 @@ export const GAME_STATE_VERSION = 1;
 
 export const DEFAULT_GAME_STATE: GameState = Object.freeze<GameState>({
     version: GAME_STATE_VERSION,
-    background: "url(assets/backgrounds/red_troublebrewing_logo.webp)",
+    background: "url(assets/grimoire-backgrounds/red_troublebrewing_logo.webp)",
     isNight: false,
     orientation: "landscape",
     playerCount: 12,
@@ -34,7 +34,11 @@ export const DEFAULT_GAME_STATE: GameState = Object.freeze<GameState>({
 export function load(): GameState {
     const defaults = structuredClone(DEFAULT_GAME_STATE);
     if (localStorage.getItem("state") === null) return defaults;
-    return { ...defaults, ...(JSON.parse(localStorage.getItem("state")!) as GameState) };
+    const out: GameState = { ...defaults, ...(JSON.parse(localStorage.getItem("state")!) as GameState) };
+    if (!out.background.includes("grimoire")) {
+        out.background = DEFAULT_GAME_STATE.background
+    }
+    return out;
 }
 
 /**

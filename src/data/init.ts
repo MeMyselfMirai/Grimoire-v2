@@ -19,7 +19,7 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
         scripts.push(updateMeta(formatImportedScript(script), roles));
     }
 
-    console.log(scripts)
+    // console.log(scripts)
 
     const localScripts = getLocalScripts().concat([gameState.script as JsonScript]);
     localScripts.forEach(script => {
@@ -31,7 +31,7 @@ export default async function init(gameState: GameState, setRoles: any, setScrip
         }
         scripts.push(newScript);
         newScript.slice(1).forEach(role => {
-            console.log(role)
+            // console.log(role)
             if (roles[role.id] !== undefined) return;
             if (!isCompleteRole(role)) {
                 throw new Error(`Script contains a role "${role.id}" for which there is no data!`);

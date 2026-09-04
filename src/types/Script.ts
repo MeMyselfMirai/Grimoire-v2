@@ -99,7 +99,6 @@ export function isCompleteScript(obj: any, roles: RoleData): obj is Script {
 
     let hasMeta = false;
     for (const role of obj) {
-        console.log(role)
         if (isMeta(role)) {
             if (hasMeta) return false;
             hasMeta = true;

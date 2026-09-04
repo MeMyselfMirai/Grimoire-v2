@@ -60,7 +60,7 @@ export default function Card() {
         setAppState(oldState => ({ ...oldState, drawingBag: false }));
     }
 
-    if (cancelPrompt) return <div className="Card__container" style={{ backgroundImage: "url(assets/background-img2.webp)" }}>
+    if (cancelPrompt) return <div className="Card__container" style={{ backgroundImage: "url(assets/backgrounds/dark.webp)" }}>
         <div className="Card__content">
             <span className="Card__title">Do you want to quit bag drawing?</span>
             <div className="CharacterSelect__button BagDraw__button" onClick={closeMenu}>
@@ -86,12 +86,12 @@ export default function Card() {
         setTokenIndex(index);
     }
 
-    if (tokensComplete) return <div className="Card__container" style={{ backgroundImage: "url(assets/background-img2.webp)" }}>
+    if (tokensComplete) return <div className="Card__container" style={{ backgroundImage: "url(assets/backgrounds/dark.webp)" }}>
         <div 
             className="Card__closeButton General__backgroundImage" 
             onClick={() => setCancelPrompt(true)}
             role="button"
-            style={{backgroundImage: 'url("assets/close.png")'}}
+            style={{backgroundImage: 'url("assets/buttons/close.png")'}}
         ></div>
         <div className="Card__content">
             <span className="Card__title">Hand the device to the Storyteller.</span>
@@ -101,19 +101,19 @@ export default function Card() {
         </div>
     </div>
 
-    if (!currentRole) return <div className="Card__container" style={{ backgroundImage: "url(assets/background-img2.webp)" }}>
+    if (!currentRole) return <div className="Card__container" style={{ backgroundImage: "url(assets/backgrounds/dark.webp)" }}>
         <div 
             className="Card__closeButton General__backgroundImage" 
             onClick={() => setCancelPrompt(true)}
             role="button"
-            style={{backgroundImage: 'url("assets/close.png")'}}
+            style={{backgroundImage: 'url("assets/buttons/close.png")'}}
         ></div>
         <div className="Card__content">
             <div className="Card__iconsContainer BagDraw__tokensContainer">
                 {tokenList.map(([_, name], index) =>
                     name !== null ? <div className="Card__iconContainer BagDraw__tokenContainer" key={index}></div> :
                     <div className="Card__iconContainer BagDraw__tokenContainer" key={index}
-                        style={{ backgroundImage: "url(assets/alive_token.png)" }} onClick={name ? () => {} : () => handleTokenClick(index)}>
+                        style={{ backgroundImage: "url(assets/icons/townSquareAlive.png)" }} onClick={name ? () => {} : () => handleTokenClick(index)}>
                         <p className="Card__title BagDraw__subtitle">{index + 1}</p>
                     </div>)
                 }
@@ -121,12 +121,12 @@ export default function Card() {
         </div>
     </div>
 
-    return <div className="Card__container" style={{ backgroundImage: "url(assets/background-img2.webp)" }}>
+    return <div className="Card__container" style={{ backgroundImage: "url(assets/backgrounds/dark.webp)" }}>
         <div 
             className="Card__closeButton General__backgroundImage" 
             onClick={() => setCancelPrompt(true)}
             role="button"
-            style={{backgroundImage: 'url("assets/close.png")'}}
+            style={{backgroundImage: 'url("assets/buttons/close.png")'}}
         ></div>
         <div className="Card__content">
             <form onSubmit={e => { e.preventDefault(); handleClick(); }}>

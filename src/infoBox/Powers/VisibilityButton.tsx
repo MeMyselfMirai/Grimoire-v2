@@ -16,13 +16,13 @@ export default function VisibilityButton() {
     let visibilityUrl: string;
     switch (token.visibility) {
         case Visibility.Assigned:
-            visibilityUrl = "url('assets/bluff.png')";
+            visibilityUrl = "url('assets/buttons/bluff.png')";
             break;
         case Visibility.Bluff:
-            visibilityUrl = "url('assets/visibility_off.png')";
+            visibilityUrl = "url('assets/buttons/hideToken.png')";
             break;
         case Visibility.Hidden:
-            visibilityUrl = "url('assets/visibility.png')";
+            visibilityUrl = "url('assets/buttons/showToken.png')";
             break;
     }
 

@@ -21,7 +21,7 @@ export default function DownloadButton() {
                 onClick={download} 
                 role="button"
                 className="SideDropdown__button General__backgroundImage" 
-                style={{backgroundColor: "#888888", backgroundImage: "url(assets/download.svg)"}}
+                style={{backgroundColor: "#888888", backgroundImage: "url(assets/buttons/download.svg)"}}
             />
             <a 
                 ref={linkRef} 

@@ -8,7 +8,7 @@ type VisibilityType = {
 export default function VisibilityIndicator({token}: VisibilityType) {
     if (token.visibility === Visibility.Assigned) return <></>;
 
-    const image = token.visibility === Visibility.Bluff ? "url(assets/visibility_off_yellow.png)" : "url(assets/visibility_off_red.png)"
+    const image = token.visibility === Visibility.Bluff ? "url(assets/icons/bluffIndicator.png)" : "url(assets/icons/hiddenIndicator.png)"
 
     return (
         <div className="Token__visibilityIndicator General__backgroundImage" style={{backgroundImage: image}}></div>

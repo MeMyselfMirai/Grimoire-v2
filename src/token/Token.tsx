@@ -36,7 +36,7 @@ export default function Token({ token, focused = false, className, onClick, titl
         <div
             className={className}
             style={{
-                backgroundImage: `url(/assets/token-DRfx6YVD.webp)`,
+                backgroundImage: `url(/assets/icons/token.png)`,
                 backgroundSize: "113% auto",
                 backgroundPosition: "50% 50%",
                 borderRadius: "50%",

@@ -28,7 +28,7 @@ export default function ToggleDrag() {
         <div onClick={onToggle} 
             role="button"
             className="BottomButtons__button BottomButtons__dragToggle" 
-            style={{backgroundImage: 'url("/assets/move.png")', backgroundColor: (appState.reminderDraggingEnabled ? (appState.tokenDraggingEnabled ? "green" : "#1d5223") : "grey")}}>
+            style={{backgroundImage: 'url("/assets/buttons/toggleDragging.png")', backgroundColor: (appState.reminderDraggingEnabled ? (appState.tokenDraggingEnabled ? "green" : "#1d5223") : "grey")}}>
         </div>
     )
 }

@@ -144,7 +144,7 @@ export default function MenuRoles() {
             />
             <div 
                 className="MenuRoles__sort" 
-                style={{backgroundImage: 'url("assets/backgrounds/purple_swirls.webp")'}}
+                style={{backgroundImage: 'url("assets/grimoire-backgrounds/purple_swirls.webp")'}}
                 onClick={() => setUsingSao(!usingSao)}
                 role="button"
             >{"Sort order: " + (usingSao ? "SAO" : "A-Z")}</div>

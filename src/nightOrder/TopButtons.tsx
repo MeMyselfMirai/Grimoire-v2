@@ -15,7 +15,7 @@ export enum NightOrderTab {
  */
 export default function TopButtons() {
     const { appState, setAppState } = useContext(GameContext) as GameContextType;
-    const style = {backgroundImage: 'url("assets/vines.png")'};
+    const style = {backgroundImage: 'url("assets/backgrounds/vines.png")'};
 
     function setOpenTabTo(tabName: NightOrderTab) {
         if (appState.nightOrderData.currentTab === tabName) {

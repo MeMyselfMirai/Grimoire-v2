@@ -60,7 +60,7 @@ export default function CardIcons() {
             token = <SampleToken id={id} alignment={alignment} className="Card__icon General__backgroundImage" />;
         }
         return (
-            <div key={index} className="Card__iconContainer" style={{backgroundImage:" url(assets/person_add.png)"}} onClick={() => changeIcon(index)}>
+            <div key={index} className="Card__iconContainer" style={{backgroundImage:" url(assets/buttons/addIcon.png)"}} onClick={() => changeIcon(index)}>
                 {token}
             </div>
         )
@@ -71,7 +71,7 @@ export default function CardIcons() {
         extraIcons = 
             <div 
                 className="Card__extraIconsButton" 
-                style={{backgroundImage: "url(assets/person_add.png)"}}
+                style={{backgroundImage: "url(assets/buttons/addIcon.png)"}}
                 onClick={addIcon}
                 role="button"
             />
