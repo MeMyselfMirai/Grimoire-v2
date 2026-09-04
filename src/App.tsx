@@ -17,6 +17,8 @@ import init from './data/init';
 import { saveLocalScripts } from './data/scriptData';
 import Dialog from './dialog/Dialog';
 import BagDraw from './bagDraw/BagDraw';
+import RenamePrompt from './renamePrompt/RenamePrompt';
+import TownInfo from './townInfo/TownInfo';
 
 function App() {
 
@@ -63,6 +65,7 @@ function App() {
             <DragZone />
             <BottomButtons />
             <NightOrder />
+            {!appState.tokenDataVisible && <TownInfo />}
             <SideMenu />
             <InfoBox />
             <BackgroundSelector />
@@ -70,6 +73,7 @@ function App() {
             {appState.characterSelect && <CharacterSelect />}
             <Dialog />
             {appState.drawingBag && <BagDraw />}
+            {appState.customReminderUid && <RenamePrompt />}
         </GameContext>
     );
 }
