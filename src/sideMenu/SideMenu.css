@@ -40,8 +40,8 @@
     position: fixed;
     left: 0px;
     top: 0px;
-    width: 280px;
-    height: 70px;
+    width: 240px;
+    height: 50px;
     opacity: 1;
     background-position: center;
     background-repeat: no-repeat;
@@ -61,9 +61,9 @@
 .SideMenu__body {
     position: fixed;
     width: 280px;
-    height: calc(100% - 110px);
+    height: calc(100% - 90px);
     padding: 10px;
-    top: 90px;
+    top: 70px;
     overflow-y: scroll;
     display: block;
     font-size: 25px;
